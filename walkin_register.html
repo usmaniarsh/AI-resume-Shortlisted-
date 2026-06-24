@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Register – {{ drive.title }}{% endblock %}
+{% block nav_links %}
+  <a href="/walk-in" class="active">Walk-in Drives</a>
+  <a href="/candidate">Open Jobs</a>
+  <a href="/">Home</a>
+{% endblock %}
+{% block content %}
+<div class="mb-4">
+  <h1 class="page-title">📝 Register for Walk-in Drive</h1>
+  <p class="text-muted mt-1">{{ drive.title }}</p>
+</div>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <div style="display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.9rem; color:var(--text-muted);">
+      {% if drive.department %}<span>🏢 {{ drive.department }}</span>{% endif %}
+      {% if drive.location %}<span>📍 {{ drive.location }}</span>{% endif %}
+      <span>📅 {{ drive.drive_date }}{% if drive.drive_time %} · ⏰ {{ drive.drive_time }}{% endif %}</span>
+    </div>
+    {% if drive.venue %}<p style="margin-top:0.75rem; font-size:0.9rem;">📌 Venue: {{ drive.venue }}</p>{% endif %}
+    {% if drive.description %}<p style="margin-top:0.5rem; font-size:0.9rem; color:var(--text-muted); line-height:1.6;">{{ drive.description }}</p>{% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group mb-3">
+        <label class="form-label">Full Name *</label>
+        <input type="text" name="name" class="form-control" required>
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label">Email *</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label">Phone Number *</label>
+        <input type="tel" name="phone" class="form-control" required>
+      </div>
+     
+
+      <div class="d-flex gap-2 mt-4">
+        <button type="submit" class="btn btn-primary">✅ Confirm Registration</button>
+        <a href="/walk-in" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

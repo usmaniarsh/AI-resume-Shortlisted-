@@ -1,0 +1,391 @@
+{% extends "base.html" %}
+{% block title %}Skill Assessment – {{ application.job_title }}{% endblock %}
+{% block nav_links %}
+  <a href="/candidate">Open Jobs</a>
+  <a href="/candidate/dashboard">📋 My Applications</a>
+{% endblock %}
+{% block extra_head_styles %}
+.option-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  background: var(--surface);
+}
+.option-label:hover { border-color: var(--primary); background: var(--primary-light); }
+.option-label input[type="radio"] { display: none; }
+.option-label.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.option-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.option-label.selected .option-dot { border-color: var(--primary); background: var(--primary); }
+.option-label.selected .option-dot::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: white; }
+.q-number {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--primary); color: white;
+  font-size: 0.8rem; font-weight: 700; flex-shrink: 0; margin-right: 10px;
+}
+.progress-bar-wrap { height: 6px; background: var(--surface2); border-radius: 999px; overflow: hidden; margin-bottom: 0.5rem; }
+.progress-bar-fill { height: 100%; background: var(--primary); border-radius: 999px; transition: width 0.3s ease; }
+
+/* Timer */
+.timer-box {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: 8px;
+  background: var(--surface2); border: 1.5px solid var(--border);
+  font-size: 1.1rem; font-weight: 800; font-family: monospace;
+  color: var(--text); transition: all 0.3s;
+}
+.timer-box.warning { background: var(--warning-light); border-color: var(--warning); color: var(--warning); animation: pulse 1s infinite; }
+.timer-box.danger  { background: var(--danger-light);  border-color: var(--danger);  color: var(--danger);  animation: pulse 0.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+/* Tab warning overlay */
+.tab-warning-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(220,38,38,0.97);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem;
+  color: white; text-align: center; padding: 2rem;
+  display: none;
+}
+.tab-warning-overlay h2 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.tab-warning-overlay p  { font-size: 1.1rem; opacity: 0.9; max-width: 480px; }
+.tab-warning-count { font-size: 4rem; font-weight: 900; line-height: 1; }
+
+/* Start modal */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 8888;
+  background: var(--overlay);
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+}
+.start-modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow-md);
+  max-width: 500px; width: 100%; padding: 2.5rem; text-align: center;
+}
+.rule-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  text-align: left; font-size: 0.9rem;
+}
+.rule-item:last-child { border-bottom: none; }
+
+/* SSE live indicator */
+.live-indicator {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; color: var(--text-muted); padding: 4px 10px;
+  border-radius: 20px; background: var(--surface2);
+  border: 1px solid var(--border);
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #22c55e; animation: livePulse 1.5s infinite;
+}
+.live-dot.disconnected { background: #ef4444; animation: none; }
+@keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+{% endblock %}
+
+{% block content %}
+{% set qs = application.assessment_questions %}
+{% set mcq = qs.mcq %}
+{% set total_q = mcq|length %}
+
+<!-- TAB SWITCH WARNING OVERLAY -->
+<div class="tab-warning-overlay" id="tabWarning">
+  <div style="font-size:3rem;">⚠️</div>
+  <h2>Tab Switch Detected!</h2>
+  <div class="tab-warning-count" id="tabSwitchCount">0</div>
+  <p>You left the assessment tab. This has been recorded.<br>
+  <strong>3 violations = Auto-submission.</strong></p>
+  <button onclick="dismissTabWarning()" style="margin-top:1rem; padding:12px 32px; background:white; color:#dc2626; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer;">
+    Return to Assessment
+  </button>
+</div>
+
+<!-- START MODAL -->
+<div class="modal-backdrop" id="startModal">
+  <div class="start-modal">
+    <div style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;background:var(--primary);border-radius:14px;margin-bottom:1.25rem;">
+      <span style="font-size:1.5rem;filter:brightness(0) invert(1);">📝</span>
+    </div>
+    <h2 style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Before You Begin</h2>
+    <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1.5rem;">Read the rules carefully before starting your assessment.</p>
+
+    <div style="background:var(--surface2);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;">
+      <div class="rule-item"><span>⏱️</span><span><strong>15 minutes</strong> time limit. Assessment auto-submits when time runs out.</span></div>
+      <div class="rule-item"><span>📋</span><span><strong>{{ total_q }} questions</strong> — all multiple choice, fully automated scoring.</span></div>
+      <div class="rule-item"><span>🚫</span><span><strong>No tab switching.</strong> Switching tabs is detected and recorded. 3 violations = auto-submit.</span></div>
+      <div class="rule-item"><span>🔒</span><span>Assessment can only be submitted <strong>once</strong>. It cannot be retaken.</span></div>
+      <div class="rule-item"><span>✅</span><span>Answer <strong>all questions</strong> to enable the submit button.</span></div>
+    </div>
+
+    <button id="startBtn" class="btn btn-primary" style="width:100%;justify-content:center;padding:13px;font-size:1rem;">
+      🚀 Start Assessment (15:00)
+    </button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div style="max-width: 720px; margin: 0 auto;">
+
+  <!-- Header + Timer row -->
+  <div style="text-align:center; padding:1.5rem 0 1.5rem;">
+    <h1 class="page-title" style="margin-bottom:0.25rem;">Skill Assessment</h1>
+    <p class="text-muted">{{ application.job_title }} · {{ total_q }} questions</p>
+  </div>
+
+  <!-- Sticky top bar: timer + progress + tab count + live indicator -->
+  <div style="position:sticky;top:62px;z-index:100;background:var(--bg);padding:0.6rem 0 0.75rem;border-bottom:1px solid var(--border);margin-bottom:1.25rem;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div class="timer-box" id="timerBox">
+        ⏱️ <span id="timerDisplay">15:00</span>
+      </div>
+      <div style="flex:1;min-width:160px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-size:0.78rem;font-weight:600;color:var(--text-muted);">Progress</span>
+          <span id="progress-text" style="font-size:0.78rem;font-weight:600;color:var(--primary);">0 / {{ total_q }}</span>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+        <div id="tabCountBadge" style="font-size:0.8rem;padding:5px 12px;border-radius:20px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);white-space:nowrap;">
+          👁️ Tab violations: <strong id="tabCountDisplay">0</strong>/3
+        </div>
+        <!-- ✅ LIVE SSE INDICATOR -->
+        <div class="live-indicator" id="liveIndicator">
+          <span class="live-dot" id="liveDot"></span>
+          <span id="liveText">Live</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/{{ application.id }}/submit" id="assessment-form">
+    <input type="hidden" name="tab_violations" id="tabViolationsInput" value="0">
+
+    <!-- MCQ Section -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <span>🧠 Multiple Choice <span style="font-weight:400;color:var(--text-muted);">({{ mcq|length }} questions)</span></span>
+        <span class="badge badge-primary">Auto-scored</span>
+      </div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:1.75rem;">
+        {% for q in mcq %}
+        {% set q_idx = loop.index0 %}
+        <div class="mcq-q" id="mcq-block-{{ q_idx }}">
+          <div style="display:flex;align-items:flex-start;margin-bottom:0.85rem;">
+            <span class="q-number">{{ loop.index }}</span>
+            <p style="font-size:0.93rem;font-weight:600;color:var(--text);line-height:1.5;margin:0;padding-top:4px;">{{ q.q }}</p>
+          </div>
+          <div>
+            {% for opt in q.options %}
+            <label class="option-label" onclick="selectOption(this, {{ q_idx }}, '{{ opt[0] }}')">
+              <input type="radio" name="mcq_{{ q_idx }}" value="{{ opt[0] }}">
+              <span class="option-dot"></span>
+              <span>{{ opt }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+        {% if not loop.last %}<hr style="border:none;border-top:1px solid var(--border);">{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Notice + Submit -->
+    <div style="background:var(--primary-light);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:0.85rem;color:var(--primary);display:flex;gap:10px;align-items:flex-start;">
+      <span>⚠️</span>
+      <span>Once submitted, the assessment <strong>cannot be retaken</strong>. Results are instantly shared with the hiring team.</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submit-btn"
+      style="width:100%;justify-content:center;padding:13px;font-size:0.95rem;" disabled>
+      Submit Assessment →
+    </button>
+    <p id="submit-hint" style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">
+      Answer all questions to enable submission
+    </p>
+    <div style="height:2rem;"></div>
+  </form>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────
+const TOTAL_SECONDS = 15 * 60;
+const MAX_TAB_VIOLATIONS = 3;
+const mcqCount = {{ mcq|length }};
+const totalQ = {{ total_q }};
+const APP_ID = "{{ application.id }}";
+
+// ── STATE ───────────────────────────────────────────
+let timerInterval = null;
+let secondsLeft = TOTAL_SECONDS;
+let tabViolations = 0;
+let answeredMcq = new Set();
+let started = false;
+let submitted = false;
+
+// ── START MODAL ─────────────────────────────────────
+document.getElementById('startBtn').addEventListener('click', function () {
+  document.getElementById('startModal').style.display = 'none';
+  started = true;
+  startTimer();
+  setupTabDetection();
+  startSSE();       // ✅ SSE shuru karo jab assessment start ho
+});
+
+// ── TIMER ────────────────────────────────────────────
+function startTimer() {
+  updateTimerDisplay();
+  timerInterval = setInterval(function () {
+    secondsLeft--;
+    updateTimerDisplay();
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      autoSubmit('Time is up! Assessment auto-submitted.');
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  document.getElementById('timerDisplay').textContent =
+    String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const box = document.getElementById('timerBox');
+  box.classList.remove('warning','danger');
+  if (secondsLeft <= 60)       box.classList.add('danger');
+  else if (secondsLeft <= 180) box.classList.add('warning');
+}
+
+// ── TAB / VISIBILITY DETECTION ───────────────────────
+function setupTabDetection() {
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden && started && !submitted) recordViolation();
+  });
+  window.addEventListener('blur', function () {
+    if (started && !submitted) recordViolation();
+  });
+}
+
+function recordViolation() {
+  tabViolations++;
+  document.getElementById('tabViolationsInput').value = tabViolations;
+  document.getElementById('tabCountDisplay').textContent = tabViolations;
+
+  const badge = document.getElementById('tabCountBadge');
+  badge.style.background = 'var(--danger-light)';
+  badge.style.borderColor = 'var(--danger)';
+  badge.style.color = 'var(--danger)';
+
+  // ✅ Server ko violation bhejo (SSE ke saath sync ke liye)
+  fetch('/api/assessment/' + APP_ID + '/violation', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ violations: tabViolations })
+  }).catch(function () {});  // silently fail karo — form submit hi karega
+
+  if (tabViolations >= MAX_TAB_VIOLATIONS) {
+    document.getElementById('tabWarning').style.display = 'none';
+    autoSubmit('3 tab violations detected. Assessment auto-submitted.');
+    return;
+  }
+
+  document.getElementById('tabSwitchCount').textContent = tabViolations;
+  document.getElementById('tabWarning').style.display = 'flex';
+}
+
+function dismissTabWarning() {
+  document.getElementById('tabWarning').style.display = 'none';
+}
+
+// ── AUTO SUBMIT ──────────────────────────────────────
+function autoSubmit(reason) {
+  if (submitted) return;
+  submitted = true;
+  clearInterval(timerInterval);
+  alert('⚠️ ' + reason);
+  document.getElementById('assessment-form').submit();
+}
+
+// ── MCQ SELECTION ────────────────────────────────────
+function selectOption(label, mcqIdx, val) {
+  const block = label.closest('.mcq-q');
+  block.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+  label.classList.add('selected');
+  label.querySelector('input[type="radio"]').checked = true;
+  answeredMcq.add(mcqIdx);
+  updateProgress();
+}
+
+// ── PROGRESS ─────────────────────────────────────────
+function updateProgress() {
+  const done = answeredMcq.size;
+  const pct = Math.round(done / totalQ * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = done + ' / ' + totalQ;
+  const allDone = answeredMcq.size === mcqCount;
+  document.getElementById('submit-btn').disabled = !allDone;
+  document.getElementById('submit-hint').style.display = allDone ? 'none' : 'block';
+}
+
+// ── PREVENT DOUBLE SUBMIT ─────────────────────────────
+document.getElementById('assessment-form').addEventListener('submit', function () {
+  if (submitted) { return false; }
+  submitted = true;
+  clearInterval(timerInterval);
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+});
+
+// ── ✅ SSE — Admin se live signal ─────────────────────
+function startSSE() {
+  if (!window.EventSource) return;
+
+  const source = new EventSource('/api/candidate/stream');
+  const dot    = document.getElementById('liveDot');
+  const text   = document.getElementById('liveText');
+
+  source.onopen = function () {
+    dot.classList.remove('disconnected');
+    text.textContent = 'Live';
+  };
+
+  source.onmessage = function (e) {
+    if (submitted) return;
+    try {
+      const apps = JSON.parse(e.data);
+      const mine = apps.find(function (a) { return a.id === APP_ID; });
+      if (!mine) return;
+
+      // Agar admin ne assessment cancel/revoke kiya ho (edge case)
+      if (!mine.has_assessment) {
+        autoSubmit('Assessment was revoked by the admin.');
+      }
+
+    } catch (err) { /* ignore parse errors */ }
+  };
+
+  source.onerror = function () {
+    dot.classList.add('disconnected');
+    text.textContent = 'Reconnecting…';
+    // EventSource browser auto-reconnects — kuch karne ki zaroorat nahi
+  };
+}
+
+updateProgress();
+</script>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Post Walk-in Drive – HR RecruitAI{% endblock %}
+{% block nav_links %}
+  <a href="/admin/home">Dashboard</a>
+  <a href="/admin/applications">Applications</a>
+  <a href="/admin/jobs/new">+ Post Job</a>
+  <a href="/admin/logout" style="color:var(--danger);">Logout {% if session.get('admin_email') %}({{ session.get('admin_email') }}){% endif %}</a>
+{% endblock %}
+{% block content %}
+<div class="mb-4">
+  <h1 class="page-title">🚀 Post New Walk-in Drive</h1>
+  <p class="text-muted mt-1">Create a walk-in interview drive — candidates can register directly, no resume needed</p>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <form method="POST">
+      <div class="form-group mb-3">
+        <label class="form-label">Drive Title *</label>
+        <input type="text" name="title" class="form-control" placeholder="e.g. Walk-in Drive for Freshers – June 2026" required>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;">
+        <div class="form-group mb-3">
+          <label class="form-label">Department</label>
+          <input type="text" name="department" class="form-control" placeholder="e.g. Engineering">
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">Location (City)</label>
+          <input type="text" name="location" class="form-control" placeholder="e.g. Mumbai">
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;">
+        <div class="form-group mb-3">
+          <label class="form-label">Drive Date *</label>
+          <input type="date" name="drive_date" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">Drive Time</label>
+          <input type="time" name="drive_time" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Venue / Address</label>
+        <input type="text" name="venue" class="form-control" placeholder="e.g. 4th Floor, Tech Park, Andheri East">
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Description / Instructions</label>
+        <textarea name="description" class="form-control" rows="4" placeholder="Bring resume copy, ID proof, documents to carry, eligibility criteria, etc."></textarea>
+      </div>
+
+      <div class="d-flex gap-2 mt-4">
+        <button type="submit" class="btn btn-primary">🚀 Post Walk-in Drive</button>
+        <a href="/admin/home" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+{
+  "jobs": [
+    {
+      "id": "bbc0103d-7124-4123-ac87-b879c9f7bd9e",
+      "title": "Production Support Engineer",
+      "department": "",
+      "location": "Mumbai",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "IT Services & Consulting",
+      "employment_type": "Full Time",
+      "education_ug": "Any Graduate",
+      "education_pg": "Any Postgraduate",
+      "key_skills": [],
+      "requirements": "Fresher or up to 1 year of experience in Production Support, Application Support, IT Operations, or related field\r\nBasic knowledge of SQL and database concepts\r\nUnderstanding of Linux/Unix commands\r\nKnowledge of incident management and ticketing tools (ServiceNow, Jira, Remedy, etc.) is a plus\r\nAbility to analyze logs and troubleshoot application issues\r\nBasic understanding of networking concepts\r\nFamiliarity with Windows and Linux operating systems\r\nKnowledge of scripting languages such as Python, Shell Scripting, or PowerShell is a plus\r\nUnderstanding of batch jobs, file transfers, and monitoring tools is preferred\r\nStrong analytical and problem-solving skills\r\nGood communication and stakeholder management skills\r\nWillingness to work in rotational shifts and provide production support\r\nB.E./B.Tech, B.Sc, BCA, MCA, or equivalent degree in Computer Science, IT, or related field\r\nAbility to work under pressure and meet SLA commitments\r\nEagerness to learn and adapt to new technologies and business applications",
+      "description": "We are looking for a Production Support Engineer Fresher to join our IT Operations team. The candidate will be responsible for monitoring applications, troubleshooting production issues, supporting business-critical systems, and ensuring smooth day-to-day operations. This role provides an excellent opportunity to learn incident management, application support, database troubleshooting, and production environment management.",
+      "active": true,
+      "created_at": "2026-06-24T01:10:18.081082"
+    },
+    {
+      "id": "6d5627cb-1afb-4ded-8074-566bfbae83af",
+      "title": "Business Analyst",
+      "department": "",
+      "location": "Mumbai",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "IT Services & Consulting",
+      "employment_type": "Full Time",
+      "education_ug": "B.Sc Computer Science/IT/Data Science",
+      "education_pg": "Post Graduation Not Required",
+      "key_skills": [],
+      "requirements": "Fresher or up to 1 year of experience in Business Analysis, Data Analysis, or related fields\r\nStrong analytical and problem-solving skills\r\nGood understanding of business processes and requirement gathering\r\nKnowledge of MS Excel, PowerPoint, and Word\r\nBasic knowledge of SQL and databases is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau is a plus\r\nUnderstanding of SDLC, Agile, and Scrum methodologies is an advantage\r\nAbility to create BRD, FRD, user stories, and process flow documents\r\nExcellent verbal and written communication skills\r\nStrong stakeholder management and coordination skills\r\nKnowledge of Jira, Confluence, or other project management tools is preferred\r\nAbility to analyze data and prepare reports and presentations",
+      "description": "We are looking for a Business Analyst Fresher to join our team. The candidate will be responsible for gathering and analyzing business requirements, preparing documentation, coordinating with stakeholders, and supporting process improvement initiatives. This role offers an opportunity to work closely with business and technical teams to deliver effective solutions and gain hands-on experience in business analysis and project management.",
+      "active": true,
+      "created_at": "2026-06-24T14:15:16.439898"
+    },
+    {
+      "id": "363e7c7c-8de7-4aef-9ce4-d8e785369659",
+      "title": "Data Analyst",
+      "department": "",
+      "location": "mumbai",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "IT Services & Consulting",
+      "experience_level": "Fresher",
+      "education_ug": "B.Sc Computer Science/IT/Data Science",
+      "education_pg": "Any Postgraduate",
+      "key_skills": [],
+      "requirements": "Fresher or up to 1 year of experience in Data Analysis, Business Intelligence, or related fields\r\nStrong knowledge of SQL and database concepts\r\nProficiency in Microsoft Excel (Pivot Tables, VLOOKUP, Charts)\r\nBasic knowledge of Python (Pandas, NumPy) is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau\r\nUnderstanding of statistics and data analysis techniques\r\nAbility to clean, transform, and analyze datasets\r\nKnowledge of ETL concepts and data pipelines is a plus\r\nStrong analytical and problem-solving skills\r\nGood communication and presentation skills\r\nFamiliarity with reporting and dashboard creation\r\nUnderstanding of business metrics and KPIs\r\nKnowledge of databases such as MySQL, PostgreSQL, or SQL Server is preferred",
+      "description": "We are looking for a Data Analyst Fresher to join our team. The candidate will be responsible for collecting, analyzing, and interpreting data to support business decisions. This role offers an opportunity to work with datasets, create reports and dashboards, and gain hands-on experience with data analysis tools and techniques.",
+      "active": true,
+      "created_at": "2026-06-24T16:59:03.671462",
+      "employment_type": "Full Time"
+    }
+  ],
+  "applications": [
+    {
+      "id": "bfd7c6a8-b7c1-4250-a7fd-514bcba4f959",
+      "job_id": "363e7c7c-8de7-4aef-9ce4-d8e785369659",
+      "job_title": "Data Analyst",
+      "job_requirements": "Fresher or up to 1 year of experience in Data Analysis, Business Intelligence, or related fields\r\nStrong knowledge of SQL and database concepts\r\nProficiency in Microsoft Excel (Pivot Tables, VLOOKUP, Charts)\r\nBasic knowledge of Python (Pandas, NumPy) is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau\r\nUnderstanding of statistics and data analysis techniques\r\nAbility to clean, transform, and analyze datasets\r\nKnowledge of ETL concepts and data pipelines is a plus\r\nStrong analytical and problem-solving skills\r\nGood communication and presentation skills\r\nFamiliarity with reporting and dashboard creation\r\nUnderstanding of business metrics and KPIs\r\nKnowledge of databases such as MySQL, PostgreSQL, or SQL Server is preferred",
+      "name": "Arsh Usmani",
+      "email": "usmaniarsh7@gmail.com",
+      "phone": "9557875692",
+      "resume_file": "0d7b1d75-08a5-4f7f-9676-238082b886ab.pdf",
+      "resume_text": "Mohd Arsh Usmani \nSoftware Engineer \nStrong foundation in \nPython, SQL, data analysis, and database management\n , with hands-on experience in \ndata\nvalidation, data cleaning, reporting, and performance analysis\n . Skilled in analyzing large datasets, identifying trends\nand anomalies, conducting root cause analysis, and transforming complex data into actionable business insights.\nExperienced in \nSQL query optimization, database analysis, dashboard reporting, log analysis, and data quality\nassuran",
+      "applied_at": "2026-06-24T17:09:44.476901",
+      "ai_analysis": {
+        "match_score": 0,
+        "status": "On Hold",
+        "strengths": [],
+        "gaps": [
+          "Could not analyze resume automatically"
+        ],
+        "summary": "Manual review required.",
+        "recommendation": "Error: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+      },
+      "ats_review": null,
+      "ai_detection": {
+        "ai_likelihood_score": 8,
+        "verdict": "Likely human-written",
+        "reasons": [
+          "Contains 1 commonly AI-overused phrase(s): streamline."
+        ]
+      },
+      "blind_screening": {
+        "redaction_log": {
+          "name": [
+            "Mohd Arsh Usmani"
+          ],
+          "gender": [
+            "MS",
+            "MS",
+            "MS"
+          ],
+          "college_tier": [],
+          "age_dob": [],
+          "photo": [],
+          "contact": [
+            "usmaniarsh7@gmail.com",
+            "9557875692"
+          ]
+        },
+        "redacted_count": 6
+      }
+    }
+  ],
+  "walkin_drives": [
+    {
+      "id": "4ac28aa7-d761-423b-a5d9-a31451d004a2",
+      "title": "Walk in drive Production Support Engineer",
+      "department": "Software Development",
+      "location": "Mumbai",
+      "venue": "techniplex 1 office",
+      "drive_date": "2026-06-24",
+      "drive_time": "10:00",
+      "description": "Join our Walk-in Drive for the Production Support Engineer role.\r\n\r\nDate: 24-06-2026\r\nTime: 10:00 AM\r\nLocation: Mumbai\r\n\r\nEligibility:\r\n\u2022 B.E./B.Tech, B.Sc, BCA, MCA, or equivalent degree.\r\n\u2022 Freshers and candidates with up to 1 year of experience are welcome.\r\n\u2022 Basic knowledge of SQL, Linux/Unix, Windows OS, networking, and application support is preferred.\r\n\r\nDocuments to Carry:\r\n\u2022 Updated Resume (2 copies)\r\n\u2022 Government Photo ID Proof\r\n\u2022 Passport Size Photograph\r\n\u2022 Educational Certificates and Mark Sheets\r\n\r\nSelection Process:\r\n1. Registration\r\n2. HR Screening\r\n3. Technical Interview\r\n4. Managerial Discussion\r\n5. Final HR Round\r\n\r\nCandidates are requested to reach the venue 30 minutes before the scheduled time.",
+      "active": true,
+      "created_at": "2026-06-24T16:18:35.305161"
+    }
+  ],
+  "walkin_registrations": []
+}

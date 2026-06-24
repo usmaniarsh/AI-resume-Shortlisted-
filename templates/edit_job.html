@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% block title %}Edit Job – HR RecruitAI{% endblock %}
+{% block nav_links %}
+  <a href="/admin/home">Dashboard</a>
+  <a href="/admin/applications">Applications</a>
+  <a href="/admin/jobs/new">+ Post Job</a>
+  <a href="/admin/logout" style="color:var(--danger);">Logout {% if session.get('admin_email') %}({{ session.get('admin_email') }}){% endif %}</a>
+{% endblock %}
+{% block content %}
+<style>
+  .postjob-wrapper { max-width:720px; margin:0 auto; padding:0 1rem 2rem; width:100%; box-sizing:border-box; overflow-x:hidden; }
+  .postjob-wrapper .page-title { margin:1.5rem 0 0.25rem; font-size:clamp(1.4rem,4vw,1.9rem); }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .col-full { grid-column:1/-1; }
+  @media(max-width:600px){ .form-grid{grid-template-columns:1fr;gap:0.85rem;} .col-full{grid-column:1;} }
+  .section-label { font-weight:700; font-size:0.95rem; color:var(--text-dark,#1f2937); margin:0.5rem 0 0; grid-column:1/-1; border-top:1px solid #eef0f3; padding-top:1.25rem; }
+  @media(max-width:600px){ .section-label{grid-column:1;} }
+  .job-type-options { display:flex; flex-wrap:wrap; gap:0.6rem; }
+  .job-type-options input[type="radio"] { display:none; }
+  .job-type-btn { padding:9px 20px; border:1.5px solid #e2e8f0; border-radius:8px; cursor:pointer; font-size:0.88rem; font-weight:500; color:var(--text-muted); background:#fff; transition:all 0.15s; user-select:none; text-align:center; }
+  .job-type-options input[type="radio"]:checked + .job-type-btn { border-color:var(--primary); background:var(--primary-light); color:var(--primary); font-weight:600; }
+  @media(max-width:600px){ .job-type-btn{flex:1 1 auto;padding:9px 12px;font-size:0.85rem;} }
+  @media(max-width:400px){ .job-type-btn{flex:1 1 100%;} }
+  .form-control { width:100%; box-sizing:border-box; }
+  textarea.form-control { resize:vertical; }
+  @media(max-width:600px){ .form-control{font-size:1rem;} }
+  .form-actions { display:flex; gap:0.75rem; justify-content:flex-end; flex-wrap:wrap; margin-top:1rem; }
+  @media(max-width:480px){ .form-actions{flex-direction:column-reverse;} .form-actions .btn{width:100%;text-align:center;} .card-body{padding:1rem!important;} }
+  @media(min-width:1200px){ .postjob-wrapper{max-width:760px;} }
+</style>
+
+<div class="postjob-wrapper">
+  <h1 class="page-title">Edit Job</h1>
+  <p class="text-muted mb-4">Update the role details and AI screening requirements</p>
+
+  <div class="card">
+    <div class="card-body">
+      <form method="POST" id="job-form">
+        <div class="form-grid">
+
+          <!-- Job Title -->
+          <div class="form-group col-full">
+            <label class="form-label">Job Title *</label>
+            <input type="text" name="title" class="form-control"
+              placeholder="e.g. Senior Python Developer" value="{{ job.title }}" required>
+          </div>
+
+          <!-- Location -->
+          <div class="form-group col-full">
+            <label class="form-label">Location *</label>
+            <input type="text" name="location" class="form-control"
+              placeholder="e.g. Mumbai" value="{{ job.location }}">
+          </div>
+
+          <!-- Experience Level -->
+          <div class="form-group col-full">
+            <label class="form-label">Experience Level *</label>
+            <div class="job-type-options">
+              <input type="radio" id="exp_fresher" name="experience_level" value="Fresher"
+                {% if job.experience_level == 'Fresher' or not job.experience_level %}checked{% endif %}>
+              <label for="exp_fresher" class="job-type-btn">🎓 Fresher</label>
+
+              <input type="radio" id="exp_experienced" name="experience_level" value="Experienced"
+                {% if job.experience_level == 'Experienced' %}checked{% endif %}>
+              <label for="exp_experienced" class="job-type-btn">💼 Experienced</label>
+
+              <input type="radio" id="exp_both" name="experience_level" value="Fresher & Experienced"
+                {% if job.experience_level == 'Fresher & Experienced' %}checked{% endif %}>
+              <label for="exp_both" class="job-type-btn">🎓💼 Both</label>
+            </div>
+          </div>
+
+          <!-- Job Type -->
+          <div class="form-group col-full">
+            <label class="form-label">Job Type *</label>
+            <div class="job-type-options">
+              <input type="radio" id="type_onsite" name="job_type" value="Onsite"
+                {% if job.job_type == 'Onsite' or not job.job_type %}checked{% endif %}>
+              <label for="type_onsite" class="job-type-btn">Onsite</label>
+
+              <input type="radio" id="type_hybrid" name="job_type" value="Hybrid"
+                {% if job.job_type == 'Hybrid' %}checked{% endif %}>
+              <label for="type_hybrid" class="job-type-btn">Hybrid</label>
+
+              <input type="radio" id="type_remote" name="job_type" value="Remote"
+                {% if job.job_type == 'Remote' %}checked{% endif %}>
+              <label for="type_remote" class="job-type-btn">Remote</label>
+            </div>
+          </div>
+
+          <!-- Role Details -->
+          <div class="section-label">Role Details</div>
+
+          <div class="form-group">
+            <label class="form-label">Role Category *</label>
+            <input type="text" name="role_category" class="form-control"
+              placeholder="e.g. Software Development" value="{{ job.role_category }}">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Industry Type *</label>
+            <input type="text" name="industry_type" class="form-control"
+              placeholder="e.g. IT Services & Consulting" value="{{ job.industry_type }}">
+          </div>
+
+          <!-- Employment Type -->
+          <div class="form-group col-full">
+            <label class="form-label">Employment Type *</label>
+            <div class="job-type-options">
+              <input type="radio" id="emp_fulltime" name="employment_type" value="Full Time"
+                {% if job.employment_type == 'Full Time' or not job.employment_type %}checked{% endif %}>
+              <label for="emp_fulltime" class="job-type-btn">Full Time</label>
+
+              <input type="radio" id="emp_parttime" name="employment_type" value="Part Time"
+                {% if job.employment_type == 'Part Time' %}checked{% endif %}>
+              <label for="emp_parttime" class="job-type-btn">Part Time</label>
+
+              <input type="radio" id="emp_contract" name="employment_type" value="Contract"
+                {% if job.employment_type == 'Contract' %}checked{% endif %}>
+              <label for="emp_contract" class="job-type-btn">Contract</label>
+
+              <input type="radio" id="emp_internship" name="employment_type" value="Internship"
+                {% if job.employment_type == 'Internship' %}checked{% endif %}>
+              <label for="emp_internship" class="job-type-btn">Internship</label>
+
+              <input type="radio" id="emp_freelance" name="employment_type" value="Freelance"
+                {% if job.employment_type == 'Freelance' %}checked{% endif %}>
+              <label for="emp_freelance" class="job-type-btn">Freelance</label>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="section-label">Education Requirements</div>
+
+          <!-- UG Qualification -->
+          <div class="form-group">
+            <label class="form-label">UG Qualification</label>
+            <select name="education_ug" class="form-control">
+              {% set ug_options = [
+                "Any Graduate","B.Tech/B.E.","B.Sc",
+                "B.Sc Computer Science/IT/Data Science",
+                "B.Com","BBA/BBM","BCA","B.A","B.Pharma",
+                "B.Arch","LLB","Diploma","12th Pass","Other Graduate"
+              ] %}
+              {% for opt in ug_options %}
+              <option value="{{ opt }}" {% if job.education_ug == opt %}selected{% endif %}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- PG Qualification -->
+          <div class="form-group">
+            <label class="form-label">PG Qualification</label>
+            <select name="education_pg" class="form-control">
+              {% set pg_options = [
+                "Any Postgraduate","Post Graduation Not Required",
+                "MBA/PGDM","M.Tech/M.E.","M.Sc","M.Com",
+                "MCA","M.A","LLM","CA","CS","Other Postgraduate"
+              ] %}
+              {% for opt in pg_options %}
+              <option value="{{ opt }}" {% if job.education_pg == opt %}selected{% endif %}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Job Description -->
+          <div class="form-group col-full">
+            <label class="form-label">Job Description *</label>
+            <textarea name="description" class="form-control" rows="3"
+              placeholder="Brief description shown to candidates..." required>{{ job.description }}</textarea>
+          </div>
+
+          <!-- AI Requirements -->
+          <div class="form-group col-full">
+            <label class="form-label">
+              Requirements for AI Screening *
+              <span style="color:var(--primary); font-weight:400;">(AI reads this to shortlist resumes)</span>
+            </label>
+            <textarea name="requirements" class="form-control" rows="6"
+              placeholder="Be specific! For example:
+- 3+ years Python experience (Django/Flask)
+- Experience with REST APIs and PostgreSQL
+- Knowledge of AWS/GCP
+- Strong problem-solving skills
+- B.Tech/B.E. in Computer Science or equivalent
+- Experience with fintech is a plus" required>{{ job.requirements }}</textarea>
+            <div class="text-muted mt-1" style="font-size:0.8rem;">💡 More detail = better AI screening accuracy</div>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <a href="/admin/home" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary">Save Changes →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

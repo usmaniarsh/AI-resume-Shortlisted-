@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}Internal Job Postings{% endblock %}
+{% block nav_links %}
+  <a href="/company-logout">Logout</a>
+{% endblock %}
+{% block extra_head_styles %}
+.internal-header {
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+}
+.employee-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-bottom: 1rem;
+}
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+.job-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.job-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.job-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 0.35rem; }
+.job-card h3 { font-size: 1.05rem; font-weight: 700; }
+.job-posted { font-size: 0.74rem; color: var(--text-muted); white-space: nowrap; padding-top: 3px; }
+.job-meta { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.75rem; }
+.job-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+  flex-grow: 1;
+}
+.job-edu {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+.job-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+.skill-chip {
+  font-size: 0.75rem;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.empty-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  color: var(--text-muted);
+}
+{% endblock %}
+{% block content %}
+<div class="internal-header">
+  <div class="employee-badge">👤 Signed in as {{ employee_email }}</div>
+  <h1 class="page-title" style="font-family:'Fraunces',serif;">Internal Job Postings</h1>
+  <p class="text-muted">Roles open exclusively to current employees</p>
+</div>
+
+{% if jobs %}
+<div class="job-grid">
+  {% for job in jobs %}
+  {% set meta_parts = [] %}
+  {% if job.role %}{% set meta_parts = meta_parts + [job.role] %}{% elif job.department %}{% set meta_parts = meta_parts + [job.department] %}{% endif %}
+  {% if job.location %}{% set meta_parts = meta_parts + [job.location] %}{% endif %}
+  {% if job.job_type %}{% set meta_parts = meta_parts + [job.job_type] %}{% endif %}
+  {% if job.employment_type %}{% set meta_parts = meta_parts + [job.employment_type] %}{% endif %}
+  <div class="job-card">
+    <div class="job-card-top">
+      <h3>{{ job.title }}</h3>
+      {% if job.created_at %}<span class="job-posted">{{ job.created_at | days_ago }}</span>{% endif %}
+    </div>
+    {% if meta_parts %}
+    <div class="job-meta">{{ meta_parts | join(' · ') }}</div>
+    {% endif %}
+
+    {% if job.description %}
+    <div class="job-desc">{{ job.description | truncate(140) }}</div>
+    {% elif job.requirements %}
+    <div class="job-desc">{{ job.requirements | truncate(140) }}</div>
+    {% endif %}
+
+    {% if job.education_ug or job.education_pg %}
+    <div class="job-edu">
+      🎓
+      <span>
+        {{ job.education_ug }}{% if job.education_ug and job.education_pg %}, {% endif %}{{ job.education_pg }}
+      </span>
+    </div>
+    {% endif %}
+
+    {% if job.key_skills %}
+    <div class="job-skills">
+      {% for skill in job.key_skills[:5] %}
+        <span class="skill-chip">{{ skill }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <a href="/apply/{{ job.id }}" class="btn btn-primary" style="width:100%;justify-content:center;">
+      Apply Now →
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p>No open positions right now. Check back soon!</p>
+</div>
+{% endif %}
+{% endblock %}

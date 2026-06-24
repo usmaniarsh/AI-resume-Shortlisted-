@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}Assessment Result – {{ application.name }}{% endblock %}
+{% block nav_links %}
+  <a href="/admin/home">Dashboard</a>
+  <a href="/admin/applications" class="active">Applications</a>
+  <a href="/admin/jobs/new">+ Post Job</a>
+  <a href="/admin/logout" style="color:var(--danger);">Logout {% if session.get('admin_email') %}({{ session.get('admin_email') }}){% endif %}</a>
+{% endblock %}
+{% block content %}
+
+{% set result = application.assessment_result %}
+{% set ascore = result.composite_score %}
+{% set correct = result.mcq_score %}
+{% set total = result.mcq_total %}
+
+<!-- Back button -->
+<div class="mb-4">
+  <a href="/admin/applications/{{ application.id }}" class="btn btn-secondary btn-sm">← Back to Application</a>
+</div>
+
+<!-- Header card -->
+<div class="card mb-4">
+  <div class="card-body" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+
+    <!-- Score ring -->
+    {% if ascore >= 70 %}
+    <div class="score-ring score-high" style="width:80px; height:80px; font-size:1.4rem; flex-shrink:0;">
+      {{ ascore }}<span style="font-size:0.65rem;">%</span>
+    </div>
+    {% elif ascore >= 40 %}
+    <div class="score-ring score-mid" style="width:80px; height:80px; font-size:1.4rem; flex-shrink:0;">
+      {{ ascore }}<span style="font-size:0.65rem;">%</span>
+    </div>
+    {% else %}
+    <div class="score-ring score-low" style="width:80px; height:80px; font-size:1.4rem; flex-shrink:0;">
+      {{ ascore }}<span style="font-size:0.65rem;">%</span>
+    </div>
+    {% endif %}
+
+    <!-- Info -->
+    <div style="flex:1;">
+      <h2 style="font-size:1.25rem; font-weight:700; margin-bottom:0.25rem;">
+        {{ application.name }}'s Assessment Result
+      </h2>
+      <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.75rem;">
+        💼 {{ application.job_title }} &nbsp;•&nbsp;
+        📅 Submitted: {{ result.completed_at[:10] if result.completed_at else 'N/A' }}
+      </p>
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <!-- Pass / Fail / Average -->
+        {% if ascore >= 70 %}
+          <span class="badge badge-success" style="font-size:0.9rem; padding:0.4rem 0.9rem;">✅ Pass</span>
+        {% elif ascore >= 40 %}
+          <span class="badge badge-warning" style="font-size:0.9rem; padding:0.4rem 0.9rem;">⚠️ Average</span>
+        {% else %}
+          <span class="badge badge-danger" style="font-size:0.9rem; padding:0.4rem 0.9rem;">❌ Fail</span>
+        {% endif %}
+
+        <span class="badge badge-gray" style="font-size:0.9rem; padding:0.4rem 0.9rem;">
+          📝 {{ correct }} / {{ total }} correct
+        </span>
+      </div>
+    </div>
+
+    <!-- Quick stats -->
+    <div style="display:flex; gap:1rem; flex-wrap:wrap; flex-shrink:0;">
+      <div style="text-align:center; padding:0.75rem 1.25rem; background:var(--bg-secondary,#f9fafb); border-radius:0.75rem;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--primary,#1a6b3a);">{{ correct }}</div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">Correct</div>
+      </div>
+      <div style="text-align:center; padding:0.75rem 1.25rem; background:var(--bg-secondary,#f9fafb); border-radius:0.75rem;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--danger,#dc2626);">{{ total - correct }}</div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">Wrong</div>
+      </div>
+      <div style="text-align:center; padding:0.75rem 1.25rem; background:var(--bg-secondary,#f9fafb); border-radius:0.75rem;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--text-muted);">{{ total }}</div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">Total</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MCQ Question-wise breakdown -->
+<div class="card">
+  <div class="card-header" style="padding:1rem 1.5rem; border-bottom:1px solid var(--border,#e5e7eb);">
+    <h3 style="font-size:1rem; font-weight:700; margin:0;">📋 Question-wise Breakdown</h3>
+  </div>
+  <div class="card-body" style="padding:1.25rem 1.5rem;">
+    <div style="display:grid; gap:1rem;">
+      {% for q in result.mcq_results %}
+      <div style="padding:1rem 1.25rem; border-radius:0.75rem; border:1.5px solid {% if q.is_correct %}#86efac{% else %}#fca5a5{% endif %}; background:{% if q.is_correct %}#f0fdf4{% else %}#fff1f2{% endif %};">
+
+        <!-- Question number + text -->
+        <div style="display:flex; gap:0.75rem; align-items:flex-start; margin-bottom:0.75rem;">
+          <span style="font-size:0.8rem; font-weight:700; padding:0.2rem 0.55rem; border-radius:999px; background:{% if q.is_correct %}#d1fae5{% else %}#fee2e2{% endif %}; color:{% if q.is_correct %}#065f46{% else %}#991b1b{% endif %}; flex-shrink:0; margin-top:0.1rem;">
+            {% if q.is_correct %}✓{% else %}✗{% endif %} Q{{ loop.index }}
+          </span>
+          <p style="font-size:0.9rem; font-weight:600; color:var(--text-primary,#111827); margin:0; line-height:1.5;">
+            {{ q.question }}
+          </p>
+        </div>
+
+        <!-- Options grid -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem 1rem; margin-left:2rem; margin-bottom:0.75rem;">
+          {% for opt in q.options %}
+          {% set opt_letter = opt[0] %}
+          <div style="font-size:0.83rem; padding:0.3rem 0.5rem; border-radius:0.4rem;
+            {% if opt_letter == q.correct_answer %}
+              background:#d1fae5; color:#065f46; font-weight:700;
+            {% elif opt_letter == q.given_answer[0] and not q.is_correct %}
+              background:#fee2e2; color:#991b1b; font-weight:600; text-decoration:line-through;
+            {% else %}
+              color:var(--text-muted);
+            {% endif %}
+          ">
+            {{ opt }}
+            {% if opt_letter == q.correct_answer %} ✓{% endif %}
+            {% if opt_letter == q.given_answer[0] and not q.is_correct %} ✗{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Candidate's answer summary -->
+        <div style="margin-left:2rem; font-size:0.8rem; color:var(--text-muted);">
+          Candidate answered: <strong style="color:{% if q.is_correct %}#065f46{% else %}#991b1b{% endif %};">
+            {{ q.given_answer if q.given_answer else '(not answered)' }}
+          </strong>
+          {% if not q.is_correct %}
+          &nbsp;• Correct: <strong style="color:#065f46;">{{ q.correct_answer }}</strong>
+          {% endif %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

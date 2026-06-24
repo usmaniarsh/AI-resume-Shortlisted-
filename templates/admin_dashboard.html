@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard – HR RecruitAI{% endblock %}
+{% block nav_links %}
+  <a href="/admin/home" class="active">Dashboard</a>
+  <a href="/admin/applications">Applications</a>
+  <a href="/admin/jobs/new">+ Post Job</a>
+  <a href="/admin/logout" style="color:var(--danger);">Logout {% if session.get('admin_email') %}({{ session.get('admin_email') }}){% endif %}</a>
+{% endblock %}
+{% block content %}
+<div class="d-flex align-center justify-between mb-4">
+  <div>
+    <h1 class="page-title">Dashboard</h1>
+    <p class="text-muted mt-1">Overview of your recruitment pipeline</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="/admin/walkin/new" class="btn btn-secondary">🚶 + Post Walk-in Drive</a>
+    <a href="/admin/jobs/new" class="btn btn-primary">+ Post New Job</a>
+  </div>
+</div>
+
+<!-- Stats -->
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-bottom:2rem;">
+  <div class="card card-body" style="text-align:center;">
+    <div style="font-size:2rem; font-weight:800; color:var(--primary);">{{ stats.total }}</div>
+    <div class="text-muted" style="font-size:0.85rem;">Total Applications</div>
+  </div>
+  <div class="card card-body" style="text-align:center;">
+    <div style="font-size:2rem; font-weight:800; color:var(--success);">{{ stats.shortlisted }}</div>
+    <div class="text-muted" style="font-size:0.85rem;">Shortlisted</div>
+  </div>
+  <div class="card card-body" style="text-align:center;">
+    <div style="font-size:2rem; font-weight:800; color:var(--warning);">{{ stats.on_hold }}</div>
+    <div class="text-muted" style="font-size:0.85rem;">On Hold</div>
+  </div>
+  <div class="card card-body" style="text-align:center;">
+    <div style="font-size:2rem; font-weight:800; color:var(--danger);">{{ stats.rejected }}</div>
+    <div class="text-muted" style="font-size:0.85rem;">Rejected</div>
+  </div>
+  <div class="card card-body" style="text-align:center;">
+    <div style="font-size:2rem; font-weight:800; color:var(--text);">{{ stats.active_jobs }}</div>
+    <div class="text-muted" style="font-size:0.85rem;">Active Jobs</div>
+  </div>
+  <div class="card card-body" style="text-align:center;">
+    <div style="font-size:2rem; font-weight:800; color:var(--text);">{{ stats.active_drives }}</div>
+    <div class="text-muted" style="font-size:0.85rem;">Active Walk-in Drives</div>
+  </div>
+</div>
+
+<!-- Jobs Table -->
+<div class="card mb-4">
+  <div class="card-header">
+    <strong>Job Listings</strong>
+  </div>
+  {% if jobs %}
+  <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+      <thead>
+        <tr style="background:var(--surface2);">
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Job Title</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Applicants</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Status</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Posted</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job in jobs %}
+        <tr style="border-top:1px solid var(--border);">
+          <td style="padding:12px 16px; font-weight:500;">{{ job.title }}</td>
+          <td style="padding:12px 16px; color:var(--text-muted);">
+            <span style="font-weight:600; color:var(--primary);">{{ job.applicant_count }}</span> applied
+          </td>
+          <td style="padding:12px 16px;">
+            {% if job.active %}
+              <span class="badge badge-success">● Active</span>
+            {% else %}
+              <span class="badge badge-gray">Paused</span>
+            {% endif %}
+          </td>
+          <td style="padding:12px 16px; color:var(--text-muted);">{{ job.created_at[:10] }} <span style="opacity:0.7;">· {{ job.created_at[11:16] }}</span></td>
+          <td style="padding:12px 16px;">
+            <div class="d-flex gap-2">
+              <a href="/admin/jobs/{{ job.id }}/edit" class="btn btn-secondary btn-sm">Edit</a>
+              <a href="/admin/applications?job_id={{ job.id }}" class="btn btn-secondary btn-sm">View Apps</a>
+              <form method="POST" action="/admin/jobs/{{ job.id }}/toggle" style="display:inline;">
+                <button type="submit" class="btn btn-secondary btn-sm">{{ 'Pause' if job.active else 'Activate' }}</button>
+              </form>
+              <form method="POST" action="/admin/jobs/{{ job.id }}/delete" style="display:inline;" onsubmit="return confirm('Delete this job?')">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="card-body" style="text-align:center; padding:2.5rem; color:var(--text-muted);">
+    No jobs posted yet. <a href="/admin/jobs/new" style="color:var(--primary);">Post your first job →</a>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Walk-in Drives Table -->
+<div class="card">
+  <div class="card-header d-flex align-center justify-between">
+    <strong>🚶 Walk-in Drives</strong>
+    <a href="/admin/walkin/new" class="btn btn-secondary btn-sm">+ Post Drive</a>
+  </div>
+  {% if walkin_drives %}
+  <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+      <thead>
+        <tr style="background:var(--surface2);">
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Drive Title</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Date</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Location</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Registered</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Status</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for drive in walkin_drives %}
+        <tr style="border-top:1px solid var(--border);">
+          <td style="padding:12px 16px; font-weight:500;">{{ drive.title }}</td>
+          <td style="padding:12px 16px; color:var(--text-muted);">{{ drive.drive_date }}{% if drive.drive_time %} · {{ drive.drive_time }}{% endif %}</td>
+          <td style="padding:12px 16px; color:var(--text-muted);">{{ drive.location or '-' }}</td>
+          <td style="padding:12px 16px; color:var(--text-muted);">
+            <span style="font-weight:600; color:var(--primary);">{{ drive.registration_count }}</span> registered
+          </td>
+          <td style="padding:12px 16px;">
+            {% if drive.active %}
+              <span class="badge badge-success">● Active</span>
+            {% else %}
+              <span class="badge badge-gray">Paused</span>
+            {% endif %}
+          </td>
+          <td style="padding:12px 16px;">
+            <div class="d-flex gap-2">
+              <a href="/admin/walkin/{{ drive.id }}/edit" class="btn btn-secondary btn-sm">Edit</a>
+              <a href="/admin/walkin/{{ drive.id }}/registrations" class="btn btn-secondary btn-sm">View Regs</a>
+              <form method="POST" action="/admin/walkin/{{ drive.id }}/toggle" style="display:inline;">
+                <button type="submit" class="btn btn-secondary btn-sm">{{ 'Pause' if drive.active else 'Activate' }}</button>
+              </form>
+              <form method="POST" action="/admin/walkin/{{ drive.id }}/delete" style="display:inline;" onsubmit="return confirm('Delete this walk-in drive?')">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="card-body" style="text-align:center; padding:2.5rem; color:var(--text-muted);">
+    No walk-in drives posted yet. <a href="/admin/walkin/new" style="color:var(--primary);">Post your first drive →</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

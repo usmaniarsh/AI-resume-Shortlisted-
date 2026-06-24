@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% block title %}Applications – HR RecruitAI{% endblock %}
+{% block nav_links %}
+  <a href="/admin/home">Dashboard</a>
+  <a href="/admin/applications" class="active">Applications</a>
+  <a href="/admin/jobs/new">+ Post Job</a>
+  <a href="/admin/logout" style="color:var(--danger);">Logout {% if session.get('admin_email') %}({{ session.get('admin_email') }}){% endif %}</a>
+{% endblock %}
+
+{% block extra_head_styles %}
+  /* ── Applications page: layout (desktop default) ── */
+  .apps-filters-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .apps-filter-form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .apps-filter-field { width: 220px; }
+  .apps-filter-field.narrow { width: 160px; }
+  .apps-filter-buttons { display: flex; gap: 0.5rem; }
+
+  .apps-bulk-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+  }
+
+  .app-card-body {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .app-score-ring { width: 60px; height: 60px; font-size: 1.1rem; flex-shrink: 0; }
+  .app-info { flex: 1; min-width: 0; }
+  .app-meta-row { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted); }
+  .app-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    align-items: stretch;
+    min-width: 160px;
+  }
+  .app-actions-row { display: flex; gap: 0.5rem; }
+
+  .apps-empty { text-align: center; padding: 3rem; color: var(--text-muted); }
+  .apps-empty .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .apps-empty h3 { font-weight: 600; margin-bottom: 0.5rem; }
+
+  /* ── Mobile (≤640px): stack everything, full-width controls ── */
+  @media (max-width: 640px) {
+    .apps-filters-row { flex-direction: column; align-items: stretch; }
+
+    .apps-filter-form { flex-direction: column; align-items: stretch; width: 100%; gap: 0.75rem; }
+    .apps-filter-field,
+    .apps-filter-field.narrow { width: 100%; }
+
+    .apps-filter-buttons { width: 100%; }
+    .apps-filter-buttons .btn { flex: 1; justify-content: center; }
+
+    .apps-bulk-actions { align-items: stretch; width: 100%; }
+    .apps-bulk-actions form { width: 100%; }
+    .apps-bulk-actions button { width: 100%; }
+
+    .app-card-body { flex-direction: column; align-items: stretch; text-align: left; }
+    .app-score-ring { margin: 0 auto; }
+    .app-meta-row { gap: 0.6rem 1rem; }
+    .app-actions { width: 100%; min-width: 0; }
+
+    .apps-empty { padding: 2rem 1rem; }
+  }
+{% endblock %}
+
+{% block content %}
+<div class="d-flex align-center justify-between mb-4">
+  <div>
+    <h1 class="page-title">Applications</h1>
+    <p class="text-muted mt-1">{{ applications|length }} application{{ 's' if applications|length != 1 }} • sorted by AI match score</p>
+  </div>
+</div>
+
+<!-- Filters card -->
+<div class="card mb-4">
+  <div class="card-body" style="padding:1rem 1.5rem;">
+    <div class="apps-filters-row">
+
+      <!-- LEFT: Filter form (GET) -->
+      <form method="GET" class="apps-filter-form">
+        <div class="apps-filter-field">
+          <label class="form-label" style="font-size:0.8rem;">Search</label>
+          <input type="text" name="search" class="form-control" placeholder="Name or email..." value="{{ search_query or '' }}">
+        </div>
+        <div class="apps-filter-field">
+          <label class="form-label" style="font-size:0.8rem;">Filter by Job</label>
+          <select name="job_id" class="form-control">
+            <option value="">All Jobs</option>
+            {% for job in all_jobs %}
+            <option value="{{ job.id }}" {% if job_id == job.id %}selected{% endif %}>{{ job.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="apps-filter-field narrow">
+          <label class="form-label" style="font-size:0.8rem;">Filter by Status</label>
+          <select name="status" class="form-control">
+            <option value="">All Status</option>
+            <option value="Shortlisted" {% if status_filter == 'Shortlisted' %}selected{% endif %}>✅ Shortlisted</option>
+            <option value="On Hold" {% if status_filter == 'On Hold' %}selected{% endif %}>⏳ On Hold</option>
+            <option value="Rejected" {% if status_filter == 'Rejected' %}selected{% endif %}>❌ Rejected</option>
+          </select>
+        </div>
+        <div class="apps-filter-buttons">
+          <button type="submit" class="btn btn-secondary">🔍 Apply Filters</button>
+          {% if job_id or status_filter or search_query %}
+          <a href="/admin/applications" class="btn btn-secondary" style="color:var(--danger);">Clear</a>
+          {% endif %}
+        </div>
+      </form>
+
+      <!-- RIGHT: Send Assessment to All + Delete All -->
+      {% if applications %}
+      <div class="apps-bulk-actions">
+
+        <!-- Send Assessment to All -->
+        <form method="POST" action="/admin/applications/send-assessment-all"
+              onsubmit="return confirm('🚀 Send assessment to ALL {{ applications|length }} candidates? Already-sent ones will be skipped.');">
+          {% if job_id %}<input type="hidden" name="job_id" value="{{ job_id }}">{% endif %}
+          {% if status_filter %}<input type="hidden" name="status" value="{{ status_filter }}">{% endif %}
+          {% if search_query %}<input type="hidden" name="search" value="{{ search_query }}">{% endif %}
+          <button type="submit" class="btn btn-sm"
+                  style="background:#f0fdf4; color:#15803d; border:1px solid #86efac; white-space:nowrap;">
+            🚀 Send Assessment to All ({{ applications|length }})
+          </button>
+        </form>
+
+        <!-- Delete All -->
+        <form method="POST" action="/admin/applications/delete-all"
+              onsubmit="return confirm('⚠️ Delete ALL {{ applications|length }} applications? This cannot be undone.');">
+          {% if job_id %}<input type="hidden" name="job_id" value="{{ job_id }}">{% endif %}
+          {% if status_filter %}<input type="hidden" name="status" value="{{ status_filter }}">{% endif %}
+          {% if search_query %}<input type="hidden" name="search" value="{{ search_query }}">{% endif %}
+          <button type="submit" class="btn btn-danger btn-sm" style="white-space:nowrap;">
+            🗑️ Delete All ({{ applications|length }})
+          </button>
+        </form>
+
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% if applications %}
+<div style="display:grid; gap:0.75rem;">
+  {% for app in applications %}
+  {% set score = app.ai_analysis.match_score %}
+  {% set status = app.ai_analysis.status %}
+  {% set assessment_done = app.assessment_result is defined and app.assessment_result %}
+  {% set assessment_sent = app.assessment_questions is defined and app.assessment_questions %}
+
+  <div class="card" style="transition:box-shadow 0.15s;">
+    <div class="card-body app-card-body">
+
+      <!-- AI Match Score Ring -->
+      {% if score >= 70 %}
+      <div class="score-ring score-high app-score-ring">
+        {{ score }}<span style="font-size:0.6rem;">%</span>
+      </div>
+      {% elif score >= 50 %}
+      <div class="score-ring score-mid app-score-ring">
+        {{ score }}<span style="font-size:0.6rem;">%</span>
+      </div>
+      {% else %}
+      <div class="score-ring score-low app-score-ring">
+        {{ score }}<span style="font-size:0.6rem;">%</span>
+      </div>
+      {% endif %}
+
+      <!-- Info -->
+      <div class="app-info">
+        <div class="d-flex align-center gap-2 mb-3" style="flex-wrap:wrap;">
+          <strong style="font-size:1rem;">{{ app.name }}</strong>
+
+          {% if status == 'Shortlisted' %}<span class="badge badge-success">✅ Shortlisted</span>
+          {% elif status == 'On Hold' %}<span class="badge badge-warning">⏳ On Hold</span>
+          {% else %}<span class="badge badge-danger">❌ Rejected</span>{% endif %}
+
+          {% if app.ai_detection and app.ai_detection.ai_likelihood_score >= 60 %}
+          <span class="badge badge-danger" title="{{ app.ai_detection.verdict }}">🤖 AI-flagged</span>
+          {% elif app.ai_detection and app.ai_detection.ai_likelihood_score >= 30 %}
+          <span class="badge badge-warning" title="{{ app.ai_detection.verdict }}">🤖 Possibly AI-assisted</span>
+          {% endif %}
+
+          {% if app.blind_screening and app.blind_screening.redacted_count %}
+          <span class="badge badge-gray" title="Identity signals redacted before scoring">🛡️ Bias-free</span>
+          {% endif %}
+
+          {% if assessment_done %}
+            {% set ascore = app.assessment_result.composite_score %}
+            {% set atotal = app.assessment_result.mcq_total %}
+            {% set acorrect = app.assessment_result.mcq_score %}
+            {% if ascore >= 70 %}
+              <span class="badge" style="background:#d1fae5; color:#065f46; font-weight:700;">📝 {{ ascore }}% ({{ acorrect }}/{{ atotal }})</span>
+              <span class="badge" style="background:#d1fae5; color:#065f46;">✅ Pass</span>
+            {% elif ascore >= 40 %}
+              <span class="badge" style="background:#fef3c7; color:#92400e; font-weight:700;">📝 {{ ascore }}% ({{ acorrect }}/{{ atotal }})</span>
+              <span class="badge" style="background:#fef3c7; color:#92400e;">⚠️ Average</span>
+            {% else %}
+              <span class="badge" style="background:#fee2e2; color:#991b1b; font-weight:700;">📝 {{ ascore }}% ({{ acorrect }}/{{ atotal }})</span>
+              <span class="badge" style="background:#fee2e2; color:#991b1b;">❌ Fail</span>
+            {% endif %}
+          {% elif assessment_sent %}
+            <span class="badge" style="background:#e0f2fe; color:#0369a1;">⏳ Assessment Pending</span>
+          {% endif %}
+        </div>
+
+        <div class="app-meta-row">
+          <span>📧 {{ app.email }}</span>
+          {% if app.phone %}<span>📱 {{ app.phone }}</span>{% endif %}
+          <span>💼 {{ app.job_title }}</span>
+          <span>📅 {{ app.applied_at[:10] }}</span>
+          {% if app.ats_review %}<span>📋 ATS: {{ app.ats_review.ats_score }}%</span>{% endif %}
+        </div>
+
+        {% if app.ai_analysis.summary %}
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem; line-height:1.5;">
+          {{ app.ai_analysis.summary[:150] }}...
+        </p>
+        {% endif %}
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="app-actions">
+        <div class="app-actions-row">
+          <a href="/admin/applications/{{ app.id }}" class="btn btn-secondary btn-sm" style="flex:1; text-align:center;">
+            View Details →
+          </a>
+          {% if assessment_done %}
+            <a href="/admin/applications/{{ app.id }}/assessment"
+               class="btn btn-sm"
+               style="background:#f0fdf4; color:#15803d; border:1px solid #86efac; white-space:nowrap; flex:1; text-align:center;">
+              📋 Result
+            </a>
+          {% elif assessment_sent %}
+            <span class="btn btn-sm"
+               style="background:#f0f9ff; color:#0369a1; border:1px solid #7dd3fc; white-space:nowrap; flex:1; text-align:center; cursor:default;">
+              ⏳ Sent
+            </span>
+          {% else %}
+            <form method="POST" action="/admin/applications/{{ app.id }}/send-assessment"
+                  onsubmit="return confirm('Send assessment to {{ app.name }}?');"
+                  style="flex:1;">
+              <button type="submit" class="btn btn-sm"
+                      style="background:#f0fdf4; color:#15803d; border:1px solid #86efac; white-space:nowrap; width:100%;">
+                🚀 Assess
+              </button>
+            </form>
+          {% endif %}
+        </div>
+
+        <form method="POST" action="/admin/applications/{{ app.id }}/delete"
+              onsubmit="return confirm('Delete this application? This cannot be undone.');">
+          <button type="submit" class="btn btn-danger btn-sm" style="width:100%;">🗑️ Delete</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<div class="card card-body apps-empty">
+  <div class="icon">📭</div>
+  <h3>No applications found</h3>
+  <p>{% if job_id or status_filter %}Try changing your filters.{% else %}Applications will appear here once candidates apply.{% endif %}</p>
+</div>
+{% endif %}
+{% endblock %}

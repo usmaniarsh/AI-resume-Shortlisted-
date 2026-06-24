@@ -1,0 +1,383 @@
+{% extends "base.html" %}
+{% block title %}{{ application.name }} – Application{% endblock %}
+{% block nav_links %}
+  <a href="/admin">Dashboard</a>
+  <a href="/admin/applications" class="active">Applications</a>
+  <a href="/admin/jobs/new">+ Post Job</a>
+  <a href="/admin/logout" style="color:var(--danger);">Logout</a>
+{% endblock %}
+{% block content %}
+{% set score = application.ai_analysis.match_score %}
+{% set status = application.ai_analysis.status %}
+{% set ai = application.ai_analysis %}
+
+<a href="/admin/applications" style="color:var(--text-muted); text-decoration:none; font-size:0.9rem;">← Back to Applications</a>
+
+<div class="grid-side" style="margin-top:1.5rem;">
+
+  <!-- LEFT COLUMN -->
+  <div>
+    <!-- Header -->
+    <div class="card mb-4">
+      <div class="card-body" style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+        <div style="width:56px; height:56px; border-radius:50%; background:var(--primary-light); display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; color:var(--primary); flex-shrink:0;">
+          {{ application.name[0].upper() }}
+        </div>
+        <div style="flex:1;">
+          <h1 style="font-size:1.25rem; font-weight:700; margin-bottom:0.25rem;">{{ application.name }}</h1>
+          <div style="display:flex; gap:1.25rem; flex-wrap:wrap; font-size:0.85rem; color:var(--text-muted);">
+            <span>📧 {{ application.email }}</span>
+            {% if application.phone %}<span>📱 {{ application.phone }}</span>{% endif %}
+          </div>
+        </div>
+        {% if status == 'Shortlisted' %}<span class="badge badge-success" style="font-size:0.9rem; padding:6px 16px;">✅ Shortlisted</span>
+        {% elif status == 'On Hold' %}<span class="badge badge-warning" style="font-size:0.9rem; padding:6px 16px;">⏳ On Hold</span>
+        {% else %}<span class="badge badge-danger" style="font-size:0.9rem; padding:6px 16px;">❌ Rejected</span>{% endif %}
+        {% if application.ai_detection and application.ai_detection.ai_likelihood_score >= 60 %}
+        <span class="badge badge-danger" style="font-size:0.78rem; padding:5px 12px;" title="{{ application.ai_detection.verdict }}">🤖 AI-flagged</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Resume -->
+    <div class="card mb-4">
+      <div class="card-header" style="display:flex; align-items:center; justify-content:space-between;">
+        <span>📄 Resume</span>
+        <a href="{{ url_for('serve_resume', filename=application.resume_file) }}" target="_blank" class="btn btn-secondary btn-sm">⬇️ View / Download</a>
+      </div>
+      <div class="card-body">
+        <pre style="white-space:pre-wrap; font-family:inherit; font-size:0.875rem; color:var(--text-muted); line-height:1.6; max-height:280px; overflow-y:auto; margin:0;">{{ application.resume_text }}{% if application.resume_text|length >= 500 %}…{% endif %}</pre>
+      </div>
+    </div>
+
+    <!-- AI Analysis -->
+    <div class="card mb-4">
+      <div class="card-header">🤖 AI Analysis</div>
+      <div class="card-body">
+        <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; margin-bottom:1.25rem;">{{ ai.summary }}</p>
+
+        <div class="grid-2">
+          {% if ai.strengths %}
+          <div>
+            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.75rem; color:var(--success);">✅ Strengths</div>
+            {% for s in ai.strengths %}
+            <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:8px; font-size:0.875rem;">
+              <span style="color:var(--success); flex-shrink:0;">✓</span> {{ s }}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if ai.gaps %}
+          <div>
+            <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.75rem; color:var(--danger);">⚠️ Gaps</div>
+            {% for g in ai.gaps %}
+            <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:8px; font-size:0.875rem;">
+              <span style="color:var(--danger); flex-shrink:0;">✗</span> {{ g }}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        {% if ai.recommendation %}
+        <div style="margin-top:1rem; padding:12px 16px; background:var(--primary-light); border-radius:8px; font-size:0.875rem; color:var(--primary); border-left:3px solid var(--primary);">
+          <strong>Recommendation:</strong> {{ ai.recommendation }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Resume Quality / ATS Review -->
+    {% if application.ats_review %}
+    {% set ats = application.ats_review %}
+    <div class="card mb-4">
+      <div class="card-header" style="display:flex; align-items:center; justify-content:space-between;">
+        <span>📋 Resume Quality (ATS Check)</span>
+        <span class="badge {% if ats.ats_score >= 70 %}badge-success{% elif ats.ats_score >= 50 %}badge-warning{% else %}badge-danger{% endif %}" style="font-size:0.85rem; padding:5px 14px;">
+          {{ ats.ats_score }}%
+        </span>
+      </div>
+      <div class="card-body" style="font-size:0.875rem;">
+        {% if ats.summary %}
+        <p style="color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">{{ ats.summary }}</p>
+        {% endif %}
+
+        {% if ats.strengths %}
+        <div style="font-weight:600; font-size:0.85rem; margin-bottom:0.6rem; color:var(--success);">✅ Strengths</div>
+        {% for s in ats.strengths %}
+        <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:6px;">
+          <span style="color:var(--success); flex-shrink:0;">✓</span> {{ s }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if ats.issues %}
+        <div style="font-weight:600; font-size:0.85rem; margin:1rem 0 0.6rem; color:var(--text);">🔧 Issues & Fixes</div>
+        {% for issue in ats.issues %}
+        <div style="border-left:3px solid var(--warning); padding-left:10px; margin-bottom:10px;">
+          <strong>{{ issue.area|capitalize }}:</strong> {{ issue.problem }}<br>
+          <span style="color:var(--text-muted);">💡 {{ issue.suggestion }}</span>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if ats.rule_flags %}
+        <div style="font-weight:600; font-size:0.85rem; margin:1rem 0 0.6rem; color:var(--text);">⚙️ Automated Checks</div>
+        {% for flag in ats.rule_flags %}
+        <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:4px;">⚠️ {{ flag }}</div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Bias-Free Screening -->
+    {% if application.blind_screening %}
+    {% set blind = application.blind_screening %}
+    <div class="card mb-4">
+      <div class="card-header">🛡️ Bias-Free Screening</div>
+      <div class="card-body" style="font-size:0.85rem;">
+        <p style="color:var(--text-muted); margin-bottom:0.75rem; line-height:1.6;">
+          {{ blind.redacted_count }} identity signal(s) were redacted before this resume was scored against the job —
+          name, gender words, college-tier names, age/DOB, photo markers, and contact details were hidden from the AI.
+        </p>
+        {% if blind.redaction_log %}
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          {% for category, items in blind.redaction_log.items() %}
+          {% if items %}
+          <span class="badge badge-gray" style="font-size:0.78rem;">{{ category|replace('_',' ')|capitalize }}: {{ items|length }}</span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- AI-Generated Content Check -->
+    {% if application.ai_detection %}
+    {% set aid = application.ai_detection %}
+    <div class="card mb-4">
+      <div class="card-header">🤖 AI-Generated Content Check</div>
+      <div class="card-body" style="font-size:0.85rem;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:0.75rem;">
+          <span class="badge {{ 'badge-danger' if aid.ai_likelihood_score >= 60 else ('badge-warning' if aid.ai_likelihood_score >= 30 else 'badge-success') }}">
+            {{ aid.ai_likelihood_score }}% — {{ aid.verdict }}
+          </span>
+        </div>
+        <ul style="margin:0; padding-left:1.1rem; color:var(--text-muted);">
+          {% for reason in aid.reasons %}
+          <li style="margin-bottom:4px;">{{ reason }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Interview Questions -->
+    {% if application.interview_questions %}
+    <div class="card mb-4">
+      <div class="card-header" style="display:flex; align-items:center; justify-content:space-between;">
+        <span>🎯 Suggested Interview Questions</span>
+        <form method="POST" action="/admin/applications/{{ application.id }}/generate-questions">
+          <button type="submit" class="btn btn-secondary btn-sm">🔄 Regenerate</button>
+        </form>
+      </div>
+      <div class="card-body">
+        {% for q in application.interview_questions %}
+        <div style="padding:0.9rem 0; {% if not loop.last %}border-bottom:1px solid var(--border);{% endif %}">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <span class="badge badge-primary" style="flex-shrink:0; margin-top:2px;">{{ loop.index }}</span>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem; line-height:1.5;">{{ q.question }}</div>
+              {% if q.purpose %}
+              <div class="text-muted" style="font-size:0.78rem; margin-top:4px;">🔍 Checks for: {{ q.purpose }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Assessment Results -->
+    {% if application.assessment_result %}
+    {% set asr = application.assessment_result %}
+    <div class="card mb-4">
+      <div class="card-header" style="display:flex; align-items:center; justify-content:space-between;">
+        <span>📝 Assessment Results</span>
+        <span class="badge {% if asr.composite_score >= 70 %}badge-success{% elif asr.composite_score >= 50 %}badge-warning{% else %}badge-danger{% endif %}" style="font-size:0.85rem; padding:5px 14px;">
+          {{ asr.composite_score }}% Composite Score
+        </span>
+      </div>
+      <div class="card-body">
+
+        <!-- Score breakdown -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.25rem;">
+          <div style="background:var(--surface2); border-radius:8px; padding:1rem; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:800; color:var(--primary);">{{ asr.mcq_score }}/{{ asr.mcq_total }}</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">MCQ Score</div>
+          </div>
+          <div style="background:var(--surface2); border-radius:8px; padding:1rem; text-align:center;">
+            {% set short_avg = namespace(val=0) %}
+            {% if asr.short_results %}
+              {% set short_avg.val = (asr.short_results | map(attribute='score') | sum) / asr.short_results|length %}
+            {% endif %}
+            <div style="font-size:1.6rem; font-weight:800; color:var(--warning);">{{ '%.1f'|format(short_avg.val) }}/10</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Written Avg</div>
+          </div>
+        </div>
+
+        {% if asr.overall_comment %}
+        <div style="background:var(--info-light); border-left:3px solid var(--info); border-radius:8px; padding:12px 16px; font-size:0.875rem; color:var(--text); margin-bottom:1.25rem; line-height:1.6;">
+          <strong style="color:var(--info);">🤖 AI Comment:</strong> {{ asr.overall_comment }}
+        </div>
+        {% endif %}
+
+        <!-- MCQ Details -->
+        <div style="font-weight:700; font-size:0.85rem; margin-bottom:0.75rem; color:var(--text);">🧠 MCQ Breakdown</div>
+        <div style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.25rem;">
+          {% for r in asr.mcq_results %}
+          <div style="padding:10px 14px; border-radius:8px; border:1px solid var(--border); background:{% if r.is_correct %}var(--success-light){% else %}var(--danger-light){% endif %}; font-size:0.85rem;">
+            <div style="display:flex; align-items:flex-start; gap:8px;">
+              <span style="flex-shrink:0; font-weight:700; color:{% if r.is_correct %}var(--success){% else %}var(--danger){% endif %};">
+                {% if r.is_correct %}✓{% else %}✗{% endif %}
+              </span>
+              <div style="flex:1;">
+                <div style="font-weight:600; margin-bottom:3px;">Q{{ loop.index }}: {{ r.question }}</div>
+                <div style="color:var(--text-muted);">
+                  Candidate: <strong>{{ r.given_answer or '(no answer)' }}</strong>
+                  {% if not r.is_correct %} · Correct: <strong style="color:var(--success);">{{ r.correct_answer }}</strong>{% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Short Answer Details -->
+        <div style="font-weight:700; font-size:0.85rem; margin-bottom:0.75rem; color:var(--text);">✍️ Written Responses</div>
+        <div style="display:flex; flex-direction:column; gap:0.85rem;">
+          {% for r in asr.short_results %}
+          <div style="border:1px solid var(--border); border-radius:8px; overflow:hidden;">
+            <div style="padding:10px 14px; background:var(--surface2); display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-weight:600; font-size:0.85rem;">Q{{ loop.index }}: {{ r.question }}</span>
+              <span style="font-size:0.8rem; font-weight:700; padding:3px 10px; border-radius:20px;
+                background:{% if r.score >= 7 %}var(--success-light){% elif r.score >= 5 %}var(--warning-light){% else %}var(--danger-light){% endif %};
+                color:{% if r.score >= 7 %}var(--success){% elif r.score >= 5 %}var(--warning){% else %}var(--danger){% endif %};">
+                {{ r.score }}/10
+              </span>
+            </div>
+            <div style="padding:10px 14px; font-size:0.85rem; line-height:1.6;">
+              <div style="color:var(--text); margin-bottom:6px; white-space:pre-wrap;">{{ r.answer }}</div>
+              {% if r.feedback %}
+              <div style="color:var(--primary); font-size:0.8rem; font-style:italic; border-top:1px solid var(--border); padding-top:6px;">
+                💬 {{ r.feedback }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% if asr.completed_at %}
+        <div style="margin-top:1rem; font-size:0.78rem; color:var(--text-muted);">
+          Completed: {{ asr.completed_at[:10] }} at {{ asr.completed_at[11:16] }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% elif application.assessment_questions %}
+    <div class="card mb-4">
+      <div class="card-header">📝 Assessment</div>
+      <div class="card-body" style="text-align:center; padding:1.5rem; color:var(--text-muted);">
+        <div style="font-size:1.8rem; margin-bottom:0.5rem;">⏳</div>
+        <p style="font-size:0.9rem;">Assessment was sent. Waiting for candidate to complete it.</p>
+        <p style="font-size:0.8rem; margin-top:0.5rem;">Link: <code>/assessment/{{ application.id }}</code></p>
+      </div>
+    </div>
+
+    {% else %}
+    <div class="card mb-4">
+      <div class="card-header">📝 Assessment</div>
+      <div class="card-body" style="text-align:center; padding:1.5rem; color:var(--text-muted);">
+        <div style="font-size:1.8rem; margin-bottom:0.5rem;">📋</div>
+        <p style="font-size:0.9rem; margin-bottom:1rem;">No assessment sent yet. Generate one to test the candidate's skills.</p>
+        <form method="POST" action="/admin/applications/{{ application.id }}/send-assessment">
+          <button type="submit" class="btn btn-primary">🚀 Generate & Send Assessment</button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Job Info -->
+    <div class="card">
+      <div class="card-header">💼 Applied For</div>
+      <div class="card-body" style="font-size:0.9rem;">
+        <div style="font-weight:600; margin-bottom:0.25rem;">{{ application.job_title }}</div>
+        {% if job.department %}<div class="text-muted">{{ job.department }}</div>{% endif %}
+        {% if job.location %}<div class="text-muted">📍 {{ job.location }}</div>{% endif %}
+        <div style="margin-top:1rem; font-size:0.8rem; color:var(--text-muted);">
+          Applied: {{ application.applied_at[:10] }} · ID: {{ application.id[:8] }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div>
+    <!-- Score Card -->
+    <div class="card mb-4">
+      <div class="card-body" style="text-align:center; padding:2rem;">
+        {% if score >= 70 %}
+        <div class="score-ring score-high" style="width:100px; height:100px; font-size:2rem; margin:0 auto 1rem;">{{ score }}<span style="font-size:0.75rem;">%</span></div>
+        {% elif score >= 50 %}
+        <div class="score-ring score-mid" style="width:100px; height:100px; font-size:2rem; margin:0 auto 1rem;">{{ score }}<span style="font-size:0.75rem;">%</span></div>
+        {% else %}
+        <div class="score-ring score-low" style="width:100px; height:100px; font-size:2rem; margin:0 auto 1rem;">{{ score }}<span style="font-size:0.75rem;">%</span></div>
+        {% endif %}
+        <div style="font-weight:600; margin-bottom:0.25rem;">Match Score</div>
+        <div class="text-muted" style="font-size:0.85rem;">Against job requirements (bias-redacted)</div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="card">
+      <div class="card-header"><strong>Actions</strong></div>
+      <div class="card-body" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ application.email }}&su={{ ('Regarding your application for ' + application.job_title) | urlencode }}" target="_blank" class="btn btn-primary" style="justify-content:center;">
+          📧 Email Candidate
+        </a>
+        <form method="POST" action="/admin/applications/{{ application.id }}/generate-questions">
+          <button type="submit" class="btn btn-secondary" style="width:100%; justify-content:center;">
+            🎯 {{ 'Regenerate' if application.interview_questions else 'Generate' }} Interview Questions
+          </button>
+        </form>
+        <form method="POST" action="/admin/applications/{{ application.id }}/reanalyze">
+          <button type="submit" class="btn btn-secondary" style="width:100%; justify-content:center;">
+            🔄 Re-analyze Resume
+          </button>
+        </form>
+        {% if not application.assessment_questions %}
+        <form method="POST" action="/admin/applications/{{ application.id }}/send-assessment">
+          <button type="submit" class="btn btn-secondary" style="width:100%; justify-content:center;">
+            📝 Generate Assessment
+          </button>
+        </form>
+        {% elif application.assessment_result %}
+        <div style="padding:10px 14px; background:var(--success-light); border-radius:8px; font-size:0.82rem; color:var(--success); text-align:center; font-weight:600;">
+          ✅ Assessment Done ({{ application.assessment_result.composite_score }}%)
+        </div>
+        {% else %}
+        <div style="padding:10px 14px; background:var(--warning-light); border-radius:8px; font-size:0.82rem; color:var(--warning); text-align:center;">
+          ⏳ Pending · <code style="font-size:0.75rem;">/assessment/{{ application.id }}</code>
+        </div>
+        {% endif %}
+        <a href="/admin/applications" class="btn btn-secondary" style="justify-content:center;">← Back to List</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

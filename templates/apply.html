@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block title %}Apply – {{ job.title }}{% endblock %}
+{% block nav_links %}
+  <a href="/candidate">Open Jobs</a>
+  <a href="/">Home</a>
+{% endblock %}
+{% block extra_head %}
+<style>
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.upload-zone:hover, .upload-zone.dragover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.upload-zone input[type=file] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+}
+.detail-grid {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1.5rem;
+}
+.detail-row { font-size:0.88rem; }
+.detail-row .label { font-weight:600; color: var(--text); }
+.detail-row .value { color: var(--text-muted); }
+.keyskill-tag {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 12px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  font-size:0.8rem;
+  color:var(--text);
+  margin: 0 6px 6px 0;
+}
+@media (max-width: 640px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}
+</style>
+{% endblock %}
+{% block content %}
+<div style="max-width:640px; margin:0 auto;">
+  <a href="/candidate" style="color:var(--text-muted); text-decoration:none; font-size:0.9rem;">← Back to Jobs</a>
+
+  <div style="margin:1.5rem 0;">
+    <div class="badge badge-primary mb-3">{{ job.department or 'General' }}</div>
+    <h1 class="page-title" style="margin-bottom:0.25rem;">{{ job.title }}</h1>
+    {% if job.location %}<p class="text-muted">📍 {{ job.location }}</p>{% endif %}
+  </div>
+
+  {% if job.role or job.role_category or job.industry_type or job.employment_type or job.education_ug or job.education_pg or job.key_skills %}
+  <div class="card mb-4">
+    <div class="card-header"><strong>Job Details</strong></div>
+    <div class="card-body">
+      <div class="detail-grid">
+        {% if job.role %}
+        <div class="detail-row"><span class="label">Role:</span> <span class="value">{{ job.role }}</span></div>
+        {% endif %}
+        {% if job.industry_type %}
+        <div class="detail-row"><span class="label">Industry Type:</span> <span class="value">{{ job.industry_type }}</span></div>
+        {% endif %}
+        {% if job.department %}
+        <div class="detail-row"><span class="label">Department:</span> <span class="value">{{ job.department }}</span></div>
+        {% endif %}
+        {% if job.employment_type %}
+        <div class="detail-row"><span class="label">Employment Type:</span> <span class="value">{{ job.employment_type }}</span></div>
+        {% endif %}
+        {% if job.role_category %}
+        <div class="detail-row"><span class="label">Role Category:</span> <span class="value">{{ job.role_category }}</span></div>
+        {% endif %}
+        {% if job.job_type %}
+        <div class="detail-row"><span class="label">Job Type:</span> <span class="value">{{ job.job_type }}</span></div>
+        {% endif %}
+      </div>
+
+      {% if job.education_ug or job.education_pg %}
+      <div style="margin-top:1.25rem;">
+        <div class="label" style="font-weight:700; margin-bottom:0.4rem;">Education</div>
+        {% if job.education_ug %}<div class="detail-row"><span class="label">UG:</span> <span class="value">{{ job.education_ug }}</span></div>{% endif %}
+        {% if job.education_pg %}<div class="detail-row"><span class="label">PG:</span> <span class="value">{{ job.education_pg }}</span></div>{% endif %}
+      </div>
+      {% endif %}
+
+      {% if job.key_skills %}
+      <div style="margin-top:1.25rem;">
+        <div class="label" style="font-weight:700; margin-bottom:0.6rem;">Key Skills</div>
+        <div>
+          {% for skill in job.key_skills %}
+          <span class="keyskill-tag">☆ {{ skill }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if job.description %}
+  <div class="card mb-4">
+    <div class="card-header"><strong>About This Role</strong></div>
+    <div class="card-body" style="font-size:0.9rem; color:var(--text-muted); line-height:1.7;">{{ job.description }}</div>
+  </div>
+  {% endif %}
+
+  {% if job.requirements %}
+  <div class="card mb-4">
+    <div class="card-header"><strong>Requirements</strong></div>
+    <div class="card-body" style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; white-space:pre-line;">{{ job.requirements }}</div>
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-header"><strong>Your Application</strong></div>
+    <div class="card-body">
+      <form method="POST" enctype="multipart/form-data">
+        <div class="grid-2">
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">Full Name *</label>
+            <input type="text" name="name" class="form-control" placeholder="Arsh Usmani" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input type="email" name="email" class="form-control" placeholder="arsh@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" name="phone" class="form-control" placeholder="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Resume / CV *</label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" name="resume" accept=".pdf,.doc,.docx,.txt" required id="resumeInput">
+            <div id="uploadContent">
+              <div style="font-size:2rem; margin-bottom:0.5rem;">📁</div>
+              <div style="font-weight:500; margin-bottom:0.25rem;">Drop your resume here</div>
+              <div class="text-muted" style="font-size:0.85rem;">PDF, DOCX, or TXT supported</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.75rem; padding:12px; background:var(--primary-light); border-radius:8px; margin-bottom:1.25rem;">
+          <span>🤖</span>
+          <span style="font-size:0.85rem; color:var(--primary);">Your resume will be analyzed by AI and matched against job requirements automatically.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px;">
+          Submit Application →
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+const input = document.getElementById('resumeInput');
+const content = document.getElementById('uploadContent');
+const zone = document.getElementById('uploadZone');
+
+input.addEventListener('change', () => {
+  if (input.files[0]) {
+    content.innerHTML = `<div style="font-size:2rem;margin-bottom:0.5rem">✅</div><div style="font-weight:600;color:var(--success)">${input.files[0].name}</div><div class="text-muted" style="font-size:0.85rem">${(input.files[0].size/1024).toFixed(1)} KB</div>`;
+    zone.style.borderColor = 'var(--success)';
+    zone.style.background = 'var(--success-light)';
+  }
+});
+
+zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', (e) => {
+  e.preventDefault(); zone.classList.remove('dragover');
+  if (e.dataTransfer.files[0]) { input.files = e.dataTransfer.files; input.dispatchEvent(new Event('change')); }
+});
+</script>
+{% endblock %}

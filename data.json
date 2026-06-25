@@ -1,83 +1,71 @@
-<<<<<<< HEAD
 {
   "jobs": [
     {
-      "id": "bbc0103d-7124-4123-ac87-b879c9f7bd9e",
-      "title": "Production Support Engineer",
+      "id": "279b0723-7bb1-4d63-883e-583f693c5ab8",
+      "title": "Application Support Engineer",
       "department": "",
       "location": "Mumbai",
-      "job_type": "Onsite",
-      "role": "",
-      "role_category": "Software Development",
-      "industry_type": "IT Services & Consulting",
-      "employment_type": "Full Time",
-      "education_ug": "Any Graduate",
-      "education_pg": "Any Postgraduate",
-      "key_skills": [],
-      "requirements": "Fresher or up to 1 year of experience in Production Support, Application Support, IT Operations, or related field\r\nBasic knowledge of SQL and database concepts\r\nUnderstanding of Linux/Unix commands\r\nKnowledge of incident management and ticketing tools (ServiceNow, Jira, Remedy, etc.) is a plus\r\nAbility to analyze logs and troubleshoot application issues\r\nBasic understanding of networking concepts\r\nFamiliarity with Windows and Linux operating systems\r\nKnowledge of scripting languages such as Python, Shell Scripting, or PowerShell is a plus\r\nUnderstanding of batch jobs, file transfers, and monitoring tools is preferred\r\nStrong analytical and problem-solving skills\r\nGood communication and stakeholder management skills\r\nWillingness to work in rotational shifts and provide production support\r\nB.E./B.Tech, B.Sc, BCA, MCA, or equivalent degree in Computer Science, IT, or related field\r\nAbility to work under pressure and meet SLA commitments\r\nEagerness to learn and adapt to new technologies and business applications",
-      "description": "We are looking for a Production Support Engineer Fresher to join our IT Operations team. The candidate will be responsible for monitoring applications, troubleshooting production issues, supporting business-critical systems, and ensuring smooth day-to-day operations. This role provides an excellent opportunity to learn incident management, application support, database troubleshooting, and production environment management.",
-      "active": true,
-      "created_at": "2026-06-24T01:10:18.081082"
-    },
-    {
-      "id": "6d5627cb-1afb-4ded-8074-566bfbae83af",
-      "title": "Business Analyst",
-      "department": "",
-      "location": "Mumbai",
-      "job_type": "Onsite",
-      "role": "",
-      "role_category": "Software Development",
-      "industry_type": "IT Services & Consulting",
-      "employment_type": "Full Time",
-      "education_ug": "B.Sc Computer Science/IT/Data Science",
-      "education_pg": "Post Graduation Not Required",
-      "key_skills": [],
-      "requirements": "Fresher or up to 1 year of experience in Business Analysis, Data Analysis, or related fields\r\nStrong analytical and problem-solving skills\r\nGood understanding of business processes and requirement gathering\r\nKnowledge of MS Excel, PowerPoint, and Word\r\nBasic knowledge of SQL and databases is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau is a plus\r\nUnderstanding of SDLC, Agile, and Scrum methodologies is an advantage\r\nAbility to create BRD, FRD, user stories, and process flow documents\r\nExcellent verbal and written communication skills\r\nStrong stakeholder management and coordination skills\r\nKnowledge of Jira, Confluence, or other project management tools is preferred\r\nAbility to analyze data and prepare reports and presentations",
-      "description": "We are looking for a Business Analyst Fresher to join our team. The candidate will be responsible for gathering and analyzing business requirements, preparing documentation, coordinating with stakeholders, and supporting process improvement initiatives. This role offers an opportunity to work closely with business and technical teams to deliver effective solutions and gain hands-on experience in business analysis and project management.",
-      "active": true,
-      "created_at": "2026-06-24T14:15:16.439898"
-    },
-    {
-      "id": "363e7c7c-8de7-4aef-9ce4-d8e785369659",
-      "title": "Data Analyst",
-      "department": "",
-      "location": "mumbai",
       "job_type": "Onsite",
       "role": "",
       "role_category": "Software Development",
       "industry_type": "IT Services & Consulting",
       "experience_level": "Fresher",
       "education_ug": "B.Sc Computer Science/IT/Data Science",
+      "education_pg": "Post Graduation Not Required",
+      "key_skills": [],
+      "requirements": "1\u20133 years of experience in Application Support / Production Support / Technical Support\r\nGood understanding of incident management, issue resolution, and troubleshooting\r\nBasic to good knowledge of SQL queries for data validation and issue analysis\r\nFamiliarity with Linux/Unix commands\r\nUnderstanding of application logs, monitoring, and batch/job handling\r\nExperience in supporting web applications, APIs, or enterprise applications\r\nKnowledge of ticketing tools such as JIRA, ServiceNow, or similar\r\nGood understanding of root cause analysis (RCA) and problem-solving\r\nStrong communication skills to coordinate with developers, QA, and business teams\r\nAbility to work in rotational shifts / production support environment if required\r\nBachelor\u2019s degree in Computer Science, IT, or related field\r\nExperience in banking, fintech, or payment support is a plus",
+      "description": "We are looking for an Application Support Engineer to join our team and support business-critical applications. The role involves monitoring application performance, troubleshooting issues, resolving incidents, coordinating with internal teams, and ensuring smooth day-to-day operations. The candidate should have good analytical skills, basic knowledge of SQL/Linux, and the ability to work in a fast-paced support environment.",
+      "active": true,
+      "created_at": "2026-06-24T19:40:03.537120"
+    },
+    {
+      "id": "7cdedad2-51a0-4e76-8771-5546ff6d385f",
+      "title": "AVP ST",
+      "department": "",
+      "location": "Ahmedabad",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "IT Services & Consulting",
+      "experience_level": "Fresher",
+      "education_ug": "Any Graduate",
       "education_pg": "Any Postgraduate",
       "key_skills": [],
-      "requirements": "Fresher or up to 1 year of experience in Data Analysis, Business Intelligence, or related fields\r\nStrong knowledge of SQL and database concepts\r\nProficiency in Microsoft Excel (Pivot Tables, VLOOKUP, Charts)\r\nBasic knowledge of Python (Pandas, NumPy) is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau\r\nUnderstanding of statistics and data analysis techniques\r\nAbility to clean, transform, and analyze datasets\r\nKnowledge of ETL concepts and data pipelines is a plus\r\nStrong analytical and problem-solving skills\r\nGood communication and presentation skills\r\nFamiliarity with reporting and dashboard creation\r\nUnderstanding of business metrics and KPIs\r\nKnowledge of databases such as MySQL, PostgreSQL, or SQL Server is preferred",
-      "description": "We are looking for a Data Analyst Fresher to join our team. The candidate will be responsible for collecting, analyzing, and interpreting data to support business decisions. This role offers an opportunity to work with datasets, create reports and dashboards, and gain hands-on experience with data analysis tools and techniques.",
+      "requirements": "ffffffffffffffffff",
+      "description": "fffffffffff",
       "active": true,
-      "created_at": "2026-06-24T16:59:03.671462",
-      "employment_type": "Full Time"
+      "created_at": "2026-06-25T16:26:00.296795"
     }
   ],
   "applications": [
     {
-      "id": "bfd7c6a8-b7c1-4250-a7fd-514bcba4f959",
-      "job_id": "363e7c7c-8de7-4aef-9ce4-d8e785369659",
-      "job_title": "Data Analyst",
-      "job_requirements": "Fresher or up to 1 year of experience in Data Analysis, Business Intelligence, or related fields\r\nStrong knowledge of SQL and database concepts\r\nProficiency in Microsoft Excel (Pivot Tables, VLOOKUP, Charts)\r\nBasic knowledge of Python (Pandas, NumPy) is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau\r\nUnderstanding of statistics and data analysis techniques\r\nAbility to clean, transform, and analyze datasets\r\nKnowledge of ETL concepts and data pipelines is a plus\r\nStrong analytical and problem-solving skills\r\nGood communication and presentation skills\r\nFamiliarity with reporting and dashboard creation\r\nUnderstanding of business metrics and KPIs\r\nKnowledge of databases such as MySQL, PostgreSQL, or SQL Server is preferred",
-      "name": "Arsh Usmani",
+      "id": "f01b9e86-c4f0-408f-9445-4b81faa25d7c",
+      "job_id": "279b0723-7bb1-4d63-883e-583f693c5ab8",
+      "job_title": "Application Support Engineer",
+      "job_requirements": "1\u20133 years of experience in Application Support / Production Support / Technical Support\r\nGood understanding of incident management, issue resolution, and troubleshooting\r\nBasic to good knowledge of SQL queries for data validation and issue analysis\r\nFamiliarity with Linux/Unix commands\r\nUnderstanding of application logs, monitoring, and batch/job handling\r\nExperience in supporting web applications, APIs, or enterprise applications\r\nKnowledge of ticketing tools such as JIRA, ServiceNow, or similar\r\nGood understanding of root cause analysis (RCA) and problem-solving\r\nStrong communication skills to coordinate with developers, QA, and business teams\r\nAbility to work in rotational shifts / production support environment if required\r\nBachelor\u2019s degree in Computer Science, IT, or related field\r\nExperience in banking, fintech, or payment support is a plus",
+      "name": "Mohd Arsh Usmani",
       "email": "usmaniarsh7@gmail.com",
       "phone": "9557875692",
-      "resume_file": "0d7b1d75-08a5-4f7f-9676-238082b886ab.pdf",
-      "resume_text": "Mohd Arsh Usmani \nSoftware Engineer \nStrong foundation in \nPython, SQL, data analysis, and database management\n , with hands-on experience in \ndata\nvalidation, data cleaning, reporting, and performance analysis\n . Skilled in analyzing large datasets, identifying trends\nand anomalies, conducting root cause analysis, and transforming complex data into actionable business insights.\nExperienced in \nSQL query optimization, database analysis, dashboard reporting, log analysis, and data quality\nassuran",
-      "applied_at": "2026-06-24T17:09:44.476901",
+      "resume_file": "3fa5c181-7123-49b7-a9e2-4a1fe0792b21.pdf",
+      "resume_text": "Mohd Arsh Usmani \nSoftware Engineer \nStrong foundation in Core Java, OOP, Python and backend work\ufb02ows with hands-on expertise in patch deployment, DC-\nDR activities, root cause analysis, and performance monitoring. Committed to enhancing system stability, reliability,\nand performance within mission-critical \ufb01nancial systems. Experienced in SQL optimization, database analysis, log\ndebugging, and resolving production issues across UAT. \nusmaniarsh7@gmail.com \n9557875692 \nMumbai \nportfolio-beta-san",
+      "applied_at": "2026-06-24T19:40:53.546591",
       "ai_analysis": {
-        "match_score": 0,
+        "match_score": 90,
         "status": "On Hold",
-        "strengths": [],
-        "gaps": [
-          "Could not analyze resume automatically"
+        "strengths": [
+          "Extensive experience in L1 production and application support for high-volume banking and payment platforms, directly addressing the 'fintech/banking' plus.",
+          "Strong technical proficiency in incident management, root cause analysis (RCA), and problem management, aligned with ITIL practices.",
+          "Proven expertise in SQL (T-SQL, optimization) for data validation, analysis, and troubleshooting, along with Unix commands.",
+          "Hands-on experience with application monitoring, batch/job handling (ETL, Autosys), log debugging, and tools like Splunk and JIRA.",
+          "Demonstrated ability to work in a 24x7 operational environment, ensuring system availability and SLA compliance.",
+          "Effective communication skills with stakeholders, engineering, operations, and vendors, and experience in knowledge article creation."
         ],
-        "summary": "Manual review required.",
-        "recommendation": "Error: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+        "gaps": [
+          "Critical date discrepancy: The 'Product Support Engineer' role is listed from '09/2025 - Present', which is a future date and needs immediate clarification as it casts doubt on current work experience.",
+          "Missing Education Details: A Bachelor\u2019s degree in Computer Science, IT, or a related field is a requirement but is not explicitly mentioned on the resume."
+        ],
+        "summary": "This candidate presents as a highly skilled and relevant Product Support Engineer, demonstrating deep experience in critical application support, incident management, and technical troubleshooting within the fintech sector. Their expertise aligns strongly with the job requirements for SQL, Unix, monitoring, and RCA in a 24x7 environment. However, a significant date error in their work history and the absence of explicit education details require urgent verification.",
+        "recommendation": "Place on 'On Hold' for immediate follow-up to clarify the start date of their 'Product Support Engineer' role and confirm educational qualifications. If these issues are resolved satisfactorily, the candidate possesses an excellent skill set and domain experience for the Application Support Engineer position and should be advanced to the interview stage."
       },
       "ats_review": null,
       "ai_detection": {
@@ -106,149 +94,351 @@
           ]
         },
         "redacted_count": 6
-      }
-    }
-  ],
-  "walkin_drives": [
-    {
-      "id": "4ac28aa7-d761-423b-a5d9-a31451d004a2",
-      "title": "Walk in drive Production Support Engineer",
-      "department": "Software Development",
-      "location": "Mumbai",
-      "venue": "techniplex 1 office",
-      "drive_date": "2026-06-24",
-      "drive_time": "10:00",
-      "description": "Join our Walk-in Drive for the Production Support Engineer role.\r\n\r\nDate: 24-06-2026\r\nTime: 10:00 AM\r\nLocation: Mumbai\r\n\r\nEligibility:\r\n\u2022 B.E./B.Tech, B.Sc, BCA, MCA, or equivalent degree.\r\n\u2022 Freshers and candidates with up to 1 year of experience are welcome.\r\n\u2022 Basic knowledge of SQL, Linux/Unix, Windows OS, networking, and application support is preferred.\r\n\r\nDocuments to Carry:\r\n\u2022 Updated Resume (2 copies)\r\n\u2022 Government Photo ID Proof\r\n\u2022 Passport Size Photograph\r\n\u2022 Educational Certificates and Mark Sheets\r\n\r\nSelection Process:\r\n1. Registration\r\n2. HR Screening\r\n3. Technical Interview\r\n4. Managerial Discussion\r\n5. Final HR Round\r\n\r\nCandidates are requested to reach the venue 30 minutes before the scheduled time.",
-      "active": true,
-      "created_at": "2026-06-24T16:18:35.305161"
-    }
-  ],
-  "walkin_registrations": []
-=======
-{
-  "jobs": [
-    {
-      "id": "bbc0103d-7124-4123-ac87-b879c9f7bd9e",
-      "title": "Production Support Engineer",
-      "department": "",
-      "location": "Mumbai",
-      "job_type": "Onsite",
-      "role": "",
-      "role_category": "Software Development",
-      "industry_type": "IT Services & Consulting",
-      "employment_type": "Full Time",
-      "education_ug": "Any Graduate",
-      "education_pg": "Any Postgraduate",
-      "key_skills": [],
-      "requirements": "Fresher or up to 1 year of experience in Production Support, Application Support, IT Operations, or related field\r\nBasic knowledge of SQL and database concepts\r\nUnderstanding of Linux/Unix commands\r\nKnowledge of incident management and ticketing tools (ServiceNow, Jira, Remedy, etc.) is a plus\r\nAbility to analyze logs and troubleshoot application issues\r\nBasic understanding of networking concepts\r\nFamiliarity with Windows and Linux operating systems\r\nKnowledge of scripting languages such as Python, Shell Scripting, or PowerShell is a plus\r\nUnderstanding of batch jobs, file transfers, and monitoring tools is preferred\r\nStrong analytical and problem-solving skills\r\nGood communication and stakeholder management skills\r\nWillingness to work in rotational shifts and provide production support\r\nB.E./B.Tech, B.Sc, BCA, MCA, or equivalent degree in Computer Science, IT, or related field\r\nAbility to work under pressure and meet SLA commitments\r\nEagerness to learn and adapt to new technologies and business applications",
-      "description": "We are looking for a Production Support Engineer Fresher to join our IT Operations team. The candidate will be responsible for monitoring applications, troubleshooting production issues, supporting business-critical systems, and ensuring smooth day-to-day operations. This role provides an excellent opportunity to learn incident management, application support, database troubleshooting, and production environment management.",
-      "active": true,
-      "created_at": "2026-06-24T01:10:18.081082"
-    },
-    {
-      "id": "6d5627cb-1afb-4ded-8074-566bfbae83af",
-      "title": "Business Analyst",
-      "department": "",
-      "location": "Mumbai",
-      "job_type": "Onsite",
-      "role": "",
-      "role_category": "Software Development",
-      "industry_type": "IT Services & Consulting",
-      "employment_type": "Full Time",
-      "education_ug": "B.Sc Computer Science/IT/Data Science",
-      "education_pg": "Post Graduation Not Required",
-      "key_skills": [],
-      "requirements": "Fresher or up to 1 year of experience in Business Analysis, Data Analysis, or related fields\r\nStrong analytical and problem-solving skills\r\nGood understanding of business processes and requirement gathering\r\nKnowledge of MS Excel, PowerPoint, and Word\r\nBasic knowledge of SQL and databases is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau is a plus\r\nUnderstanding of SDLC, Agile, and Scrum methodologies is an advantage\r\nAbility to create BRD, FRD, user stories, and process flow documents\r\nExcellent verbal and written communication skills\r\nStrong stakeholder management and coordination skills\r\nKnowledge of Jira, Confluence, or other project management tools is preferred\r\nAbility to analyze data and prepare reports and presentations",
-      "description": "We are looking for a Business Analyst Fresher to join our team. The candidate will be responsible for gathering and analyzing business requirements, preparing documentation, coordinating with stakeholders, and supporting process improvement initiatives. This role offers an opportunity to work closely with business and technical teams to deliver effective solutions and gain hands-on experience in business analysis and project management.",
-      "active": true,
-      "created_at": "2026-06-24T14:15:16.439898"
-    },
-    {
-      "id": "363e7c7c-8de7-4aef-9ce4-d8e785369659",
-      "title": "Data Analyst",
-      "department": "",
-      "location": "mumbai",
-      "job_type": "Onsite",
-      "role": "",
-      "role_category": "Software Development",
-      "industry_type": "IT Services & Consulting",
-      "experience_level": "Fresher",
-      "education_ug": "B.Sc Computer Science/IT/Data Science",
-      "education_pg": "Any Postgraduate",
-      "key_skills": [],
-      "requirements": "Fresher or up to 1 year of experience in Data Analysis, Business Intelligence, or related fields\r\nStrong knowledge of SQL and database concepts\r\nProficiency in Microsoft Excel (Pivot Tables, VLOOKUP, Charts)\r\nBasic knowledge of Python (Pandas, NumPy) is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau\r\nUnderstanding of statistics and data analysis techniques\r\nAbility to clean, transform, and analyze datasets\r\nKnowledge of ETL concepts and data pipelines is a plus\r\nStrong analytical and problem-solving skills\r\nGood communication and presentation skills\r\nFamiliarity with reporting and dashboard creation\r\nUnderstanding of business metrics and KPIs\r\nKnowledge of databases such as MySQL, PostgreSQL, or SQL Server is preferred",
-      "description": "We are looking for a Data Analyst Fresher to join our team. The candidate will be responsible for collecting, analyzing, and interpreting data to support business decisions. This role offers an opportunity to work with datasets, create reports and dashboards, and gain hands-on experience with data analysis tools and techniques.",
-      "active": true,
-      "created_at": "2026-06-24T16:59:03.671462",
-      "employment_type": "Full Time"
-    }
-  ],
-  "applications": [
-    {
-      "id": "bfd7c6a8-b7c1-4250-a7fd-514bcba4f959",
-      "job_id": "363e7c7c-8de7-4aef-9ce4-d8e785369659",
-      "job_title": "Data Analyst",
-      "job_requirements": "Fresher or up to 1 year of experience in Data Analysis, Business Intelligence, or related fields\r\nStrong knowledge of SQL and database concepts\r\nProficiency in Microsoft Excel (Pivot Tables, VLOOKUP, Charts)\r\nBasic knowledge of Python (Pandas, NumPy) is preferred\r\nFamiliarity with data visualization tools such as Power BI or Tableau\r\nUnderstanding of statistics and data analysis techniques\r\nAbility to clean, transform, and analyze datasets\r\nKnowledge of ETL concepts and data pipelines is a plus\r\nStrong analytical and problem-solving skills\r\nGood communication and presentation skills\r\nFamiliarity with reporting and dashboard creation\r\nUnderstanding of business metrics and KPIs\r\nKnowledge of databases such as MySQL, PostgreSQL, or SQL Server is preferred",
-      "name": "Arsh Usmani",
-      "email": "usmaniarsh7@gmail.com",
-      "phone": "9557875692",
-      "resume_file": "0d7b1d75-08a5-4f7f-9676-238082b886ab.pdf",
-      "resume_text": "Mohd Arsh Usmani \nSoftware Engineer \nStrong foundation in \nPython, SQL, data analysis, and database management\n , with hands-on experience in \ndata\nvalidation, data cleaning, reporting, and performance analysis\n . Skilled in analyzing large datasets, identifying trends\nand anomalies, conducting root cause analysis, and transforming complex data into actionable business insights.\nExperienced in \nSQL query optimization, database analysis, dashboard reporting, log analysis, and data quality\nassuran",
-      "applied_at": "2026-06-24T17:09:44.476901",
-      "ai_analysis": {
-        "match_score": 0,
-        "status": "On Hold",
-        "strengths": [],
-        "gaps": [
-          "Could not analyze resume automatically"
-        ],
-        "summary": "Manual review required.",
-        "recommendation": "Error: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
       },
-      "ats_review": null,
-      "ai_detection": {
-        "ai_likelihood_score": 8,
-        "verdict": "Likely human-written",
-        "reasons": [
-          "Contains 1 commonly AI-overused phrase(s): streamline."
+      "assessment_questions": {
+        "mcq": [
+          {
+            "q": "A critical payment processing batch job failed during nightly processing, impacting customer transactions. What is the immediate priority for an Application Support Engineer?",
+            "options": [
+              "A. Analyze the root cause of the failure.",
+              "B. Notify all stakeholders about the incident.",
+              "C. Escalate to the development team for a fix.",
+              "D. Restore service immediately and stabilize the system."
+            ],
+            "answer": "D"
+          },
+          {
+            "q": "A web application is intermittently failing with a '500 Internal Server Error'. You check the application logs and find entries like 'java.sql.SQLException: Connection refused: (description=(Address=(protocol=tcp)(host=db.example.com)(port=1521)))'. What is the most likely issue?",
+            "options": [
+              "A. The web application's database server is unreachable or down.",
+              "B. The web application's web server has run out of memory.",
+              "C. There's a SQL query syntax error in the application code.",
+              "D. The application server is facing high CPU utilization."
+            ],
+            "answer": "A"
+          },
+          {
+            "q": "A report shows a discrepancy in transaction counts for a specific date. As an Application Support Engineer, you suspect a data issue. Which SQL query would you primarily use to validate the transaction count for '2023-10-26' in a 'transactions' table?",
+            "options": [
+              "A. SELECT SUM(amount) FROM transactions WHERE transaction_date = '2023-10-26';",
+              "B. SELECT COUNT(*) FROM transactions WHERE transaction_date = '2023-10-26';",
+              "C. SELECT * FROM transactions WHERE transaction_date = '2023-10-26' ORDER BY id DESC LIMIT 10;",
+              "D. DELETE FROM transactions WHERE transaction_date = '2023-10-26';"
+            ],
+            "answer": "B"
+          },
+          {
+            "q": "You notice an application process is consuming excessive CPU on a Linux server and needs to be restarted. Which command would you use to find its Process ID (PID) given its name, say 'my_app_service'?",
+            "options": [
+              "A. ls -l my_app_service",
+              "B. grep my_app_service /var/log/messages",
+              "C. ps -ef | grep my_app_service",
+              "D. netstat -tulnp | grep my_app_service"
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "After a recurring issue causing data inconsistencies, the development team has implemented a fix. Before closing the incident, what is a crucial step in the Root Cause Analysis (RCA) process that ensures future prevention?",
+            "options": [
+              "A. Notify all users about the fix immediately.",
+              "B. Monitor the system for a few days to confirm the fix's effectiveness.",
+              "C. Document the problem, the root cause, and the permanent solution.",
+              "D. Conduct a post-mortem meeting with only the development team."
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "You are setting up monitoring alerts for a critical API. Which of the following metrics would be MOST important to monitor for immediate performance degradation alerts?",
+            "options": [
+              "A. Disk space utilization on the server.",
+              "B. API response time and error rate.",
+              "C. Number of logged-in users.",
+              "D. Database connection pool size."
+            ],
+            "answer": "B"
+          },
+          {
+            "q": "You've identified a bug in the application that requires a code change. Following standard ITIL practices, which of the following is the most appropriate next step after logging the issue in a ticketing tool like JIRA or ServiceNow?",
+            "options": [
+              "A. Immediately implement a hotfix in production.",
+              "B. Prioritize the issue and assign it to the development team.",
+              "C. Close the ticket as the issue is understood.",
+              "D. Delete the affected data to prevent further impact."
+            ],
+            "answer": "B"
+          },
+          {
+            "q": "A critical end-of-day batch job failed to run. You need to verify its last execution status and scheduled time. Which aspect of batch/job handling would you investigate first?",
+            "options": [
+              "A. The application's database schema.",
+              "B. The job scheduler or orchestrator (e.g., cron, Control-M, Airflow).",
+              "C. The server's network configuration.",
+              "D. The firewall rules between application components."
+            ],
+            "answer": "B"
+          },
+          {
+            "q": "Users are reporting that recent orders are not appearing in their order history. You suspect a data processing delay. Which SQL query could help you check if recent orders are present in the database but just not displayed? Assume 'order_id' is unique and 'order_date' exists.",
+            "options": [
+              "A. SELECT order_id, order_date, status FROM orders WHERE order_date >= CURDATE() - INTERVAL 1 DAY ORDER BY order_date DESC;",
+              "B. UPDATE orders SET status = 'DELIVERED' WHERE order_date < CURDATE();",
+              "C. DELETE FROM orders WHERE status = 'CANCELLED';",
+              "D. CREATE INDEX idx_order_date ON orders(order_date);"
+            ],
+            "answer": "A"
+          },
+          {
+            "q": "An application configuration file is suspected to have incorrect settings. You know the file name is 'app_config.properties' but are unsure of its exact location on the Linux server. Which command would help you locate it efficiently?",
+            "options": [
+              "A. cd /etc",
+              "B. ls -a",
+              "C. find / -name app_config.properties",
+              "D. df -h"
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "A frontend application is failing to retrieve data from a backend service. You investigate and find that the backend service logs show 'HTTP 401 Unauthorized' errors. What is the most likely cause of this issue?",
+            "options": [
+              "A. The backend service is down.",
+              "B. The network connection between frontend and backend is severed.",
+              "C. The frontend application is not providing valid authentication credentials.",
+              "D. The database connected to the backend service is offline."
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "A core payment gateway service is completely down, affecting all incoming transactions. You are the on-call Application Support Engineer. After confirming the outage, what is your IMMEDIATE next step before even starting detailed troubleshooting?",
+            "options": [
+              "A. Start a conference bridge and gather all relevant technical teams (Dev, Infra, DBA).",
+              "B. Check the application logs for error messages.",
+              "C. Attempt to restart the service immediately without further investigation.",
+              "D. Analyze the database performance metrics."
+            ],
+            "answer": "A"
+          },
+          {
+            "q": "You're debugging a complex issue in a Java application and see a 'NullPointerException' in the logs. What additional information from the log entry is crucial for you to pinpoint the problem quickly?",
+            "options": [
+              "A. The exact timestamp of the error.",
+              "B. The IP address of the server.",
+              "C. The full stack trace and the specific class/method/line number.",
+              "D. The Java Virtual Machine (JVM) version."
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "An upstream system incorrectly sent duplicate records, causing a data integrity issue in your application. Before taking any corrective action, what is the most important step?",
+            "options": [
+              "A. Ask the upstream system to resend all data.",
+              "B. Develop a new feature to prevent duplicates.",
+              "C. Assess the scope and impact of the duplicate records (e.g., how many, what tables, business impact).",
+              "D. Immediately delete all duplicate records from the database."
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "A critical incident has been resolved and the system is stable. What is the final step in the incident management lifecycle for the Application Support team?",
+            "options": [
+              "A. Close the incident ticket immediately without further action.",
+              "B. Monitor the system proactively to ensure stability and prevent recurrence.",
+              "C. Schedule a meeting with the business team to explain the fix.",
+              "D. Update the development team on the resolution."
+            ],
+            "answer": "B"
+          }
         ]
       },
-      "blind_screening": {
-        "redaction_log": {
-          "name": [
-            "Mohd Arsh Usmani"
-          ],
-          "gender": [
-            "MS",
-            "MS",
-            "MS"
-          ],
-          "college_tier": [],
-          "age_dob": [],
-          "photo": [],
-          "contact": [
-            "usmaniarsh7@gmail.com",
-            "9557875692"
-          ]
-        },
-        "redacted_count": 6
+      "assessment_result": {
+        "mcq_score": 4,
+        "mcq_total": 15,
+        "mcq_results": [
+          {
+            "question": "A critical payment processing batch job failed during nightly processing, impacting customer transactions. What is the immediate priority for an Application Support Engineer?",
+            "options": [
+              "A. Analyze the root cause of the failure.",
+              "B. Notify all stakeholders about the incident.",
+              "C. Escalate to the development team for a fix.",
+              "D. Restore service immediately and stabilize the system."
+            ],
+            "correct_answer": "D",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "A web application is intermittently failing with a '500 Internal Server Error'. You check the application logs and find entries like 'java.sql.SQLException: Connection refused: (description=(Address=(protocol=tcp)(host=db.example.com)(port=1521)))'. What is the most likely issue?",
+            "options": [
+              "A. The web application's database server is unreachable or down.",
+              "B. The web application's web server has run out of memory.",
+              "C. There's a SQL query syntax error in the application code.",
+              "D. The application server is facing high CPU utilization."
+            ],
+            "correct_answer": "A",
+            "given_answer": "A",
+            "is_correct": true
+          },
+          {
+            "question": "A report shows a discrepancy in transaction counts for a specific date. As an Application Support Engineer, you suspect a data issue. Which SQL query would you primarily use to validate the transaction count for '2023-10-26' in a 'transactions' table?",
+            "options": [
+              "A. SELECT SUM(amount) FROM transactions WHERE transaction_date = '2023-10-26';",
+              "B. SELECT COUNT(*) FROM transactions WHERE transaction_date = '2023-10-26';",
+              "C. SELECT * FROM transactions WHERE transaction_date = '2023-10-26' ORDER BY id DESC LIMIT 10;",
+              "D. DELETE FROM transactions WHERE transaction_date = '2023-10-26';"
+            ],
+            "correct_answer": "B",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "You notice an application process is consuming excessive CPU on a Linux server and needs to be restarted. Which command would you use to find its Process ID (PID) given its name, say 'my_app_service'?",
+            "options": [
+              "A. ls -l my_app_service",
+              "B. grep my_app_service /var/log/messages",
+              "C. ps -ef | grep my_app_service",
+              "D. netstat -tulnp | grep my_app_service"
+            ],
+            "correct_answer": "C",
+            "given_answer": "B",
+            "is_correct": false
+          },
+          {
+            "question": "After a recurring issue causing data inconsistencies, the development team has implemented a fix. Before closing the incident, what is a crucial step in the Root Cause Analysis (RCA) process that ensures future prevention?",
+            "options": [
+              "A. Notify all users about the fix immediately.",
+              "B. Monitor the system for a few days to confirm the fix's effectiveness.",
+              "C. Document the problem, the root cause, and the permanent solution.",
+              "D. Conduct a post-mortem meeting with only the development team."
+            ],
+            "correct_answer": "C",
+            "given_answer": "B",
+            "is_correct": false
+          },
+          {
+            "question": "You are setting up monitoring alerts for a critical API. Which of the following metrics would be MOST important to monitor for immediate performance degradation alerts?",
+            "options": [
+              "A. Disk space utilization on the server.",
+              "B. API response time and error rate.",
+              "C. Number of logged-in users.",
+              "D. Database connection pool size."
+            ],
+            "correct_answer": "B",
+            "given_answer": "B",
+            "is_correct": true
+          },
+          {
+            "question": "You've identified a bug in the application that requires a code change. Following standard ITIL practices, which of the following is the most appropriate next step after logging the issue in a ticketing tool like JIRA or ServiceNow?",
+            "options": [
+              "A. Immediately implement a hotfix in production.",
+              "B. Prioritize the issue and assign it to the development team.",
+              "C. Close the ticket as the issue is understood.",
+              "D. Delete the affected data to prevent further impact."
+            ],
+            "correct_answer": "B",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "A critical end-of-day batch job failed to run. You need to verify its last execution status and scheduled time. Which aspect of batch/job handling would you investigate first?",
+            "options": [
+              "A. The application's database schema.",
+              "B. The job scheduler or orchestrator (e.g., cron, Control-M, Airflow).",
+              "C. The server's network configuration.",
+              "D. The firewall rules between application components."
+            ],
+            "correct_answer": "B",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "Users are reporting that recent orders are not appearing in their order history. You suspect a data processing delay. Which SQL query could help you check if recent orders are present in the database but just not displayed? Assume 'order_id' is unique and 'order_date' exists.",
+            "options": [
+              "A. SELECT order_id, order_date, status FROM orders WHERE order_date >= CURDATE() - INTERVAL 1 DAY ORDER BY order_date DESC;",
+              "B. UPDATE orders SET status = 'DELIVERED' WHERE order_date < CURDATE();",
+              "C. DELETE FROM orders WHERE status = 'CANCELLED';",
+              "D. CREATE INDEX idx_order_date ON orders(order_date);"
+            ],
+            "correct_answer": "A",
+            "given_answer": "B",
+            "is_correct": false
+          },
+          {
+            "question": "An application configuration file is suspected to have incorrect settings. You know the file name is 'app_config.properties' but are unsure of its exact location on the Linux server. Which command would help you locate it efficiently?",
+            "options": [
+              "A. cd /etc",
+              "B. ls -a",
+              "C. find / -name app_config.properties",
+              "D. df -h"
+            ],
+            "correct_answer": "C",
+            "given_answer": "B",
+            "is_correct": false
+          },
+          {
+            "question": "A frontend application is failing to retrieve data from a backend service. You investigate and find that the backend service logs show 'HTTP 401 Unauthorized' errors. What is the most likely cause of this issue?",
+            "options": [
+              "A. The backend service is down.",
+              "B. The network connection between frontend and backend is severed.",
+              "C. The frontend application is not providing valid authentication credentials.",
+              "D. The database connected to the backend service is offline."
+            ],
+            "correct_answer": "C",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "A core payment gateway service is completely down, affecting all incoming transactions. You are the on-call Application Support Engineer. After confirming the outage, what is your IMMEDIATE next step before even starting detailed troubleshooting?",
+            "options": [
+              "A. Start a conference bridge and gather all relevant technical teams (Dev, Infra, DBA).",
+              "B. Check the application logs for error messages.",
+              "C. Attempt to restart the service immediately without further investigation.",
+              "D. Analyze the database performance metrics."
+            ],
+            "correct_answer": "A",
+            "given_answer": "A",
+            "is_correct": true
+          },
+          {
+            "question": "You're debugging a complex issue in a Java application and see a 'NullPointerException' in the logs. What additional information from the log entry is crucial for you to pinpoint the problem quickly?",
+            "options": [
+              "A. The exact timestamp of the error.",
+              "B. The IP address of the server.",
+              "C. The full stack trace and the specific class/method/line number.",
+              "D. The Java Virtual Machine (JVM) version."
+            ],
+            "correct_answer": "C",
+            "given_answer": "C",
+            "is_correct": true
+          },
+          {
+            "question": "An upstream system incorrectly sent duplicate records, causing a data integrity issue in your application. Before taking any corrective action, what is the most important step?",
+            "options": [
+              "A. Ask the upstream system to resend all data.",
+              "B. Develop a new feature to prevent duplicates.",
+              "C. Assess the scope and impact of the duplicate records (e.g., how many, what tables, business impact).",
+              "D. Immediately delete all duplicate records from the database."
+            ],
+            "correct_answer": "C",
+            "given_answer": "D",
+            "is_correct": false
+          },
+          {
+            "question": "A critical incident has been resolved and the system is stable. What is the final step in the incident management lifecycle for the Application Support team?",
+            "options": [
+              "A. Close the incident ticket immediately without further action.",
+              "B. Monitor the system proactively to ensure stability and prevent recurrence.",
+              "C. Schedule a meeting with the business team to explain the fix.",
+              "D. Update the development team on the resolution."
+            ],
+            "correct_answer": "B",
+            "given_answer": "D",
+            "is_correct": false
+          }
+        ],
+        "composite_score": 27,
+        "completed_at": "2026-06-24T19:51:17.238109"
       }
     }
   ],
-  "walkin_drives": [
-    {
-      "id": "4ac28aa7-d761-423b-a5d9-a31451d004a2",
-      "title": "Walk in drive Production Support Engineer",
-      "department": "Software Development",
-      "location": "Mumbai",
-      "venue": "techniplex 1 office",
-      "drive_date": "2026-06-24",
-      "drive_time": "10:00",
-      "description": "Join our Walk-in Drive for the Production Support Engineer role.\r\n\r\nDate: 24-06-2026\r\nTime: 10:00 AM\r\nLocation: Mumbai\r\n\r\nEligibility:\r\n\u2022 B.E./B.Tech, B.Sc, BCA, MCA, or equivalent degree.\r\n\u2022 Freshers and candidates with up to 1 year of experience are welcome.\r\n\u2022 Basic knowledge of SQL, Linux/Unix, Windows OS, networking, and application support is preferred.\r\n\r\nDocuments to Carry:\r\n\u2022 Updated Resume (2 copies)\r\n\u2022 Government Photo ID Proof\r\n\u2022 Passport Size Photograph\r\n\u2022 Educational Certificates and Mark Sheets\r\n\r\nSelection Process:\r\n1. Registration\r\n2. HR Screening\r\n3. Technical Interview\r\n4. Managerial Discussion\r\n5. Final HR Round\r\n\r\nCandidates are requested to reach the venue 30 minutes before the scheduled time.",
-      "active": true,
-      "created_at": "2026-06-24T16:18:35.305161"
-    }
-  ],
+  "walkin_drives": [],
   "walkin_registrations": []
->>>>>>> e6860fc (Initial commit)
 }

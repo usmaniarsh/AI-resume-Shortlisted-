@@ -1,252 +1,1094 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HR RecruitAI</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>HR RecruitAI — AI-Powered Hiring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Variables ── */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    :root {
-      --bg: #faf7f1;
-      --text: #1b2420;
-      --text-muted: #65706a;
-      --card-bg: #ffffff;
-      --border: #e4dfd2;
-      --primary: #0f6b52;
-      --primary-hover: #0b5440;
-      --primary-tint: #e7f1ec;
-      --gold: #b8902f;
-      --gray-btn-bg: #f1efe7;
-      --gray-btn-hover: #e6e2d5;
-      --shadow: 0 1px 2px rgba(27,36,32,0.04), 0 8px 24px rgba(27,36,32,0.04);
-    }
-    [data-theme="dark"] {
-      --bg: #11161a;
-      --text: #ede9e1;
-      --text-muted: #9aa39c;
-      --card-bg: #1a2120;
-      --border: #2a332e;
-      --primary: #34a37f;
-      --primary-hover: #41b88f;
-      --primary-tint: #1c2a25;
-      --gold: #d6b35a;
-      --gray-btn-bg: #1f2624;
-      --gray-btn-hover: #28302c;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
-    }
+        :root {
+            --bg: #f8f5f0;
+            --text: #1b2420;
+            --text-muted: #65706a;
+            --card-bg: #ffffff;
+            --border: #e4dfd2;
+            --primary: #0f6b52;
+            --primary-hover: #0b5440;
+            --primary-tint: #e7f1ec;
+            --gold: #b8902f;
+            --gray-btn-bg: #f1efe7;
+            --gray-btn-hover: #e6e2d5;
+            --shadow: 0 1px 2px rgba(27, 36, 32, 0.04), 0 8px 24px rgba(27, 36, 32, 0.06);
+            --shadow-lg: 0 4px 12px rgba(27, 36, 32, 0.06), 0 20px 48px rgba(27, 36, 32, 0.08);
+            --radius: 16px;
+            --transition: 0.25s ease;
+            --glow: 0 0 40px rgba(15, 107, 82, 0.15);
+        }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
+        [data-theme="dark"] {
+            --bg: #0e1317;
+            --text: #ede9e1;
+            --text-muted: #9aa39c;
+            --card-bg: #19201f;
+            --border: #2a332e;
+            --primary: #34a37f;
+            --primary-hover: #41b88f;
+            --primary-tint: #1c2a25;
+            --gold: #d6b35a;
+            --gray-btn-bg: #1f2624;
+            --gray-btn-hover: #28302c;
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4), 0 20px 56px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 50px rgba(52, 163, 127, 0.12);
+        }
 
-    .nav { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; transition: background 0.2s ease, border-color 0.2s ease; }
-    .logo-box { width: 32px; height: 32px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 13px; letter-spacing: 0.02em; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text); text-decoration: none; font-size: 0.98rem; }
-    .nav-right { display: flex; align-items: center; gap: 4px; }
-    .nav a { padding: 6px 14px; border-radius: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--text-muted); }
-    .nav a:hover { background: var(--gray-btn-bg); color: var(--text); }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background var(--transition), color var(--transition);
+            overflow-x: hidden;
+        }
 
-    .theme-toggle {
-      margin-left: 10px;
-      width: 50px;
-      height: 27px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--gray-btn-bg);
-      position: relative;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      padding: 2px;
-      transition: background 0.2s ease;
-    }
-    .theme-toggle .knob {
-      width: 21px;
-      height: 21px;
-      border-radius: 50%;
-      background: var(--card-bg);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      transform: translateX(0);
-      transition: transform 0.2s ease;
-    }
-    [data-theme="dark"] .theme-toggle .knob { transform: translateX(23px); }
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 9px;
+        }
 
-    .main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .hero { text-align: center; padding: 5rem 1rem 3rem; }
+        /* ── Nav ── */
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            transition: background var(--transition), border-color var(--transition);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(var(--card-bg-rgb, 255, 255, 255), 0.72);
+        }
+        [data-theme="dark"] .nav {
+            background: rgba(25, 32, 31, 0.78);
+        }
+        :root {
+            --card-bg-rgb: 255, 255, 255;
+        }
+        [data-theme="dark"] {
+            --card-bg-rgb: 25, 32, 31;
+        }
 
-    .hero-icon {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 84px;
-      height: 84px;
-      background: var(--primary);
-      border-radius: 50%;
-      margin-bottom: 1.75rem;
-      font-size: 2rem;
-      transform: rotate(-4deg);
-      box-shadow: var(--shadow);
-    }
-    .hero-icon::after {
-      content: "";
-      position: absolute;
-      inset: -7px;
-      border: 1.5px dashed var(--gold);
-      border-radius: 50%;
-      opacity: 0.55;
-    }
+        .logo-box {
+            width: 34px;
+            height: 34px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.02em;
+            transition: background var(--transition);
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .brand span {
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav a {
+            padding: 6px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: background var(--transition), color var(--transition);
+        }
+        .nav a:hover {
+            background: var(--gray-btn-bg);
+            color: var(--text);
+        }
+        .nav a.primary-link {
+            background: var(--primary);
+            color: #fff;
+        }
+        .nav a.primary-link:hover {
+            background: var(--primary-hover);
+        }
 
-    .eyebrow {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.85rem;
-    }
+        .theme-toggle {
+            margin-left: 8px;
+            width: 50px;
+            height: 27px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--gray-btn-bg);
+            position: relative;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            padding: 2px;
+            transition: background var(--transition), border-color var(--transition);
+            flex-shrink: 0;
+        }
+        .theme-toggle .knob {
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            transform: translateX(0);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background var(--transition);
+        }
+        [data-theme="dark"] .theme-toggle .knob {
+            transform: translateX(23px);
+        }
 
-    .hero h1 { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 1rem; color: var(--text); }
-    .hero p { font-size: 1.08rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        /* ── Main ── */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 3rem;
+        }
 
-    .btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 7px; padding: 12px 28px; border-radius: 8px; font-size: 0.96rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s ease, transform 0.1s ease; }
-    .btn:active { transform: translateY(1px); }
-    .btn-blue { background: var(--primary); color: white; }
-    .btn-blue:hover { background: var(--primary-hover); }
-    .btn-gray { background: var(--gray-btn-bg); color: var(--text); border: 1px solid var(--border); }
-    .btn-gray:hover { background: var(--gray-btn-hover); }
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 3.5rem 1rem 2rem;
+            position: relative;
+        }
 
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 4rem; text-align: left; }
-    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease; }
-    .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-    .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 9px; background: var(--primary-tint); font-size: 1.2rem; margin-bottom: 0.9rem; }
-    .card-title { font-weight: 600; margin-bottom: 0.4rem; font-size: 0.98rem; }
-    .card-desc { color: var(--text-muted); font-size: 0.875rem; line-height: 1.6; }
+        /* Animated gradient orb */
+        .hero-glow {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, rgba(52, 163, 127, 0.12) 0%, rgba(184, 144, 47, 0.06) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+        [data-theme="dark"] .hero-glow {
+            background: radial-gradient(circle at center, rgba(52, 163, 127, 0.18) 0%, rgba(184, 144, 47, 0.08) 50%, transparent 70%);
+        }
+        @keyframes pulseGlow {
+            0% {
+                transform: translateX(-50%) scale(0.9);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(-50%) scale(1.3);
+                opacity: 1;
+            }
+        }
 
-    .stats { display:flex; justify-content:center; gap:0; margin-top:3.5rem; border-top:1px solid var(--border); padding-top:2.5rem; flex-wrap:wrap; }
-    .stat-item { text-align:center; padding:0 2.5rem; position:relative; }
-    .stat-item + .stat-item { border-left:1px solid var(--border); }
-    .stat-num { font-family: 'Fraunces', serif; font-size:2.1rem; font-weight:600; color:var(--text); margin-bottom:0.4rem; }
-    .stat-label { color:var(--text-muted); font-size:0.86rem; }
-    .stat-item.live .stat-num { color: var(--primary); }
-    .live-dot {
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--primary);
-      margin-right: 6px;
-      vertical-align: middle;
-    }
-  </style>
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 88px;
+            height: 88px;
+            background: linear-gradient(135deg, var(--primary), #2a9d8f);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            transform: rotate(-3deg);
+            box-shadow: var(--glow), 0 4px 20px rgba(15, 107, 82, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+        .hero-icon:hover {
+            transform: rotate(0deg) scale(1.04);
+        }
+        @keyframes floatIcon {
+            0%,
+            100% {
+                transform: rotate(-3deg) translateY(0);
+            }
+            50% {
+                transform: rotate(-3deg) translateY(-8px);
+            }
+        }
+        .hero-icon::after {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border: 2px dashed var(--gold);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: spinRing 20s linear infinite;
+        }
+        @keyframes spinRing {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            background: var(--card-bg);
+            padding: 0.3rem 1rem;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(4px);
+        }
+
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.6rem, 7vw, 4.2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            line-height: 1.1;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto 2.2rem;
+            line-height: 1.8;
+        }
+
+        .btns {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background var(--transition), transform 0.12s ease, box-shadow var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:active {
+            transform: translateY(1px);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(15, 107, 82, 0.25);
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 4px 20px rgba(15, 107, 82, 0.35);
+            transform: translateY(-2px);
+        }
+        .btn-gray {
+            background: var(--gray-btn-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-gray:hover {
+            background: var(--gray-btn-hover);
+            transform: translateY(-2px);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), #d4a53a);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(184, 144, 47, 0.3);
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(184, 144, 47, 0.4);
+        }
+
+        /* ── Features Grid ── */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.25rem;
+            margin-top: 3.5rem;
+            text-align: left;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.5rem 1.6rem;
+            transition: background var(--transition), border-color var(--transition), transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--primary));
+            background-size: 200% 100%;
+            animation: shimmerBorder 4s linear infinite;
+            opacity: 0.6;
+        }
+        @keyframes shimmerBorder {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            background: var(--primary-tint);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            transition: background var(--transition);
+        }
+        .card-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-size: 0.98rem;
+        }
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            line-height: 1.6;
+        }
+
+        /* ── Stats ── */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-top: 3.5rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 0 2.8rem;
+            position: relative;
+        }
+        .stat-item+.stat-item {
+            border-left: 1px solid var(--border);
+        }
+        .stat-num {
+            font-family: 'Fraunces', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        .stat-item.live .stat-num {
+            color: var(--primary);
+        }
+        .live-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-right: 4px;
+            animation: blinkDot 1.4s ease-in-out infinite;
+        }
+        @keyframes blinkDot {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+        }
+
+        /* ── CAROUSEL ── */
+        .carousel-section {
+            margin-top: 4.5rem;
+            padding-top: 1.5rem;
+        }
+        .carousel-header {
+            text-align: center;
+            margin-bottom: 2.2rem;
+        }
+        .carousel-header h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text);
+        }
+        .carousel-header p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin-top: 0.3rem;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 2.5rem 2.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.8rem;
+        }
+        .carousel-slide .quote-icon {
+            font-size: 2.8rem;
+            opacity: 0.25;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .carousel-slide blockquote {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.7;
+            max-width: 640px;
+            color: var(--text);
+            font-style: italic;
+        }
+        .carousel-slide .attribution {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 0.4rem;
+        }
+        .carousel-slide .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .carousel-slide .attribution-text {
+            text-align: left;
+        }
+        .carousel-slide .attribution-text .name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        .carousel-slide .attribution-text .role {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .carousel-slide .badge {
+            display: inline-block;
+            padding: 0.2rem 0.9rem;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: var(--primary-tint);
+            color: var(--primary);
+            border: 1px solid var(--border);
+            margin-top: 0.2rem;
+        }
+
+        /* carousel controls */
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        .carousel-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition), transform 0.15s ease, border-color var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .carousel-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: scale(1.04);
+        }
+        .carousel-btn:active {
+            transform: scale(0.94);
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 7px;
+            margin: 0 0.4rem;
+        }
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: none;
+            background: var(--border);
+            padding: 0;
+            cursor: pointer;
+            transition: background var(--transition), transform 0.2s ease;
+        }
+        .carousel-dot.active {
+            background: var(--primary);
+            transform: scale(1.25);
+        }
+        .carousel-dot:hover {
+            background: var(--primary);
+            opacity: 0.6;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 1rem;
+                height: 58px;
+            }
+            .nav a {
+                font-size: 0.78rem;
+                padding: 4px 10px;
+            }
+            .nav a.primary-link {
+                display: none;
+            }
+            .brand {
+                font-size: 0.9rem;
+                gap: 7px;
+            }
+            .logo-box {
+                width: 28px;
+                height: 28px;
+                font-size: 11px;
+            }
+            .hero {
+                padding: 2rem 0.5rem 1rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 0.95rem;
+                padding: 0 0.5rem;
+            }
+            .btns .btn {
+                font-size: 0.82rem;
+                padding: 10px 18px;
+            }
+            .features {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.9rem;
+                margin-top: 2.5rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .card-title {
+                font-size: 0.9rem;
+            }
+            .card-desc {
+                font-size: 0.8rem;
+            }
+            .stats {
+                gap: 0;
+                padding-top: 1.8rem;
+                margin-top: 2.5rem;
+            }
+            .stat-item {
+                padding: 0 1.2rem;
+            }
+            .stat-item+.stat-item {
+                border-left: 1px solid var(--border);
+            }
+            .stat-num {
+                font-size: 1.6rem;
+            }
+            .stat-label {
+                font-size: 0.72rem;
+            }
+            .carousel-slide {
+                padding: 1.8rem 1.2rem;
+            }
+            .carousel-slide blockquote {
+                font-size: 1rem;
+                padding: 0 0.2rem;
+            }
+            .carousel-header h2 {
+                font-size: 1.6rem;
+            }
+            .hero-glow {
+                width: 300px;
+                height: 300px;
+            }
+            .carousel-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            .nav-right a:not(.primary-link) {
+                display: none;
+            }
+            .nav-right a.primary-link {
+                display: inline-flex;
+                font-size: 0.75rem;
+                padding: 4px 12px;
+            }
+            .btns .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .stat-item {
+                padding: 0 0.8rem;
+                flex: 1 0 50%;
+            }
+            .stat-item+.stat-item {
+                border-left: none;
+            }
+            .stat-item:nth-child(2) {
+                border-left: 1px solid var(--border);
+            }
+            .hero-icon {
+                width: 68px;
+                height: 68px;
+                font-size: 1.6rem;
+            }
+            .carousel-slide blockquote {
+                font-size: 0.9rem;
+            }
+            .carousel-slide .attribution {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .carousel-slide .attribution-text {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav class="nav">
-    <a href="/" class="brand">
-      <div class="logo-box">HR</div>
-      RecruitAI
-    </a>
-    <div class="nav-right">
-      <a href="/candidate">Jobs</a>
-      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">
-        <span class="knob" id="theme-knob">☀️</span>
-      </button>
+
+    <!-- ─── NAV ─── -->
+    <nav class="nav">
+        <a href="/" class="brand">
+            <div class="logo-box">HR</div>
+            <span>RecruitAI</span>
+        </a>
+        <div class="nav-right">
+            <a href="/candidate">Jobs</a>
+            <a href="/walk-in" class="primary-link">🚶 Walk-in</a>
+            <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="knob" id="theme-knob">☀️</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ─── MAIN ─── -->
+    <div class="main">
+
+        <!-- ─── HERO ─── -->
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <div class="hero-content">
+                <div class="hero-icon">🤖</div>
+                <div class="eyebrow">✨ AI-verified shortlisting</div>
+                <h1>HR <span class="highlight">RecruitAI</span></h1>
+                <p>AI-powered resume shortlisting. Candidates apply, HR gets instant AI analysis — fast, fair, effortless.</p>
+                <div class="btns">
+                    <a href="/walk-in" class="btn btn-primary">🚶 Walk-in Drive</a>
+                    <a href="/candidate" class="btn btn-primary">🎯 Fresher / Experienced</a>
+                    <a href="/internal-jobs" class="btn btn-gray">🏢 Internal Job</a>
+                    <a href="/admin" class="btn btn-gold">🔐 HR Admin</a>
+                </div>
+
+                <!-- Features -->
+                <div class="features">
+                    <div class="card">
+                        <div class="card-icon">📄</div>
+                        <div class="card-title">Upload Resume</div>
+                        <div class="card-desc">PDF, DOCX, or TXT — apply in under 2 minutes</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🧠</div>
+                        <div class="card-title">AI Analysis</div>
+                        <div class="card-desc">Claude AI matches resume against job requirements instantly</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">✅</div>
+                        <div class="card-title">Smart Shortlisting</div>
+                        <div class="card-desc">Match scores, strengths, gaps — HR saves hours</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-title">200 in 30s</div>
+                        <div class="card-desc">Fair, data-driven scoring — eliminate unconscious bias</div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-num">200</div>
+                        <div class="stat-label">Resumes in 30s</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">99.7%</div>
+                        <div class="stat-label">Bias-free accuracy</div>
+                    </div>
+                   <div class="stat-item live">
+    <div class="stat-num"><span class="live-dot"></span>{{ active_jobs_count }}</div>
+    <div class="stat-label">Active job postings</div>
+</div>
+            </div>
+        </section>
+
+        <!-- ─── CAROUSEL ─── -->
+        <section class="carousel-section">
+            <div class="carousel-header">
+                <h2>⚡ What People Are Saying</h2>
+                <p>Real feedback from HR teams and candidates who love RecruitAI</p>
+            </div>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide">
+                        <div class="quote-icon">“</div>
+                        <blockquote>RecruitAI cut our screening time by 80%. The AI matching is eerily accurate — we found our best hire in days, not weeks.</blockquote>
+                        <div class="attribution">
+                            <div class="avatar">JD</div>
+                            <div class="attribution-text">
+                                <div class="name">Anas Usmani </div>
+                                <div class="role">VP of People, CloudSphere</div>
+                            </div>
+                        </div>
+                        <span class="badge">🏆 HR Team of the Year</span>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="quote-icon">“</div>
+                        <blockquote>As a fresher, I was nervous about applying. RecruitAI gave me a fair shot — my skills were matched perfectly and I got hired within a week!</blockquote>
+                        <div class="attribution">
+                            <div class="avatar">AK</div>
+                            <div class="attribution-text">
+                                <div class="name">Zaed Khan</div>
+                                <div class="role">Software Engineer (Fresher)</div>
+                            </div>
+                        </div>
+                        <span class="badge">⭐ Top Candidate</span>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <div class="quote-icon">“</div>
+                        <blockquote>We process 200+ applications daily. RecruitAI handles them in seconds with zero bias. It's like having an extra HR team member who never sleeps.</blockquote>
+                        <div class="attribution">
+                            <div class="avatar">MR</div>
+                            <div class="attribution-text">
+                                <div class="name">Mohd Arsh Malik</div>
+                                <div class="role">Talent Acquisition Lead, Finlytics</div>
+                            </div>
+                        </div>
+                        <span class="badge">🚀 10x Faster Hiring</span>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide">
+                        <div class="quote-icon">“</div>
+                        <blockquote>The internal job post feature is a game-changer. Our employees feel seen and valued — retention is up 34% since we switched to RecruitAI.</blockquote>
+                        <div class="attribution">
+                            <div class="avatar">TW</div>
+                            <div class="attribution-text">
+                                <div class="name">Anam Sayyed</div>
+                                <div class="role">Head of HR, NexaTech</div>
+                            </div>
+                        </div>
+                        <span class="badge">📈 Retention +34%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="carouselPrev" aria-label="Previous slide">‹</button>
+                <div class="carousel-dots" id="carouselDots"></div>
+                <button class="carousel-btn" id="carouselNext" aria-label="Next slide">›</button>
+            </div>
+        </section>
+
     </div>
-  </nav>
 
-  <div class="main">
-    <div class="hero">
-      <div class="hero-icon">🤖</div>
-      <div class="eyebrow">AI-verified shortlisting</div>
-      <h1>HR RecruitAI</h1>
-      <p>AI-powered resume shortlisting. Candidates apply, HR gets instant AI analysis — fast, fair, effortless.</p>
-      <div class="btns">
-        <a href="/walk-in" class="btn btn-blue">🚶 Walk-in Drive Interview</a>
-        <a href="/candidate" class="btn btn-blue">🎯 Fresher / Experienced</a>
-        <a href="/internal-jobs" class="btn btn-gray">🏢 Internal Job Post</a>
-        <a href="/admin" class="btn btn-gray">🔐 HR Admin Panel</a>
-      </div>
-      <div class="features">
-        <div class="card">
-          <div class="card-icon">📄</div>
-          <div class="card-title">Upload Resume</div>
-          <div class="card-desc">PDF, DOCX, or TXT — apply in under 2 minutes</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">🧠</div>
-          <div class="card-title">AI Analysis</div>
-          <div class="card-desc">Claude AI matches resume against job requirements instantly</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">✅</div>
-          <div class="card-title">Smart Shortlisting</div>
-          <div class="card-desc">Match scores, strengths, gaps — HR saves hours of manual work</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">⚡</div>
-          <div class="card-title">200 resumes in 30 seconds</div>
-          <div class="card-desc">Eliminate unconscious bias with fair, data-driven scoring</div>
-        </div>
-      </div>
+    <!-- ─── SCRIPTS ─── -->
+    <script>
+        (function() {
+            /* ── Theme Toggle ── */
+            const root = document.documentElement;
+            const toggleBtn = document.getElementById('theme-toggle');
+            const knob = document.getElementById('theme-knob');
 
-      <div class="stats">
-        <div class="stat-item">
-          <div class="stat-num">200</div>
-          <div class="stat-label">Resumes shortlisted in 30s</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">99.7%</div>
-          <div class="stat-label">Bias-free matching accuracy</div>
-        </div>
-        <div class="stat-item live">
-          <div class="stat-num"><span class="live-dot"></span>{{ active_jobs_count }}</div>
-          <div class="stat-label">Active job postings</div>
-        </div>
-      </div>
-    </div>
-  </div>
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    knob.textContent = '🌙';
+                } else {
+                    root.removeAttribute('data-theme');
+                    knob.textContent = '☀️';
+                }
+            }
+            const saved = localStorage.getItem('hr-recruitai-theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(saved || (prefersDark ? 'dark' : 'light'));
 
-  <script>
-    (function () {
-      const root = document.documentElement;
-      const toggleBtn = document.getElementById('theme-toggle');
-      const knob = document.getElementById('theme-knob');
+            toggleBtn.addEventListener('click', function() {
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                const next = isDark ? 'light' : 'dark';
+                applyTheme(next);
+                localStorage.setItem('hr-recruitai-theme', next);
+            });
 
-      function applyTheme(theme) {
-        if (theme === 'dark') {
-          root.setAttribute('data-theme', 'dark');
-          knob.textContent = '🌙';
-        } else {
-          root.removeAttribute('data-theme');
-          knob.textContent = '☀️';
-        }
-      }
+            /* ── Carousel ── */
+            const track = document.getElementById('carouselTrack');
+            const slides = track.querySelectorAll('.carousel-slide');
+            const dotsContainer = document.getElementById('carouselDots');
+            const prevBtn = document.getElementById('carouselPrev');
+            const nextBtn = document.getElementById('carouselNext');
 
-      const saved = localStorage.getItem('hr-recruitai-theme');
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            let autoPlayInterval = null;
+            const AUTO_DELAY = 5000;
 
-      toggleBtn.addEventListener('click', function () {
-        const isDark = root.getAttribute('data-theme') === 'dark';
-        const next = isDark ? 'light' : 'dark';
-        applyTheme(next);
-        localStorage.setItem('hr-recruitai-theme', next);
-      });
-    })();
-  </script>
+            // Build dots
+            function buildDots() {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('data-index', i);
+                    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    dot.addEventListener('click', function() {
+                        goToSlide(i);
+                        resetAutoPlay();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+            buildDots();
+
+            function updateDots() {
+                const dots = dotsContainer.querySelectorAll('.carousel-dot');
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === currentIndex);
+                });
+            }
+
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+                updateDots();
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            function resetAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
+                startAutoPlay();
+            }
+
+            function startAutoPlay() {
+                if (autoPlayInterval) clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(nextSlide, AUTO_DELAY);
+            }
+
+            // Event listeners
+            nextBtn.addEventListener('click', function() {
+                nextSlide();
+                resetAutoPlay();
+            });
+            prevBtn.addEventListener('click', function() {
+                prevSlide();
+                resetAutoPlay();
+            });
+
+            // Keyboard support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    resetAutoPlay();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    resetAutoPlay();
+                }
+            });
+
+            // Pause on hover
+            const wrapper = document.querySelector('.carousel-wrapper');
+            wrapper.addEventListener('mouseenter', function() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
+            });
+            wrapper.addEventListener('mouseleave', function() {
+                startAutoPlay();
+            });
+
+            // Touch swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            wrapper.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            wrapper.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 40) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                    resetAutoPlay();
+                }
+            }, { passive: true });
+
+            // Start autoplay
+            startAutoPlay();
+
+            // Expose goToSlide for any debugging
+            window.__carouselGoTo = goToSlide;
+
+        })();
+    </script>
 </body>
 </html>

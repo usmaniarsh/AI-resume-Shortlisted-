@@ -857,7 +857,7 @@
                         <div class="stat-label">Bias-free accuracy</div>
                     </div>
                    <div class="stat-item live">
-    <div class="stat-num"><span class="live-dot"></span>{{ active_jobs_count }}</div>
+    <div class="stat-num"><span class="live-dot"></span><span id="activeJobsNum">{{ active_jobs_count }}</span></div>
     <div class="stat-label">Active job postings</div>
 </div>
             </div>
@@ -936,7 +936,28 @@
         </section>
 
     </div>
+<script>
+(function() {
+    const numEl = document.getElementById('activeJobsNum');
+    if (!numEl) return;
 
+    async function refreshActiveJobsCount() {
+        try {
+            const res = await fetch('/api/active-jobs-count');
+            const data = await res.json();
+            numEl.textContent = data.active_jobs_count;
+        } catch (e) {
+            console.error('Failed to refresh active jobs count', e);
+        }
+    }
+
+    setInterval(refreshActiveJobsCount, 5000);
+
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) refreshActiveJobsCount();
+    });
+})();
+</script>
     <!-- ─── SCRIPTS ─── -->
     <script>
         (function() {

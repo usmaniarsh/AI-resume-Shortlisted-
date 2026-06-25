@@ -1,73 +1,82 @@
 {
-  "jobs": [
-    {
-      "id": "279b0723-7bb1-4d63-883e-583f693c5ab8",
-      "title": "Application Support Engineer",
-      "department": "",
-      "location": "Mumbai",
-      "job_type": "Onsite",
-      "role": "",
-      "role_category": "Software Development",
-      "industry_type": "IT Services & Consulting",
-      "experience_level": "Fresher",
-      "education_ug": "B.Sc Computer Science/IT/Data Science",
-      "education_pg": "Post Graduation Not Required",
-      "key_skills": [],
-      "requirements": "1\u20133 years of experience in Application Support / Production Support / Technical Support\r\nGood understanding of incident management, issue resolution, and troubleshooting\r\nBasic to good knowledge of SQL queries for data validation and issue analysis\r\nFamiliarity with Linux/Unix commands\r\nUnderstanding of application logs, monitoring, and batch/job handling\r\nExperience in supporting web applications, APIs, or enterprise applications\r\nKnowledge of ticketing tools such as JIRA, ServiceNow, or similar\r\nGood understanding of root cause analysis (RCA) and problem-solving\r\nStrong communication skills to coordinate with developers, QA, and business teams\r\nAbility to work in rotational shifts / production support environment if required\r\nBachelor\u2019s degree in Computer Science, IT, or related field\r\nExperience in banking, fintech, or payment support is a plus",
-      "description": "We are looking for an Application Support Engineer to join our team and support business-critical applications. The role involves monitoring application performance, troubleshooting issues, resolving incidents, coordinating with internal teams, and ensuring smooth day-to-day operations. The candidate should have good analytical skills, basic knowledge of SQL/Linux, and the ability to work in a fast-paced support environment.",
-      "active": true,
-      "created_at": "2026-06-24T19:40:03.537120"
-    },
-    {
-      "id": "7cdedad2-51a0-4e76-8771-5546ff6d385f",
-      "title": "AVP ST",
-      "department": "",
-      "location": "Ahmedabad",
-      "job_type": "Onsite",
-      "role": "",
-      "role_category": "Software Development",
-      "industry_type": "IT Services & Consulting",
-      "experience_level": "Fresher",
-      "education_ug": "Any Graduate",
-      "education_pg": "Any Postgraduate",
-      "key_skills": [],
-      "requirements": "ffffffffffffffffff",
-      "description": "fffffffffff",
-      "active": true,
-      "created_at": "2026-06-25T16:26:00.296795"
-    }
-  ],
+  "jobs": [],
   "applications": [
     {
-      "id": "f01b9e86-c4f0-408f-9445-4b81faa25d7c",
-      "job_id": "279b0723-7bb1-4d63-883e-583f693c5ab8",
+      "id": "36c6404b-3ec6-4049-b6c8-7048437b363e",
+      "job_id": "f9272543-2a25-40f7-a584-212d1183d75b",
       "job_title": "Application Support Engineer",
-      "job_requirements": "1\u20133 years of experience in Application Support / Production Support / Technical Support\r\nGood understanding of incident management, issue resolution, and troubleshooting\r\nBasic to good knowledge of SQL queries for data validation and issue analysis\r\nFamiliarity with Linux/Unix commands\r\nUnderstanding of application logs, monitoring, and batch/job handling\r\nExperience in supporting web applications, APIs, or enterprise applications\r\nKnowledge of ticketing tools such as JIRA, ServiceNow, or similar\r\nGood understanding of root cause analysis (RCA) and problem-solving\r\nStrong communication skills to coordinate with developers, QA, and business teams\r\nAbility to work in rotational shifts / production support environment if required\r\nBachelor\u2019s degree in Computer Science, IT, or related field\r\nExperience in banking, fintech, or payment support is a plus",
+      "job_requirements": "\u2705 SQL (basic queries, joins, troubleshooting)\r\n\u2705 Windows/Linux basics\r\n\u2705 Networking fundamentals (IP, DNS, HTTP, HTTPS)\r\n\u2705 Ticketing tools (ServiceNow, Jira, Remedy)\r\n\u2705 Basic scripting (Python, Shell, PowerShell)\r\n\u2705 Good communication skills\r\n\u2705 Problem-solving mindset",
       "name": "Mohd Arsh Usmani",
       "email": "usmaniarsh7@gmail.com",
       "phone": "9557875692",
-      "resume_file": "3fa5c181-7123-49b7-a9e2-4a1fe0792b21.pdf",
+      "resume_file": "08cccc9e-c299-4764-bad2-cdf9ec1c3a87.pdf",
       "resume_text": "Mohd Arsh Usmani \nSoftware Engineer \nStrong foundation in Core Java, OOP, Python and backend work\ufb02ows with hands-on expertise in patch deployment, DC-\nDR activities, root cause analysis, and performance monitoring. Committed to enhancing system stability, reliability,\nand performance within mission-critical \ufb01nancial systems. Experienced in SQL optimization, database analysis, log\ndebugging, and resolving production issues across UAT. \nusmaniarsh7@gmail.com \n9557875692 \nMumbai \nportfolio-beta-san",
-      "applied_at": "2026-06-24T19:40:53.546591",
+      "applied_at": "2026-06-25T19:37:05.889711",
       "ai_analysis": {
-        "match_score": 90,
-        "status": "On Hold",
+        "match_score": 78,
+        "status": "Shortlisted",
         "strengths": [
-          "Extensive experience in L1 production and application support for high-volume banking and payment platforms, directly addressing the 'fintech/banking' plus.",
-          "Strong technical proficiency in incident management, root cause analysis (RCA), and problem management, aligned with ITIL practices.",
-          "Proven expertise in SQL (T-SQL, optimization) for data validation, analysis, and troubleshooting, along with Unix commands.",
-          "Hands-on experience with application monitoring, batch/job handling (ETL, Autosys), log debugging, and tools like Splunk and JIRA.",
-          "Demonstrated ability to work in a 24x7 operational environment, ensuring system availability and SLA compliance.",
-          "Effective communication skills with stakeholders, engineering, operations, and vendors, and experience in knowledge article creation."
+          "Extensive hands-on experience in L1 production and application support within a high-volume fintech environment.",
+          "Strong proficiency in SQL (T-SQL) for querying, troubleshooting, optimization, and database analysis.",
+          "Proven expertise in incident management, root cause analysis, problem management, and ITIL practices.",
+          "Demonstrated strong communication, stakeholder management, and cross-functional coordination skills.",
+          "Practical experience with Python for automation initiatives and UNIX for system interaction.",
+          "Proficient with Jira for ticketing and incident tracking."
         ],
         "gaps": [
-          "Critical date discrepancy: The 'Product Support Engineer' role is listed from '09/2025 - Present', which is a future date and needs immediate clarification as it casts doubt on current work experience.",
-          "Missing Education Details: A Bachelor\u2019s degree in Computer Science, IT, or a related field is a requirement but is not explicitly mentioned on the resume."
+          "Lack of explicit mention of foundational networking concepts (IP, DNS, HTTP, HTTPS).",
+          "Windows OS experience is not explicitly detailed.",
+          "Shell scripting (beyond implied UNIX use) and PowerShell scripting are not mentioned."
         ],
-        "summary": "This candidate presents as a highly skilled and relevant Product Support Engineer, demonstrating deep experience in critical application support, incident management, and technical troubleshooting within the fintech sector. Their expertise aligns strongly with the job requirements for SQL, Unix, monitoring, and RCA in a 24x7 environment. However, a significant date error in their work history and the absence of explicit education details require urgent verification.",
-        "recommendation": "Place on 'On Hold' for immediate follow-up to clarify the start date of their 'Product Support Engineer' role and confirm educational qualifications. If these issues are resolved satisfactorily, the candidate possesses an excellent skill set and domain experience for the Application Support Engineer position and should be advanced to the interview stage."
+        "summary": "This candidate possesses a highly relevant background as a Product Support Engineer in a demanding fintech environment, showcasing strong skills in SQL, incident management, and root cause analysis. Their experience in reducing issue recurrence, automating tasks, and effective stakeholder communication aligns well with the Application Support Engineer role. The practical experience in a 24x7 operational setting with high transaction volumes is particularly valuable.",
+        "recommendation": "Shortlist for an interview to delve deeper into networking fundamentals, Windows experience, and scripting depth, while leveraging their strong application support background."
       },
-      "ats_review": null,
+      "ats_review": {
+        "ats_score": 65,
+        "strengths": [
+          "Strong alignment with problem-solving and troubleshooting keywords",
+          "Quantifiable achievements with impressive metrics and percentages",
+          "Explicit mention of key technical skills like SQL, Python, UNIX, and JIRA",
+          "Demonstrated communication and teamwork skills"
+        ],
+        "issues": [
+          {
+            "area": "clarity",
+            "problem": "The employment dates for both listed roles are in the future, which is a critical error that makes the experience appear invalid.",
+            "suggestion": "Immediately correct all employment dates to accurately reflect past or current employment periods."
+          },
+          {
+            "area": "keywords",
+            "problem": "The resume does not explicitly mention networking fundamentals (IP, DNS, HTTP, HTTPS), which are important for the target role.",
+            "suggestion": "Integrate relevant networking experiences, such as troubleshooting connectivity or configuring network services, if applicable to your background."
+          },
+          {
+            "area": "structure",
+            "problem": "The skills within the 'Product Support Engineer' section are poorly integrated, appearing as a mixed list with responsibilities.",
+            "suggestion": "Create a distinct 'Technical Skills' section or clearly separate skills using a dedicated sub-heading or different formatting within the experience."
+          },
+          {
+            "area": "clarity",
+            "problem": "The 'Data Analyst Internship' uses redundant subheadings within the experience bullet points.",
+            "suggestion": "Rephrase the internship experience into concise, action-verb-led bullet points, naturally integrating skills without separate subheadings."
+          }
+        ],
+        "summary": "This resume showcases excellent problem-solving skills and technical expertise, with strong quantifiable achievements and relevant keywords.",
+        "rule_flags": [
+          "1 line(s) start with weak verbs (e.g. 'worked', 'helped').",
+          "Missing keywords from job requirements: joins, basics, Networking, fundamentals, DNS, HTTP, HTTPS, Ticketing"
+        ],
+        "missing_keywords": [
+          "joins",
+          "basics",
+          "Networking",
+          "fundamentals",
+          "DNS",
+          "HTTP",
+          "HTTPS",
+          "Ticketing"
+        ]
+      },
       "ai_detection": {
         "ai_likelihood_score": 8,
         "verdict": "Likely human-written",
@@ -98,344 +107,344 @@
       "assessment_questions": {
         "mcq": [
           {
-            "q": "A critical payment processing batch job failed during nightly processing, impacting customer transactions. What is the immediate priority for an Application Support Engineer?",
+            "q": "You need to retrieve a list of all customers and any orders they might have placed. If a customer has no orders, they should still appear in the list. Which type of SQL JOIN would you use?",
             "options": [
-              "A. Analyze the root cause of the failure.",
-              "B. Notify all stakeholders about the incident.",
-              "C. Escalate to the development team for a fix.",
-              "D. Restore service immediately and stabilize the system."
-            ],
-            "answer": "D"
-          },
-          {
-            "q": "A web application is intermittently failing with a '500 Internal Server Error'. You check the application logs and find entries like 'java.sql.SQLException: Connection refused: (description=(Address=(protocol=tcp)(host=db.example.com)(port=1521)))'. What is the most likely issue?",
-            "options": [
-              "A. The web application's database server is unreachable or down.",
-              "B. The web application's web server has run out of memory.",
-              "C. There's a SQL query syntax error in the application code.",
-              "D. The application server is facing high CPU utilization."
-            ],
-            "answer": "A"
-          },
-          {
-            "q": "A report shows a discrepancy in transaction counts for a specific date. As an Application Support Engineer, you suspect a data issue. Which SQL query would you primarily use to validate the transaction count for '2023-10-26' in a 'transactions' table?",
-            "options": [
-              "A. SELECT SUM(amount) FROM transactions WHERE transaction_date = '2023-10-26';",
-              "B. SELECT COUNT(*) FROM transactions WHERE transaction_date = '2023-10-26';",
-              "C. SELECT * FROM transactions WHERE transaction_date = '2023-10-26' ORDER BY id DESC LIMIT 10;",
-              "D. DELETE FROM transactions WHERE transaction_date = '2023-10-26';"
+              "A. INNER JOIN",
+              "B. LEFT JOIN",
+              "C. RIGHT JOIN",
+              "D. FULL OUTER JOIN"
             ],
             "answer": "B"
           },
           {
-            "q": "You notice an application process is consuming excessive CPU on a Linux server and needs to be restarted. Which command would you use to find its Process ID (PID) given its name, say 'my_app_service'?",
+            "q": "An application on a Linux server is performing slowly. To identify which processes are consuming the most CPU and memory, which command would you typically use?",
             "options": [
-              "A. ls -l my_app_service",
-              "B. grep my_app_service /var/log/messages",
-              "C. ps -ef | grep my_app_service",
-              "D. netstat -tulnp | grep my_app_service"
+              "A. `ls -l`",
+              "B. `df -h`",
+              "C. `top`",
+              "D. `ping`"
             ],
             "answer": "C"
           },
           {
-            "q": "After a recurring issue causing data inconsistencies, the development team has implemented a fix. Before closing the incident, what is a crucial step in the Root Cause Analysis (RCA) process that ensures future prevention?",
+            "q": "Users are reporting that they cannot access a web application using its domain name (e.g., `www.example.com`), but they can access it directly via its IP address. What is the most likely component that needs investigation?",
             "options": [
-              "A. Notify all users about the fix immediately.",
-              "B. Monitor the system for a few days to confirm the fix's effectiveness.",
-              "C. Document the problem, the root cause, and the permanent solution.",
-              "D. Conduct a post-mortem meeting with only the development team."
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "You are setting up monitoring alerts for a critical API. Which of the following metrics would be MOST important to monitor for immediate performance degradation alerts?",
-            "options": [
-              "A. Disk space utilization on the server.",
-              "B. API response time and error rate.",
-              "C. Number of logged-in users.",
-              "D. Database connection pool size."
+              "A. DHCP server",
+              "B. DNS server",
+              "C. Firewall",
+              "D. Router"
             ],
             "answer": "B"
           },
           {
-            "q": "You've identified a bug in the application that requires a code change. Following standard ITIL practices, which of the following is the most appropriate next step after logging the issue in a ticketing tool like JIRA or ServiceNow?",
+            "q": "An Application Support Engineer receives an incident ticket describing a minor cosmetic UI bug. However, the ticket has been mistakenly categorized with \"Critical\" priority. What is the most appropriate initial action for the engineer to take?",
             "options": [
-              "A. Immediately implement a hotfix in production.",
-              "B. Prioritize the issue and assign it to the development team.",
-              "C. Close the ticket as the issue is understood.",
-              "D. Delete the affected data to prevent further impact."
+              "A. Immediately escalate to a senior engineer",
+              "B. Start working on the bug fix",
+              "C. Re-evaluate the priority based on impact and urgency",
+              "D. Close the ticket as invalid"
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "You need to write a Python script to scan a large log file (`application.log`) for occurrences of the string \"ERROR\" and count them. Which combination of Python operations would be most efficient?",
+            "options": [
+              "A. `read()` the whole file, then `split()` by lines, then `find()` \"ERROR\"",
+              "B. `for line in file:` and `if \"ERROR\" in line:`",
+              "C. `readline()` in a loop, then `replace()` \"ERROR\"",
+              "D. `open()` the file with `os.system('grep \"ERROR\" application.log')`"
             ],
             "answer": "B"
           },
           {
-            "q": "A critical end-of-day batch job failed to run. You need to verify its last execution status and scheduled time. Which aspect of batch/job handling would you investigate first?",
+            "q": "An application is displaying incorrect data for some user profiles. Upon investigating, you find that the SQL query used to fetch user data is returning too many rows, including those from a different department. You suspect an issue with the filtering condition. Which clause in a SQL `SELECT` statement would you primarily inspect and modify?",
             "options": [
-              "A. The application's database schema.",
-              "B. The job scheduler or orchestrator (e.g., cron, Control-M, Airflow).",
-              "C. The server's network configuration.",
-              "D. The firewall rules between application components."
+              "A. `SELECT`",
+              "B. `FROM`",
+              "C. `WHERE`",
+              "D. `ORDER BY`"
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "A critical Windows service for your application fails to start and reports a generic error. Where is the most important place to look for detailed error messages and clues about why the service failed?",
+            "options": [
+              "A. Task Manager",
+              "B. Registry Editor",
+              "C. Event Viewer",
+              "D. System Information"
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "A web application runs on port 80 for HTTP and port 443 for HTTPS. If a user is experiencing issues connecting via HTTPS, but HTTP connections work, what is the most likely area to investigate first?",
+            "options": [
+              "A. Database connectivity",
+              "B. Application server CPU usage",
+              "C. SSL/TLS certificate configuration or firewall rules for port 443",
+              "D. DNS resolution for the domain"
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "An application process on a Linux server is unable to write to a specific log directory (`/var/log/myapp`). You suspect it's a permissions issue. Which command would you use to check the current permissions of that directory?",
+            "options": [
+              "A. `cat /var/log/myapp`",
+              "B. `chmod /var/log/myapp`",
+              "C. `ls -ld /var/log/myapp`",
+              "D. `chown /var/log/myapp`"
+            ],
+            "answer": "C"
+          },
+          {
+            "q": "You need to create a simple shell script to regularly check if a specific process named `my_app_service` is running on a Linux server and restart it if it's not. Which command would be most appropriate to check for the process's existence in a script?",
+            "options": [
+              "A. `ls -l my_app_service`",
+              "B. `ps aux | grep my_app_service`",
+              "C. `netstat -tuln`",
+              "D. `df -h`"
             ],
             "answer": "B"
           },
           {
-            "q": "Users are reporting that recent orders are not appearing in their order history. You suspect a data processing delay. Which SQL query could help you check if recent orders are present in the database but just not displayed? Assume 'order_id' is unique and 'order_date' exists.",
+            "q": "An application suddenly stops responding and logs show frequent \"OutOfMemoryError\" messages. What is your immediate and most effective first step in diagnosing this issue?",
             "options": [
-              "A. SELECT order_id, order_date, status FROM orders WHERE order_date >= CURDATE() - INTERVAL 1 DAY ORDER BY order_date DESC;",
-              "B. UPDATE orders SET status = 'DELIVERED' WHERE order_date < CURDATE();",
-              "C. DELETE FROM orders WHERE status = 'CANCELLED';",
-              "D. CREATE INDEX idx_order_date ON orders(order_date);"
-            ],
-            "answer": "A"
-          },
-          {
-            "q": "An application configuration file is suspected to have incorrect settings. You know the file name is 'app_config.properties' but are unsure of its exact location on the Linux server. Which command would help you locate it efficiently?",
-            "options": [
-              "A. cd /etc",
-              "B. ls -a",
-              "C. find / -name app_config.properties",
-              "D. df -h"
+              "A. Reboot the server immediately",
+              "B. Check for recently deployed code changes",
+              "C. Analyze heap dumps or memory usage statistics",
+              "D. Escalate to the database administrator"
             ],
             "answer": "C"
           },
           {
-            "q": "A frontend application is failing to retrieve data from a backend service. You investigate and find that the backend service logs show 'HTTP 401 Unauthorized' errors. What is the most likely cause of this issue?",
+            "q": "A user reports that their recently created account is not appearing in the application's user list. You want to verify if the user's data was successfully inserted into the `Users` table. Which SQL query would you use to check for a user with `username = 'john.doe'`?",
             "options": [
-              "A. The backend service is down.",
-              "B. The network connection between frontend and backend is severed.",
-              "C. The frontend application is not providing valid authentication credentials.",
-              "D. The database connected to the backend service is offline."
+              "A. `DELETE FROM Users WHERE username = 'john.doe';`",
+              "B. `UPDATE Users SET active = 1 WHERE username = 'john.doe';`",
+              "C. `SELECT * FROM Users WHERE username = 'john.doe';`",
+              "D. `INSERT INTO Users (username, email) VALUES ('john.doe', 'john.doe@example.com');`"
             ],
             "answer": "C"
           },
           {
-            "q": "A core payment gateway service is completely down, affecting all incoming transactions. You are the on-call Application Support Engineer. After confirming the outage, what is your IMMEDIATE next step before even starting detailed troubleshooting?",
+            "q": "An application server has an IP address of `192.168.1.10` and a subnet mask of `255.255.255.0`. Which of the following IP addresses would be on the same local network segment as the server?",
             "options": [
-              "A. Start a conference bridge and gather all relevant technical teams (Dev, Infra, DBA).",
-              "B. Check the application logs for error messages.",
-              "C. Attempt to restart the service immediately without further investigation.",
-              "D. Analyze the database performance metrics."
-            ],
-            "answer": "A"
-          },
-          {
-            "q": "You're debugging a complex issue in a Java application and see a 'NullPointerException' in the logs. What additional information from the log entry is crucial for you to pinpoint the problem quickly?",
-            "options": [
-              "A. The exact timestamp of the error.",
-              "B. The IP address of the server.",
-              "C. The full stack trace and the specific class/method/line number.",
-              "D. The Java Virtual Machine (JVM) version."
+              "A. `192.168.2.10`",
+              "B. `10.0.0.5`",
+              "C. `192.168.1.100`",
+              "D. `172.16.0.20`"
             ],
             "answer": "C"
           },
           {
-            "q": "An upstream system incorrectly sent duplicate records, causing a data integrity issue in your application. Before taking any corrective action, what is the most important step?",
+            "q": "On a Windows server, you need to write a PowerShell script to list all running services that have \"SQL\" in their name. Which commandlet would you use?",
             "options": [
-              "A. Ask the upstream system to resend all data.",
-              "B. Develop a new feature to prevent duplicates.",
-              "C. Assess the scope and impact of the duplicate records (e.g., how many, what tables, business impact).",
-              "D. Immediately delete all duplicate records from the database."
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "A critical incident has been resolved and the system is stable. What is the final step in the incident management lifecycle for the Application Support team?",
-            "options": [
-              "A. Close the incident ticket immediately without further action.",
-              "B. Monitor the system proactively to ensure stability and prevent recurrence.",
-              "C. Schedule a meeting with the business team to explain the fix.",
-              "D. Update the development team on the resolution."
+              "A. `Get-Process -Name *SQL*`",
+              "B. `Get-Service | Where-Object {$_.Name -like \"*SQL*\"}`",
+              "C. `dir C:\\Program Files\\SQL`",
+              "D. `Tasklist /fi \"IMAGENAME eq SQL*\"`"
             ],
             "answer": "B"
+          },
+          {
+            "q": "After resolving a critical application outage, the next crucial step in good incident management practice is to perform a Root Cause Analysis (RCA). What is the primary purpose of an RCA?",
+            "options": [
+              "A. To assign blame for the outage",
+              "B. To quickly restore services to prevent further downtime",
+              "C. To identify and address the underlying cause to prevent recurrence",
+              "D. To document the incident for audit purposes"
+            ],
+            "answer": "C"
           }
         ]
       },
       "assessment_result": {
-        "mcq_score": 4,
+        "mcq_score": 8,
         "mcq_total": 15,
         "mcq_results": [
           {
-            "question": "A critical payment processing batch job failed during nightly processing, impacting customer transactions. What is the immediate priority for an Application Support Engineer?",
+            "question": "You need to retrieve a list of all customers and any orders they might have placed. If a customer has no orders, they should still appear in the list. Which type of SQL JOIN would you use?",
             "options": [
-              "A. Analyze the root cause of the failure.",
-              "B. Notify all stakeholders about the incident.",
-              "C. Escalate to the development team for a fix.",
-              "D. Restore service immediately and stabilize the system."
-            ],
-            "correct_answer": "D",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "A web application is intermittently failing with a '500 Internal Server Error'. You check the application logs and find entries like 'java.sql.SQLException: Connection refused: (description=(Address=(protocol=tcp)(host=db.example.com)(port=1521)))'. What is the most likely issue?",
-            "options": [
-              "A. The web application's database server is unreachable or down.",
-              "B. The web application's web server has run out of memory.",
-              "C. There's a SQL query syntax error in the application code.",
-              "D. The application server is facing high CPU utilization."
-            ],
-            "correct_answer": "A",
-            "given_answer": "A",
-            "is_correct": true
-          },
-          {
-            "question": "A report shows a discrepancy in transaction counts for a specific date. As an Application Support Engineer, you suspect a data issue. Which SQL query would you primarily use to validate the transaction count for '2023-10-26' in a 'transactions' table?",
-            "options": [
-              "A. SELECT SUM(amount) FROM transactions WHERE transaction_date = '2023-10-26';",
-              "B. SELECT COUNT(*) FROM transactions WHERE transaction_date = '2023-10-26';",
-              "C. SELECT * FROM transactions WHERE transaction_date = '2023-10-26' ORDER BY id DESC LIMIT 10;",
-              "D. DELETE FROM transactions WHERE transaction_date = '2023-10-26';"
-            ],
-            "correct_answer": "B",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "You notice an application process is consuming excessive CPU on a Linux server and needs to be restarted. Which command would you use to find its Process ID (PID) given its name, say 'my_app_service'?",
-            "options": [
-              "A. ls -l my_app_service",
-              "B. grep my_app_service /var/log/messages",
-              "C. ps -ef | grep my_app_service",
-              "D. netstat -tulnp | grep my_app_service"
-            ],
-            "correct_answer": "C",
-            "given_answer": "B",
-            "is_correct": false
-          },
-          {
-            "question": "After a recurring issue causing data inconsistencies, the development team has implemented a fix. Before closing the incident, what is a crucial step in the Root Cause Analysis (RCA) process that ensures future prevention?",
-            "options": [
-              "A. Notify all users about the fix immediately.",
-              "B. Monitor the system for a few days to confirm the fix's effectiveness.",
-              "C. Document the problem, the root cause, and the permanent solution.",
-              "D. Conduct a post-mortem meeting with only the development team."
-            ],
-            "correct_answer": "C",
-            "given_answer": "B",
-            "is_correct": false
-          },
-          {
-            "question": "You are setting up monitoring alerts for a critical API. Which of the following metrics would be MOST important to monitor for immediate performance degradation alerts?",
-            "options": [
-              "A. Disk space utilization on the server.",
-              "B. API response time and error rate.",
-              "C. Number of logged-in users.",
-              "D. Database connection pool size."
+              "A. INNER JOIN",
+              "B. LEFT JOIN",
+              "C. RIGHT JOIN",
+              "D. FULL OUTER JOIN"
             ],
             "correct_answer": "B",
             "given_answer": "B",
             "is_correct": true
           },
           {
-            "question": "You've identified a bug in the application that requires a code change. Following standard ITIL practices, which of the following is the most appropriate next step after logging the issue in a ticketing tool like JIRA or ServiceNow?",
+            "question": "An application on a Linux server is performing slowly. To identify which processes are consuming the most CPU and memory, which command would you typically use?",
             "options": [
-              "A. Immediately implement a hotfix in production.",
-              "B. Prioritize the issue and assign it to the development team.",
-              "C. Close the ticket as the issue is understood.",
-              "D. Delete the affected data to prevent further impact."
-            ],
-            "correct_answer": "B",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "A critical end-of-day batch job failed to run. You need to verify its last execution status and scheduled time. Which aspect of batch/job handling would you investigate first?",
-            "options": [
-              "A. The application's database schema.",
-              "B. The job scheduler or orchestrator (e.g., cron, Control-M, Airflow).",
-              "C. The server's network configuration.",
-              "D. The firewall rules between application components."
-            ],
-            "correct_answer": "B",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "Users are reporting that recent orders are not appearing in their order history. You suspect a data processing delay. Which SQL query could help you check if recent orders are present in the database but just not displayed? Assume 'order_id' is unique and 'order_date' exists.",
-            "options": [
-              "A. SELECT order_id, order_date, status FROM orders WHERE order_date >= CURDATE() - INTERVAL 1 DAY ORDER BY order_date DESC;",
-              "B. UPDATE orders SET status = 'DELIVERED' WHERE order_date < CURDATE();",
-              "C. DELETE FROM orders WHERE status = 'CANCELLED';",
-              "D. CREATE INDEX idx_order_date ON orders(order_date);"
-            ],
-            "correct_answer": "A",
-            "given_answer": "B",
-            "is_correct": false
-          },
-          {
-            "question": "An application configuration file is suspected to have incorrect settings. You know the file name is 'app_config.properties' but are unsure of its exact location on the Linux server. Which command would help you locate it efficiently?",
-            "options": [
-              "A. cd /etc",
-              "B. ls -a",
-              "C. find / -name app_config.properties",
-              "D. df -h"
+              "A. `ls -l`",
+              "B. `df -h`",
+              "C. `top`",
+              "D. `ping`"
             ],
             "correct_answer": "C",
             "given_answer": "B",
             "is_correct": false
           },
           {
-            "question": "A frontend application is failing to retrieve data from a backend service. You investigate and find that the backend service logs show 'HTTP 401 Unauthorized' errors. What is the most likely cause of this issue?",
+            "question": "Users are reporting that they cannot access a web application using its domain name (e.g., `www.example.com`), but they can access it directly via its IP address. What is the most likely component that needs investigation?",
             "options": [
-              "A. The backend service is down.",
-              "B. The network connection between frontend and backend is severed.",
-              "C. The frontend application is not providing valid authentication credentials.",
-              "D. The database connected to the backend service is offline."
+              "A. DHCP server",
+              "B. DNS server",
+              "C. Firewall",
+              "D. Router"
             ],
-            "correct_answer": "C",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "A core payment gateway service is completely down, affecting all incoming transactions. You are the on-call Application Support Engineer. After confirming the outage, what is your IMMEDIATE next step before even starting detailed troubleshooting?",
-            "options": [
-              "A. Start a conference bridge and gather all relevant technical teams (Dev, Infra, DBA).",
-              "B. Check the application logs for error messages.",
-              "C. Attempt to restart the service immediately without further investigation.",
-              "D. Analyze the database performance metrics."
-            ],
-            "correct_answer": "A",
-            "given_answer": "A",
+            "correct_answer": "B",
+            "given_answer": "B",
             "is_correct": true
           },
           {
-            "question": "You're debugging a complex issue in a Java application and see a 'NullPointerException' in the logs. What additional information from the log entry is crucial for you to pinpoint the problem quickly?",
+            "question": "An Application Support Engineer receives an incident ticket describing a minor cosmetic UI bug. However, the ticket has been mistakenly categorized with \"Critical\" priority. What is the most appropriate initial action for the engineer to take?",
             "options": [
-              "A. The exact timestamp of the error.",
-              "B. The IP address of the server.",
-              "C. The full stack trace and the specific class/method/line number.",
-              "D. The Java Virtual Machine (JVM) version."
+              "A. Immediately escalate to a senior engineer",
+              "B. Start working on the bug fix",
+              "C. Re-evaluate the priority based on impact and urgency",
+              "D. Close the ticket as invalid"
             ],
             "correct_answer": "C",
             "given_answer": "C",
             "is_correct": true
           },
           {
-            "question": "An upstream system incorrectly sent duplicate records, causing a data integrity issue in your application. Before taking any corrective action, what is the most important step?",
+            "question": "You need to write a Python script to scan a large log file (`application.log`) for occurrences of the string \"ERROR\" and count them. Which combination of Python operations would be most efficient?",
             "options": [
-              "A. Ask the upstream system to resend all data.",
-              "B. Develop a new feature to prevent duplicates.",
-              "C. Assess the scope and impact of the duplicate records (e.g., how many, what tables, business impact).",
-              "D. Immediately delete all duplicate records from the database."
+              "A. `read()` the whole file, then `split()` by lines, then `find()` \"ERROR\"",
+              "B. `for line in file:` and `if \"ERROR\" in line:`",
+              "C. `readline()` in a loop, then `replace()` \"ERROR\"",
+              "D. `open()` the file with `os.system('grep \"ERROR\" application.log')`"
+            ],
+            "correct_answer": "B",
+            "given_answer": "B",
+            "is_correct": true
+          },
+          {
+            "question": "An application is displaying incorrect data for some user profiles. Upon investigating, you find that the SQL query used to fetch user data is returning too many rows, including those from a different department. You suspect an issue with the filtering condition. Which clause in a SQL `SELECT` statement would you primarily inspect and modify?",
+            "options": [
+              "A. `SELECT`",
+              "B. `FROM`",
+              "C. `WHERE`",
+              "D. `ORDER BY`"
             ],
             "correct_answer": "C",
-            "given_answer": "D",
+            "given_answer": "A",
             "is_correct": false
           },
           {
-            "question": "A critical incident has been resolved and the system is stable. What is the final step in the incident management lifecycle for the Application Support team?",
+            "question": "A critical Windows service for your application fails to start and reports a generic error. Where is the most important place to look for detailed error messages and clues about why the service failed?",
             "options": [
-              "A. Close the incident ticket immediately without further action.",
-              "B. Monitor the system proactively to ensure stability and prevent recurrence.",
-              "C. Schedule a meeting with the business team to explain the fix.",
-              "D. Update the development team on the resolution."
+              "A. Task Manager",
+              "B. Registry Editor",
+              "C. Event Viewer",
+              "D. System Information"
+            ],
+            "correct_answer": "C",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "A web application runs on port 80 for HTTP and port 443 for HTTPS. If a user is experiencing issues connecting via HTTPS, but HTTP connections work, what is the most likely area to investigate first?",
+            "options": [
+              "A. Database connectivity",
+              "B. Application server CPU usage",
+              "C. SSL/TLS certificate configuration or firewall rules for port 443",
+              "D. DNS resolution for the domain"
+            ],
+            "correct_answer": "C",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "An application process on a Linux server is unable to write to a specific log directory (`/var/log/myapp`). You suspect it's a permissions issue. Which command would you use to check the current permissions of that directory?",
+            "options": [
+              "A. `cat /var/log/myapp`",
+              "B. `chmod /var/log/myapp`",
+              "C. `ls -ld /var/log/myapp`",
+              "D. `chown /var/log/myapp`"
+            ],
+            "correct_answer": "C",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "You need to create a simple shell script to regularly check if a specific process named `my_app_service` is running on a Linux server and restart it if it's not. Which command would be most appropriate to check for the process's existence in a script?",
+            "options": [
+              "A. `ls -l my_app_service`",
+              "B. `ps aux | grep my_app_service`",
+              "C. `netstat -tuln`",
+              "D. `df -h`"
             ],
             "correct_answer": "B",
-            "given_answer": "D",
+            "given_answer": "A",
             "is_correct": false
+          },
+          {
+            "question": "An application suddenly stops responding and logs show frequent \"OutOfMemoryError\" messages. What is your immediate and most effective first step in diagnosing this issue?",
+            "options": [
+              "A. Reboot the server immediately",
+              "B. Check for recently deployed code changes",
+              "C. Analyze heap dumps or memory usage statistics",
+              "D. Escalate to the database administrator"
+            ],
+            "correct_answer": "C",
+            "given_answer": "A",
+            "is_correct": false
+          },
+          {
+            "question": "A user reports that their recently created account is not appearing in the application's user list. You want to verify if the user's data was successfully inserted into the `Users` table. Which SQL query would you use to check for a user with `username = 'john.doe'`?",
+            "options": [
+              "A. `DELETE FROM Users WHERE username = 'john.doe';`",
+              "B. `UPDATE Users SET active = 1 WHERE username = 'john.doe';`",
+              "C. `SELECT * FROM Users WHERE username = 'john.doe';`",
+              "D. `INSERT INTO Users (username, email) VALUES ('john.doe', 'john.doe@example.com');`"
+            ],
+            "correct_answer": "C",
+            "given_answer": "C",
+            "is_correct": true
+          },
+          {
+            "question": "An application server has an IP address of `192.168.1.10` and a subnet mask of `255.255.255.0`. Which of the following IP addresses would be on the same local network segment as the server?",
+            "options": [
+              "A. `192.168.2.10`",
+              "B. `10.0.0.5`",
+              "C. `192.168.1.100`",
+              "D. `172.16.0.20`"
+            ],
+            "correct_answer": "C",
+            "given_answer": "C",
+            "is_correct": true
+          },
+          {
+            "question": "On a Windows server, you need to write a PowerShell script to list all running services that have \"SQL\" in their name. Which commandlet would you use?",
+            "options": [
+              "A. `Get-Process -Name *SQL*`",
+              "B. `Get-Service | Where-Object {$_.Name -like \"*SQL*\"}`",
+              "C. `dir C:\\Program Files\\SQL`",
+              "D. `Tasklist /fi \"IMAGENAME eq SQL*\"`"
+            ],
+            "correct_answer": "B",
+            "given_answer": "B",
+            "is_correct": true
+          },
+          {
+            "question": "After resolving a critical application outage, the next crucial step in good incident management practice is to perform a Root Cause Analysis (RCA). What is the primary purpose of an RCA?",
+            "options": [
+              "A. To assign blame for the outage",
+              "B. To quickly restore services to prevent further downtime",
+              "C. To identify and address the underlying cause to prevent recurrence",
+              "D. To document the incident for audit purposes"
+            ],
+            "correct_answer": "C",
+            "given_answer": "C",
+            "is_correct": true
           }
         ],
-        "composite_score": 27,
-        "completed_at": "2026-06-24T19:51:17.238109"
+        "composite_score": 53,
+        "completed_at": "2026-06-25T19:46:52.253886"
       }
     }
   ],

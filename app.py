@@ -362,7 +362,11 @@ def index():
     active_jobs_count = sum(1 for j in data["jobs"] if j.get("active", True))
     return render_template("index.html", active_jobs_count=active_jobs_count)
 
-
+@app.route("/api/active-jobs-count")
+def api_active_jobs_count():
+    data = load_data()
+    active_jobs_count = sum(1 for j in data["jobs"] if j.get("active", True))
+    return jsonify({"active_jobs_count": active_jobs_count})
 # ---- CANDIDATE PORTAL ----
 
 @app.route("/candidate")

@@ -6,6 +6,7 @@ import time
 import base64
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash, send_from_directory
+from werkzeug.middleware.proxy_fix import ProxyFix
 from google import genai
 import PyPDF2
 import docx
@@ -22,6 +23,9 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "hr-tool-secret-key-2024")
+
+# Fix for Render/reverse proxy — ensures url_for() generates https:// URLs correctly
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # Initialize Gemini
 client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
@@ -367,6 +371,7 @@ def api_active_jobs_count():
     data = load_data()
     active_jobs_count = sum(1 for j in data["jobs"] if j.get("active", True))
     return jsonify({"active_jobs_count": active_jobs_count})
+
 # ---- CANDIDATE PORTAL ----
 
 @app.route("/candidate")
@@ -383,7 +388,12 @@ def candidate():
 
 @app.route("/auth/google/login")
 def google_login():
-    redirect_uri = url_for("google_callback", _external=True)
+    # GOOGLE_REDIRECT_URI env var use karo agar set hai (Render pe zaroori)
+    # warna url_for se dynamically generate karo (local dev ke liye)
+    redirect_uri = os.environ.get(
+        "GOOGLE_REDIRECT_URI",
+        url_for("google_callback", _external=True)
+    )
     return google_oauth.authorize_redirect(redirect_uri)
 
 
@@ -760,11 +770,13 @@ def new_walkin():
         drive = {
             "id": str(uuid.uuid4()),
             "title": request.form.get("title", "").strip(),
-            "department": request.form.get("department", "").strip(),
+            "drive_type": request.form.get("drive_type", "").strip(),
+            "position": request.form.get("position", "").strip(),
             "location": request.form.get("location", "").strip(),
             "venue": request.form.get("venue", "").strip(),
             "drive_date": request.form.get("drive_date", "").strip(),
-            "drive_time": request.form.get("drive_time", "").strip(),
+            "drive_start_time": request.form.get("drive_start_time", "").strip(),
+            "drive_end_time": request.form.get("drive_end_time", "").strip(),
             "description": request.form.get("description", "").strip(),
             "active": True,
             "created_at": datetime.now().isoformat(),
@@ -796,11 +808,13 @@ def edit_walkin(drive_id):
             return render_template("edit_walkin.html", drive=drive)
 
         drive["title"] = title
-        drive["department"] = request.form.get("department", "").strip()
+        drive["drive_type"] = request.form.get("drive_type", "").strip()
+        drive["position"] = request.form.get("position", "").strip()
         drive["location"] = request.form.get("location", "").strip()
         drive["venue"] = request.form.get("venue", "").strip()
         drive["drive_date"] = drive_date
-        drive["drive_time"] = request.form.get("drive_time", "").strip()
+        drive["drive_start_time"] = request.form.get("drive_start_time", "").strip()
+        drive["drive_end_time"] = request.form.get("drive_end_time", "").strip()
         drive["description"] = request.form.get("description", "").strip()
 
         save_data(data)
@@ -1320,6 +1334,33 @@ def view_assessment(app_id):
         flash("No assessment result yet. Candidate hasn't submitted the assessment.", "error")
         return redirect(url_for("view_application", app_id=app_id))
     return render_template("admin_assessment_result.html", application=app_data)
+
+
+@app.route("/api/walkin-drives")
+def api_walkin_drives():
+    data = load_data()
+    active_drives = [d for d in data["walkin_drives"] if d.get("active", True)]
+    reg_counts = {}
+    for r in data["walkin_registrations"]:
+        reg_counts[r["drive_id"]] = reg_counts.get(r["drive_id"], 0) + 1
+
+    drives_data = []
+    for d in active_drives:
+        drives_data.append({
+            "id": d["id"],
+            "title": d["title"],
+            "drive_type": d.get("drive_type", ""),
+            "position": d.get("position", ""),
+            "location": d.get("location", ""),
+            "drive_date": d.get("drive_date", ""),
+            "drive_start_time": d.get("drive_start_time", ""),
+            "drive_end_time": d.get("drive_end_time", ""),
+            "venue": d.get("venue", ""),
+            "description": d.get("description", ""),
+            "registered_count": reg_counts.get(d["id"], 0),
+        })
+
+    return jsonify({"drives": drives_data})
 
 
 if __name__ == "__main__":

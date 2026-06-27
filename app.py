@@ -124,7 +124,7 @@ def extract_text_from_file(filepath):
 
 def gemini_generate_with_retry(prompt, retries=3, delay=5):
     """Gemini API call with retry + memory cleanup."""
-    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash"]
+    models_to_try = ["gemini-1.5-flash", "gemini-1.5-flash"]
     last_exception = None
     for model in models_to_try:
         for attempt in range(retries):

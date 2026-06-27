@@ -14,9 +14,13 @@
 <div class="card mb-4">
   <div class="card-body">
     <div style="display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.9rem; color:var(--text-muted);">
-      {% if drive.department %}<span>🏢 {{ drive.department }}</span>{% endif %}
+      {% if drive.drive_type %}<span>🧑‍💼 {{ drive.drive_type }}</span>{% endif %}
+      {% if drive.position %}<span>💼 {{ drive.position }}</span>{% endif %}
       {% if drive.location %}<span>📍 {{ drive.location }}</span>{% endif %}
-      <span>📅 {{ drive.drive_date }}{% if drive.drive_time %} · ⏰ {{ drive.drive_time }}{% endif %}</span>
+      <span>📅 {{ drive.drive_date }}</span>
+      {% if drive.drive_start_time %}
+        <span>⏰ {{ drive.drive_start_time }}{% if drive.drive_end_time %} – {{ drive.drive_end_time }}{% endif %}</span>
+      {% endif %}
     </div>
     {% if drive.venue %}<p style="margin-top:0.75rem; font-size:0.9rem;">📌 Venue: {{ drive.venue }}</p>{% endif %}
     {% if drive.description %}<p style="margin-top:0.5rem; font-size:0.9rem; color:var(--text-muted); line-height:1.6;">{{ drive.description }}</p>{% endif %}
@@ -38,7 +42,6 @@
         <label class="form-label">Phone Number *</label>
         <input type="tel" name="phone" class="form-control" required>
       </div>
-     
 
       <div class="d-flex gap-2 mt-4">
         <button type="submit" class="btn btn-primary">✅ Confirm Registration</button>

@@ -114,7 +114,8 @@
       <thead>
         <tr style="background:var(--surface2);">
           <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Drive Title</th>
-          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Date</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Type / Position</th>
+          <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Date & Time</th>
           <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Location</th>
           <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Registered</th>
           <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Status</th>
@@ -125,7 +126,14 @@
         {% for drive in walkin_drives %}
         <tr style="border-top:1px solid var(--border);">
           <td style="padding:12px 16px; font-weight:500;">{{ drive.title }}</td>
-          <td style="padding:12px 16px; color:var(--text-muted);">{{ drive.drive_date }}{% if drive.drive_time %} · {{ drive.drive_time }}{% endif %}</td>
+          <td style="padding:12px 16px; color:var(--text-muted);">
+            {% if drive.drive_type %}<div>🧑‍💼 {{ drive.drive_type }}</div>{% endif %}
+            {% if drive.position %}<div>💼 {{ drive.position }}</div>{% endif %}
+          </td>
+          <td style="padding:12px 16px; color:var(--text-muted);">
+            {{ drive.drive_date }}
+            {% if drive.drive_start_time %}<br>⏰ {{ drive.drive_start_time }}{% if drive.drive_end_time %} – {{ drive.drive_end_time }}{% endif %}{% endif %}
+          </td>
           <td style="padding:12px 16px; color:var(--text-muted);">{{ drive.location or '-' }}</td>
           <td style="padding:12px 16px; color:var(--text-muted);">
             <span style="font-weight:600; color:var(--primary);">{{ drive.registration_count }}</span> registered

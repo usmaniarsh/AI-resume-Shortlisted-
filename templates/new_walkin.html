@@ -22,13 +22,62 @@
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;">
         <div class="form-group mb-3">
-          <label class="form-label">Department</label>
-          <input type="text" name="department" class="form-control" placeholder="e.g. Engineering">
+          <label class="form-label">Drive Type *</label>
+          <select name="drive_type" class="form-control" required>
+            <option value="" disabled selected>Select drive type</option>
+            <option value="Walk-in Fresher">Walk-in Fresher</option>
+            <option value="Walk-in Experienced">Walk-in Experienced</option>
+          </select>
         </div>
         <div class="form-group mb-3">
-          <label class="form-label">Location (City)</label>
-          <input type="text" name="location" class="form-control" placeholder="e.g. Mumbai">
+          <label class="form-label">Position *</label>
+          <select name="position" class="form-control" required>
+            <option value="" disabled selected>Select position</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="Web Developer">Web Developer</option>
+            <option value="Full Stack Developer">Full Stack Developer</option>
+            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="Java Developer">Java Developer</option>
+            <option value="Python Developer">Python Developer</option>
+            <option value="PHP Developer">PHP Developer</option>
+            <option value=".NET Developer">.NET Developer</option>
+            <option value="React Developer">React Developer</option>
+            <option value="Angular Developer">Angular Developer</option>
+            <option value="Node.js Developer">Node.js Developer</option>
+            <option value="Android Developer">Android Developer</option>
+            <option value="iOS Developer">iOS Developer</option>
+            <option value="Mobile App Developer">Mobile App Developer</option>
+            <option value="QA Engineer / Tester">QA Engineer / Tester</option>
+            <option value="Automation Tester">Automation Tester</option>
+            <option value="DevOps Engineer">DevOps Engineer</option>
+            <option value="Cloud Engineer (AWS/Azure/GCP)">Cloud Engineer (AWS/Azure/GCP)</option>
+            <option value="System Administrator">System Administrator</option>
+            <option value="Network Engineer">Network Engineer</option>
+            <option value="Database Administrator (DBA)">Database Administrator (DBA)</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="Data Scientist">Data Scientist</option>
+            <option value="Business Analyst">Business Analyst</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="Scrum Master">Scrum Master</option>
+            <option value="UI/UX Designer">UI/UX Designer</option>
+            <option value="Technical Support Engineer">Technical Support Engineer</option>
+            <option value="IT Support Executive">IT Support Executive</option>
+            <option value="Help Desk Executive">Help Desk Executive</option>
+            <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+            <option value="SAP Consultant">SAP Consultant</option>
+            <option value="Salesforce Developer">Salesforce Developer</option>
+            <option value="ERP Consultant">ERP Consultant</option>
+            <option value="Software Architect">Software Architect</option>
+            <option value="Technical Lead">Technical Lead</option>
+            <option value="IT Recruiter">IT Recruiter</option>
+          </select>
         </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Location (City)</label>
+        <input type="text" name="location" class="form-control" placeholder="e.g. Mumbai">
       </div>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;">
@@ -37,8 +86,12 @@
           <input type="date" name="drive_date" class="form-control" required>
         </div>
         <div class="form-group mb-3">
-          <label class="form-label">Drive Time</label>
-          <input type="time" name="drive_time" class="form-control">
+          <label class="form-label">Start Time</label>
+          <input type="time" name="drive_start_time" class="form-control">
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">End Time</label>
+          <input type="time" name="drive_end_time" class="form-control">
         </div>
       </div>
 

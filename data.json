@@ -448,6 +448,46 @@
       }
     }
   ],
-  "walkin_drives": [],
-  "walkin_registrations": []
+  "walkin_drives": [
+    {
+      "id": "4e0614ab-ad69-4e68-9b0b-d3c88f98ad6d",
+      "title": "ISG",
+      "drive_type": "Walk-in Fresher",
+      "position": "Angular Developer",
+      "location": "Mumbai",
+      "venue": "Kurla",
+      "drive_date": "2052-05-15",
+      "drive_start_time": "07:08",
+      "drive_end_time": "08:59",
+      "description": "Mumbai",
+      "active": true,
+      "created_at": "2026-06-25T23:48:14.337220"
+    },
+    {
+      "id": "e50dfef2-990a-4668-8900-0c6a3ad13924",
+      "title": "In Solution Global Limited",
+      "drive_type": "Walk-in Fresher",
+      "position": "Software Engineer",
+      "location": "Mumbai",
+      "venue": "kurla",
+      "drive_date": "2026-06-26",
+      "drive_start_time": "01:50",
+      "drive_end_time": "02:51",
+      "description": "Mumbbia",
+      "active": true,
+      "created_at": "2026-06-25T23:51:16.769262"
+    }
+  ],
+  "walkin_registrations": [
+    {
+      "id": "324516a2-7803-4214-a795-77714cb10b58",
+      "drive_id": "4e0614ab-ad69-4e68-9b0b-d3c88f98ad6d",
+      "drive_title": "ISG",
+      "name": "Mumbai",
+      "email": "usmaniarsh7@gmail.com",
+      "phone": "9557875692",
+      "slot": "",
+      "registered_at": "2026-06-25T23:48:49.303629"
+    }
+  ]
 }

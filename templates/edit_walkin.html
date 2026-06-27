@@ -21,13 +21,39 @@
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;">
         <div class="form-group mb-3">
-          <label class="form-label">Department</label>
-          <input type="text" name="department" class="form-control" value="{{ drive.department }}">
+          <label class="form-label">Drive Type *</label>
+          <select name="drive_type" class="form-control" required>
+            <option value="" disabled {% if not drive.drive_type %}selected{% endif %}>Select drive type</option>
+            <option value="Walk-in Fresher" {% if drive.drive_type == 'Walk-in Fresher' %}selected{% endif %}>Walk-in Fresher</option>
+            <option value="Walk-in Experienced" {% if drive.drive_type == 'Walk-in Experienced' %}selected{% endif %}>Walk-in Experienced</option>
+          </select>
         </div>
         <div class="form-group mb-3">
-          <label class="form-label">Location (City)</label>
-          <input type="text" name="location" class="form-control" value="{{ drive.location }}">
+          <label class="form-label">Position *</label>
+          <select name="position" class="form-control" required>
+            <option value="" disabled {% if not drive.position %}selected{% endif %}>Select position</option>
+            {% set position_options = [
+              "Software Engineer","Web Developer","Full Stack Developer","Frontend Developer",
+              "Backend Developer","Java Developer","Python Developer","PHP Developer",
+              ".NET Developer","React Developer","Angular Developer","Node.js Developer",
+              "Android Developer","iOS Developer","Mobile App Developer","QA Engineer / Tester",
+              "Automation Tester","DevOps Engineer","Cloud Engineer (AWS/Azure/GCP)",
+              "System Administrator","Network Engineer","Database Administrator (DBA)",
+              "Data Analyst","Data Scientist","Business Analyst","Project Manager",
+              "Scrum Master","UI/UX Designer","Technical Support Engineer","IT Support Executive",
+              "Help Desk Executive","Cybersecurity Analyst","SAP Consultant","Salesforce Developer",
+              "ERP Consultant","Software Architect","Technical Lead","IT Recruiter"
+            ] %}
+            {% for opt in position_options %}
+            <option value="{{ opt }}" {% if drive.position == opt %}selected{% endif %}>{{ opt }}</option>
+            {% endfor %}
+          </select>
         </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Location (City)</label>
+        <input type="text" name="location" class="form-control" value="{{ drive.location }}">
       </div>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;">
@@ -36,8 +62,12 @@
           <input type="date" name="drive_date" class="form-control" value="{{ drive.drive_date }}" required>
         </div>
         <div class="form-group mb-3">
-          <label class="form-label">Drive Time</label>
-          <input type="time" name="drive_time" class="form-control" value="{{ drive.drive_time }}">
+          <label class="form-label">Start Time</label>
+          <input type="time" name="drive_start_time" class="form-control" value="{{ drive.drive_start_time }}">
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label">End Time</label>
+          <input type="time" name="drive_end_time" class="form-control" value="{{ drive.drive_end_time }}">
         </div>
       </div>
 

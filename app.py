@@ -1,4 +1,6 @@
 import os
+import gc
+import time
 import json
 import uuid
 import io
@@ -120,6 +122,35 @@ def extract_text_from_file(filepath):
     return text.strip()
 
 
+def gemini_generate_with_retry(prompt, retries=3, delay=5):
+    """Gemini API call with retry + memory cleanup."""
+    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash"]
+    last_exception = None
+    for model in models_to_try:
+        for attempt in range(retries):
+            try:
+                gc.collect()
+                response = client.models.generate_content(model=model, contents=prompt)
+                gc.collect()
+                return response
+            except Exception as e:
+                last_exception = e
+                err_str = str(e)
+                is_overload = (
+                    "503" in err_str or "UNAVAILABLE" in err_str
+                    or "overloaded" in err_str.lower()
+                    or "high demand" in err_str.lower()
+                )
+                if is_overload and attempt < retries - 1:
+                    time.sleep(delay * (attempt + 1))
+                    continue
+                elif is_overload:
+                    break
+                else:
+                    raise
+    raise Exception(f"Gemini unavailable. Last error: {last_exception}")
+
+
 def analyze_resume_with_ai(resume_text, job_requirements, job_title):
     prompt = f"""You are an expert HR recruiter. Analyze this resume against the job requirements and provide a structured evaluation.
 
@@ -146,10 +177,7 @@ Status rules:
 - On Hold: score 50-69
 - Rejected: score < 50"""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
+    response = gemini_generate_with_retry(prompt)
     response_text = response.text.strip()
 
     # Clean markdown if present
@@ -181,10 +209,7 @@ Resume text: {resume_text[:3000]}
 }}
 Be specific and actionable. Do not be harsh — candidate will read this directly."""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
+    response = gemini_generate_with_retry(prompt)
     response_text = response.text.strip()
 
     if "```json" in response_text:
@@ -235,10 +260,7 @@ Provide your answer in this EXACT JSON format (no other text, no markdown, no ba
   ]
 }}"""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
+    response = gemini_generate_with_retry(prompt)
     response_text = response.text.strip()
 
     if "```json" in response_text:
@@ -275,10 +297,7 @@ Return ONLY this exact JSON (no markdown, no backticks):
   ]
 }}"""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
+    response = gemini_generate_with_retry(prompt)
     response_text = response.text.strip()
     if "```json" in response_text:
         response_text = response_text.split("```json")[1].split("```")[0].strip()
@@ -342,8 +361,6 @@ def candidate():
 
 @app.route("/auth/google/login")
 def google_login():
-    # GOOGLE_REDIRECT_URI env var use karo agar set hai (Render pe zaroori)
-    # warna url_for se dynamically generate karo (local dev ke liye)
     redirect_uri = os.environ.get(
         "GOOGLE_REDIRECT_URI",
         url_for("google_callback", _external=True)

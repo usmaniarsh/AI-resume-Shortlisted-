@@ -2,7 +2,6 @@ import os
 import json
 import uuid
 import io
-import time
 import base64
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash, send_from_directory
@@ -29,11 +28,6 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # Initialize Gemini
 client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
-
-# Optional second key — set GOOGLE_API_KEY_2 in .env to use a backup key when
-# the primary key's quota is exhausted (429 RESOURCE_EXHAUSTED).
-_backup_key = os.environ.get("GOOGLE_API_KEY_2")
-client_backup = genai.Client(api_key=_backup_key) if _backup_key else None
 
 # Initialize Google OAuth (for candidate sign-in)
 oauth = OAuth(app)
@@ -126,53 +120,6 @@ def extract_text_from_file(filepath):
     return text.strip()
 
 
-# ============ GEMINI RETRY HELPER ============
-
-def gemini_generate_with_retry(prompt, retries=3, delay=5):
-    """Gemini API call with automatic retry on 503/overload errors.
-    Primary: gemini-2.5-flash — fallback: gemini-1.5-flash.
-    Waits 5s, 10s, 15s between attempts before trying next model."""
-    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash"]
-    last_exception = None
-
-    for model in models_to_try:
-        for attempt in range(retries):
-            try:
-                response = client.models.generate_content(
-                    model=model,
-                    contents=prompt
-                )
-                return response
-            except Exception as e:
-                last_exception = e
-                err_str = str(e)
-                is_overload = (
-                    "503" in err_str
-                    or "UNAVAILABLE" in err_str
-                    or "overloaded" in err_str.lower()
-                    or "high demand" in err_str.lower()
-                )
-                if is_overload and attempt < retries - 1:
-                    wait = delay * (attempt + 1)  # 5s → 10s → 15s
-                    print(f"[Gemini] {model} overloaded, retrying in {wait}s... (attempt {attempt + 1}/{retries})")
-                    time.sleep(wait)
-                    continue
-                elif is_overload:
-                    # Last attempt on this model failed — try next model
-                    print(f"[Gemini] {model} exhausted all retries, trying fallback model...")
-                    break
-                else:
-                    # Non-overload error (bad prompt, auth, etc.) — raise immediately
-                    raise
-
-    raise Exception(
-        f"Gemini API unavailable after trying all models. Please try again in a moment. "
-        f"(Last error: {last_exception})"
-    )
-
-
-# ============ AI FUNCTIONS ============
-
 def analyze_resume_with_ai(resume_text, job_requirements, job_title):
     prompt = f"""You are an expert HR recruiter. Analyze this resume against the job requirements and provide a structured evaluation.
 
@@ -199,7 +146,10 @@ Status rules:
 - On Hold: score 50-69
 - Rejected: score < 50"""
 
-    response = gemini_generate_with_retry(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
     response_text = response.text.strip()
 
     # Clean markdown if present
@@ -231,7 +181,10 @@ Resume text: {resume_text[:3000]}
 }}
 Be specific and actionable. Do not be harsh — candidate will read this directly."""
 
-    response = gemini_generate_with_retry(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
     response_text = response.text.strip()
 
     if "```json" in response_text:
@@ -282,7 +235,10 @@ Provide your answer in this EXACT JSON format (no other text, no markdown, no ba
   ]
 }}"""
 
-    response = gemini_generate_with_retry(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
     response_text = response.text.strip()
 
     if "```json" in response_text:
@@ -319,7 +275,10 @@ Return ONLY this exact JSON (no markdown, no backticks):
   ]
 }}"""
 
-    response = gemini_generate_with_retry(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
     response_text = response.text.strip()
     if "```json" in response_text:
         response_text = response_text.split("```json")[1].split("```")[0].strip()
@@ -366,11 +325,6 @@ def index():
     active_jobs_count = sum(1 for j in data["jobs"] if j.get("active", True))
     return render_template("index.html", active_jobs_count=active_jobs_count)
 
-@app.route("/api/active-jobs-count")
-def api_active_jobs_count():
-    data = load_data()
-    active_jobs_count = sum(1 for j in data["jobs"] if j.get("active", True))
-    return jsonify({"active_jobs_count": active_jobs_count})
 
 # ---- CANDIDATE PORTAL ----
 
@@ -758,8 +712,6 @@ def new_job():
         flash(f"Job '{job['title']}' posted successfully!", "success")
         return redirect(url_for("admin_home"))
     return render_template("new_job.html")
-
-
 # ============ WALK-IN DRIVE — ADMIN ============
 
 @app.route("/admin/walkin/new", methods=["GET", "POST"])
@@ -770,13 +722,11 @@ def new_walkin():
         drive = {
             "id": str(uuid.uuid4()),
             "title": request.form.get("title", "").strip(),
-            "drive_type": request.form.get("drive_type", "").strip(),
-            "position": request.form.get("position", "").strip(),
+            "department": request.form.get("department", "").strip(),
             "location": request.form.get("location", "").strip(),
             "venue": request.form.get("venue", "").strip(),
             "drive_date": request.form.get("drive_date", "").strip(),
-            "drive_start_time": request.form.get("drive_start_time", "").strip(),
-            "drive_end_time": request.form.get("drive_end_time", "").strip(),
+            "drive_time": request.form.get("drive_time", "").strip(),
             "description": request.form.get("description", "").strip(),
             "active": True,
             "created_at": datetime.now().isoformat(),
@@ -808,13 +758,11 @@ def edit_walkin(drive_id):
             return render_template("edit_walkin.html", drive=drive)
 
         drive["title"] = title
-        drive["drive_type"] = request.form.get("drive_type", "").strip()
-        drive["position"] = request.form.get("position", "").strip()
+        drive["department"] = request.form.get("department", "").strip()
         drive["location"] = request.form.get("location", "").strip()
         drive["venue"] = request.form.get("venue", "").strip()
         drive["drive_date"] = drive_date
-        drive["drive_start_time"] = request.form.get("drive_start_time", "").strip()
-        drive["drive_end_time"] = request.form.get("drive_end_time", "").strip()
+        drive["drive_time"] = request.form.get("drive_time", "").strip()
         drive["description"] = request.form.get("description", "").strip()
 
         save_data(data)
@@ -937,7 +885,6 @@ def register_walkin(drive_id):
         return render_template("walkin_registered.html", registration=registration, drive=drive)
 
     return render_template("walkin_register.html", drive=drive)
-
 
 @app.route("/admin/jobs/<job_id>/edit", methods=["GET", "POST"])
 @admin_required
@@ -1334,33 +1281,6 @@ def view_assessment(app_id):
         flash("No assessment result yet. Candidate hasn't submitted the assessment.", "error")
         return redirect(url_for("view_application", app_id=app_id))
     return render_template("admin_assessment_result.html", application=app_data)
-
-
-@app.route("/api/walkin-drives")
-def api_walkin_drives():
-    data = load_data()
-    active_drives = [d for d in data["walkin_drives"] if d.get("active", True)]
-    reg_counts = {}
-    for r in data["walkin_registrations"]:
-        reg_counts[r["drive_id"]] = reg_counts.get(r["drive_id"], 0) + 1
-
-    drives_data = []
-    for d in active_drives:
-        drives_data.append({
-            "id": d["id"],
-            "title": d["title"],
-            "drive_type": d.get("drive_type", ""),
-            "position": d.get("position", ""),
-            "location": d.get("location", ""),
-            "drive_date": d.get("drive_date", ""),
-            "drive_start_time": d.get("drive_start_time", ""),
-            "drive_end_time": d.get("drive_end_time", ""),
-            "venue": d.get("venue", ""),
-            "description": d.get("description", ""),
-            "registered_count": reg_counts.get(d["id"], 0),
-        })
-
-    return jsonify({"drives": drives_data})
 
 
 if __name__ == "__main__":

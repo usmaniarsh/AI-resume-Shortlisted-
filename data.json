@@ -1,80 +1,143 @@
 {
-  "jobs": [],
+  "jobs": [
+    {
+      "id": "f2c76caa-eb86-4be4-9680-cdaa302a3044",
+      "title": "Data Analyst",
+      "department": "",
+      "location": "Mumbai",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "Software Product",
+      "experience_level": "Fresher",
+      "education_ug": "B.Sc Computer Science/IT/Data Science",
+      "education_pg": "M.Tech/M.E.",
+      "key_skills": [],
+      "requirements": "Collect, clean, and analyze large datasets.\r\nCreate dashboards and reports using Power BI or Tableau.\r\nWrite SQL queries to extract and manipulate data.\r\nPerform data validation and ensure data accuracy.\r\nIdentify trends, patterns, and business insights.\r\nWork with cross-functional teams to understand reporting requirements.\r\nPresent findings in a clear and actionable manner.",
+      "description": "We are looking for a detail-oriented Data Analyst to collect, clean, analyze, and interpret data to support business decisions. The ideal candidate should be comfortable working with Excel, SQL, Power BI/Tableau, and Python while creating reports and dashboards. Freshers with strong analytical skills and relevant projects are encouraged to apply.",
+      "active": true,
+      "created_at": "2026-06-29T01:21:13.021937"
+    },
+    {
+      "id": "c617ed06-c77d-4bdc-abdb-fd9385f7c3c7",
+      "title": "Flutter Developer",
+      "department": "",
+      "location": "Ahmedabad",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "IT Services & Consulting",
+      "experience_level": "Fresher",
+      "education_ug": "B.Sc Computer Science/IT/Data Science",
+      "education_pg": "Post Graduation Not Required",
+      "key_skills": [],
+      "requirements": "Hwkk",
+      "description": "Hello",
+      "active": true,
+      "created_at": "2026-06-29T15:37:56.853719"
+    },
+    {
+      "id": "ebc20cd3-3e0c-4fd3-a345-a4a9e30a0b89",
+      "title": "ETL Developer",
+      "department": "",
+      "location": "Ahmedabad",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "SaaS / Cloud Services",
+      "experience_level": "Fresher",
+      "education_ug": "B.Sc Computer Science/IT/Data Science",
+      "education_pg": "Post Graduation Not Required",
+      "key_skills": [],
+      "requirements": "xxxxxxxxxxxxxxxxxx",
+      "description": "xxxxxxxxxxxxx",
+      "active": true,
+      "created_at": "2026-06-29T16:08:04.324013"
+    },
+    {
+      "id": "d396cbfa-4fd6-4e24-8137-055d17d240e9",
+      "title": "Java Developer",
+      "department": "",
+      "location": "Chennai",
+      "job_type": "Onsite",
+      "role": "",
+      "role_category": "Software Development",
+      "industry_type": "IT Services & Consulting",
+      "experience_level": "Fresher",
+      "education_ug": "B.Sc Computer Science/IT/Data Science",
+      "education_pg": "Post Graduation Not Required",
+      "key_skills": [],
+      "requirements": "ddddddddddddddddddd",
+      "description": "ddddddddd",
+      "active": true,
+      "created_at": "2026-06-29T16:12:04.815811"
+    }
+  ],
   "applications": [
     {
-      "id": "36c6404b-3ec6-4049-b6c8-7048437b363e",
-      "job_id": "f9272543-2a25-40f7-a584-212d1183d75b",
-      "job_title": "Application Support Engineer",
-      "job_requirements": "\u2705 SQL (basic queries, joins, troubleshooting)\r\n\u2705 Windows/Linux basics\r\n\u2705 Networking fundamentals (IP, DNS, HTTP, HTTPS)\r\n\u2705 Ticketing tools (ServiceNow, Jira, Remedy)\r\n\u2705 Basic scripting (Python, Shell, PowerShell)\r\n\u2705 Good communication skills\r\n\u2705 Problem-solving mindset",
-      "name": "Mohd Arsh Usmani",
+      "id": "d359ce9c-0791-4d89-95ee-caa8d43e7875",
+      "job_id": "f2c76caa-eb86-4be4-9680-cdaa302a3044",
+      "job_title": "Data Analyst",
+      "job_requirements": "Collect, clean, and analyze large datasets.\r\nCreate dashboards and reports using Power BI or Tableau.\r\nWrite SQL queries to extract and manipulate data.\r\nPerform data validation and ensure data accuracy.\r\nIdentify trends, patterns, and business insights.\r\nWork with cross-functional teams to understand reporting requirements.\r\nPresent findings in a clear and actionable manner.",
+      "name": "ADS",
       "email": "usmaniarsh7@gmail.com",
       "phone": "9557875692",
-      "resume_file": "08cccc9e-c299-4764-bad2-cdf9ec1c3a87.pdf",
-      "resume_text": "Mohd Arsh Usmani \nSoftware Engineer \nStrong foundation in Core Java, OOP, Python and backend work\ufb02ows with hands-on expertise in patch deployment, DC-\nDR activities, root cause analysis, and performance monitoring. Committed to enhancing system stability, reliability,\nand performance within mission-critical \ufb01nancial systems. Experienced in SQL optimization, database analysis, log\ndebugging, and resolving production issues across UAT. \nusmaniarsh7@gmail.com \n9557875692 \nMumbai \nportfolio-beta-san",
-      "applied_at": "2026-06-25T19:37:05.889711",
+      "resume_file": "747673a4-9dfe-4e10-90e6-4ab4318b26fb.pdf",
+      "resume_text": "Mohd Arsh Usmani \nSoftware Engineer \nStrong foundation in \nPython, SQL, data analysis, and database management\n , with hands-on experience in \ndata\nvalidation, data cleaning, reporting, and performance analysis\n . Skilled in analyzing large datasets, identifying trends\nand anomalies, conducting root cause analysis, and transforming complex data into actionable business insights.\nExperienced in \nSQL query optimization, database analysis, dashboard reporting, log analysis, and data quality\nassuran",
+      "applied_at": "2026-06-29T16:17:51.205041",
       "ai_analysis": {
-        "match_score": 78,
+        "match_score": 85,
         "status": "Shortlisted",
         "strengths": [
-          "Extensive hands-on experience in L1 production and application support within a high-volume fintech environment.",
-          "Strong proficiency in SQL (T-SQL) for querying, troubleshooting, optimization, and database analysis.",
-          "Proven expertise in incident management, root cause analysis, problem management, and ITIL practices.",
-          "Demonstrated strong communication, stakeholder management, and cross-functional coordination skills.",
-          "Practical experience with Python for automation initiatives and UNIX for system interaction.",
-          "Proficient with Jira for ticketing and incident tracking."
+          "Strong foundation in data analysis and database management",
+          "Experience with SQL query optimization and data validation",
+          "Ability to identify trends and anomalies in large datasets"
         ],
         "gaps": [
-          "Lack of explicit mention of foundational networking concepts (IP, DNS, HTTP, HTTPS).",
-          "Windows OS experience is not explicitly detailed.",
-          "Shell scripting (beyond implied UNIX use) and PowerShell scripting are not mentioned."
+          "Limited experience with Power BI or Tableau for dashboard creation",
+          "No direct experience working with cross-functional teams for reporting requirements"
         ],
-        "summary": "This candidate possesses a highly relevant background as a Product Support Engineer in a demanding fintech environment, showcasing strong skills in SQL, incident management, and root cause analysis. Their experience in reducing issue recurrence, automating tasks, and effective stakeholder communication aligns well with the Application Support Engineer role. The practical experience in a 24x7 operational setting with high transaction volumes is particularly valuable.",
-        "recommendation": "Shortlist for an interview to delve deeper into networking fundamentals, Windows experience, and scripting depth, while leveraging their strong application support background."
+        "summary": "The candidate has a strong background in data analysis and database management, with experience in data validation, SQL query optimization, and trend identification. They have worked with high-volume financial datasets and have improved data accuracy and operational efficiency in their previous roles. The candidate is skilled in using various tools and technologies, including SQL Server, UNIX, and Python.",
+        "recommendation": "The candidate is a strong fit for the Data Analyst role and should be invited for an interview to further assess their skills and experience."
       },
       "ats_review": {
-        "ats_score": 65,
+        "ats_score": 85,
         "strengths": [
-          "Strong alignment with problem-solving and troubleshooting keywords",
-          "Quantifiable achievements with impressive metrics and percentages",
-          "Explicit mention of key technical skills like SQL, Python, UNIX, and JIRA",
-          "Demonstrated communication and teamwork skills"
+          "strong technical skills",
+          "relevant experience",
+          "various tools proficiency"
         ],
         "issues": [
           {
-            "area": "clarity",
-            "problem": "The employment dates for both listed roles are in the future, which is a critical error that makes the experience appear invalid.",
-            "suggestion": "Immediately correct all employment dates to accurately reflect past or current employment periods."
+            "area": "structure",
+            "problem": "Lack of clear sectioning and formatting",
+            "suggestion": "Use headers and bullet points for better readability"
           },
           {
             "area": "keywords",
-            "problem": "The resume does not explicitly mention networking fundamentals (IP, DNS, HTTP, HTTPS), which are important for the target role.",
-            "suggestion": "Integrate relevant networking experiences, such as troubleshooting connectivity or configuring network services, if applicable to your background."
+            "problem": "Missing relevant keywords like Tableau and data visualization",
+            "suggestion": "Incorporate target job keywords in the resume"
           },
           {
-            "area": "structure",
-            "problem": "The skills within the 'Product Support Engineer' section are poorly integrated, appearing as a mixed list with responsibilities.",
-            "suggestion": "Create a distinct 'Technical Skills' section or clearly separate skills using a dedicated sub-heading or different formatting within the experience."
-          },
-          {
-            "area": "clarity",
-            "problem": "The 'Data Analyst Internship' uses redundant subheadings within the experience bullet points.",
-            "suggestion": "Rephrase the internship experience into concise, action-verb-led bullet points, naturally integrating skills without separate subheadings."
+            "area": "achievements",
+            "problem": "Quantified results are mostly at the end of the experience section",
+            "suggestion": "Highlight achievements and impact at the beginning of each experience section"
           }
         ],
-        "summary": "This resume showcases excellent problem-solving skills and technical expertise, with strong quantifiable achievements and relevant keywords.",
+        "summary": "Strong foundation in data analysis",
         "rule_flags": [
-          "1 line(s) start with weak verbs (e.g. 'worked', 'helped').",
-          "Missing keywords from job requirements: joins, basics, Networking, fundamentals, DNS, HTTP, HTTPS, Ticketing"
+          "2 line(s) start with weak verbs (e.g. 'worked', 'helped').",
+          "Missing keywords from job requirements: analyze, Create, dashboards, reports, Tableau, Write, manipulate, patterns"
         ],
         "missing_keywords": [
-          "joins",
-          "basics",
-          "Networking",
-          "fundamentals",
-          "DNS",
-          "HTTP",
-          "HTTPS",
-          "Ticketing"
+          "analyze",
+          "Create",
+          "dashboards",
+          "reports",
+          "Tableau",
+          "Write",
+          "manipulate",
+          "patterns"
         ]
       },
       "ai_detection": {
@@ -103,366 +166,10 @@
           ]
         },
         "redacted_count": 6
-      },
-      "assessment_questions": {
-        "mcq": [
-          {
-            "q": "You need to retrieve a list of all customers and any orders they might have placed. If a customer has no orders, they should still appear in the list. Which type of SQL JOIN would you use?",
-            "options": [
-              "A. INNER JOIN",
-              "B. LEFT JOIN",
-              "C. RIGHT JOIN",
-              "D. FULL OUTER JOIN"
-            ],
-            "answer": "B"
-          },
-          {
-            "q": "An application on a Linux server is performing slowly. To identify which processes are consuming the most CPU and memory, which command would you typically use?",
-            "options": [
-              "A. `ls -l`",
-              "B. `df -h`",
-              "C. `top`",
-              "D. `ping`"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "Users are reporting that they cannot access a web application using its domain name (e.g., `www.example.com`), but they can access it directly via its IP address. What is the most likely component that needs investigation?",
-            "options": [
-              "A. DHCP server",
-              "B. DNS server",
-              "C. Firewall",
-              "D. Router"
-            ],
-            "answer": "B"
-          },
-          {
-            "q": "An Application Support Engineer receives an incident ticket describing a minor cosmetic UI bug. However, the ticket has been mistakenly categorized with \"Critical\" priority. What is the most appropriate initial action for the engineer to take?",
-            "options": [
-              "A. Immediately escalate to a senior engineer",
-              "B. Start working on the bug fix",
-              "C. Re-evaluate the priority based on impact and urgency",
-              "D. Close the ticket as invalid"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "You need to write a Python script to scan a large log file (`application.log`) for occurrences of the string \"ERROR\" and count them. Which combination of Python operations would be most efficient?",
-            "options": [
-              "A. `read()` the whole file, then `split()` by lines, then `find()` \"ERROR\"",
-              "B. `for line in file:` and `if \"ERROR\" in line:`",
-              "C. `readline()` in a loop, then `replace()` \"ERROR\"",
-              "D. `open()` the file with `os.system('grep \"ERROR\" application.log')`"
-            ],
-            "answer": "B"
-          },
-          {
-            "q": "An application is displaying incorrect data for some user profiles. Upon investigating, you find that the SQL query used to fetch user data is returning too many rows, including those from a different department. You suspect an issue with the filtering condition. Which clause in a SQL `SELECT` statement would you primarily inspect and modify?",
-            "options": [
-              "A. `SELECT`",
-              "B. `FROM`",
-              "C. `WHERE`",
-              "D. `ORDER BY`"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "A critical Windows service for your application fails to start and reports a generic error. Where is the most important place to look for detailed error messages and clues about why the service failed?",
-            "options": [
-              "A. Task Manager",
-              "B. Registry Editor",
-              "C. Event Viewer",
-              "D. System Information"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "A web application runs on port 80 for HTTP and port 443 for HTTPS. If a user is experiencing issues connecting via HTTPS, but HTTP connections work, what is the most likely area to investigate first?",
-            "options": [
-              "A. Database connectivity",
-              "B. Application server CPU usage",
-              "C. SSL/TLS certificate configuration or firewall rules for port 443",
-              "D. DNS resolution for the domain"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "An application process on a Linux server is unable to write to a specific log directory (`/var/log/myapp`). You suspect it's a permissions issue. Which command would you use to check the current permissions of that directory?",
-            "options": [
-              "A. `cat /var/log/myapp`",
-              "B. `chmod /var/log/myapp`",
-              "C. `ls -ld /var/log/myapp`",
-              "D. `chown /var/log/myapp`"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "You need to create a simple shell script to regularly check if a specific process named `my_app_service` is running on a Linux server and restart it if it's not. Which command would be most appropriate to check for the process's existence in a script?",
-            "options": [
-              "A. `ls -l my_app_service`",
-              "B. `ps aux | grep my_app_service`",
-              "C. `netstat -tuln`",
-              "D. `df -h`"
-            ],
-            "answer": "B"
-          },
-          {
-            "q": "An application suddenly stops responding and logs show frequent \"OutOfMemoryError\" messages. What is your immediate and most effective first step in diagnosing this issue?",
-            "options": [
-              "A. Reboot the server immediately",
-              "B. Check for recently deployed code changes",
-              "C. Analyze heap dumps or memory usage statistics",
-              "D. Escalate to the database administrator"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "A user reports that their recently created account is not appearing in the application's user list. You want to verify if the user's data was successfully inserted into the `Users` table. Which SQL query would you use to check for a user with `username = 'john.doe'`?",
-            "options": [
-              "A. `DELETE FROM Users WHERE username = 'john.doe';`",
-              "B. `UPDATE Users SET active = 1 WHERE username = 'john.doe';`",
-              "C. `SELECT * FROM Users WHERE username = 'john.doe';`",
-              "D. `INSERT INTO Users (username, email) VALUES ('john.doe', 'john.doe@example.com');`"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "An application server has an IP address of `192.168.1.10` and a subnet mask of `255.255.255.0`. Which of the following IP addresses would be on the same local network segment as the server?",
-            "options": [
-              "A. `192.168.2.10`",
-              "B. `10.0.0.5`",
-              "C. `192.168.1.100`",
-              "D. `172.16.0.20`"
-            ],
-            "answer": "C"
-          },
-          {
-            "q": "On a Windows server, you need to write a PowerShell script to list all running services that have \"SQL\" in their name. Which commandlet would you use?",
-            "options": [
-              "A. `Get-Process -Name *SQL*`",
-              "B. `Get-Service | Where-Object {$_.Name -like \"*SQL*\"}`",
-              "C. `dir C:\\Program Files\\SQL`",
-              "D. `Tasklist /fi \"IMAGENAME eq SQL*\"`"
-            ],
-            "answer": "B"
-          },
-          {
-            "q": "After resolving a critical application outage, the next crucial step in good incident management practice is to perform a Root Cause Analysis (RCA). What is the primary purpose of an RCA?",
-            "options": [
-              "A. To assign blame for the outage",
-              "B. To quickly restore services to prevent further downtime",
-              "C. To identify and address the underlying cause to prevent recurrence",
-              "D. To document the incident for audit purposes"
-            ],
-            "answer": "C"
-          }
-        ]
-      },
-      "assessment_result": {
-        "mcq_score": 8,
-        "mcq_total": 15,
-        "mcq_results": [
-          {
-            "question": "You need to retrieve a list of all customers and any orders they might have placed. If a customer has no orders, they should still appear in the list. Which type of SQL JOIN would you use?",
-            "options": [
-              "A. INNER JOIN",
-              "B. LEFT JOIN",
-              "C. RIGHT JOIN",
-              "D. FULL OUTER JOIN"
-            ],
-            "correct_answer": "B",
-            "given_answer": "B",
-            "is_correct": true
-          },
-          {
-            "question": "An application on a Linux server is performing slowly. To identify which processes are consuming the most CPU and memory, which command would you typically use?",
-            "options": [
-              "A. `ls -l`",
-              "B. `df -h`",
-              "C. `top`",
-              "D. `ping`"
-            ],
-            "correct_answer": "C",
-            "given_answer": "B",
-            "is_correct": false
-          },
-          {
-            "question": "Users are reporting that they cannot access a web application using its domain name (e.g., `www.example.com`), but they can access it directly via its IP address. What is the most likely component that needs investigation?",
-            "options": [
-              "A. DHCP server",
-              "B. DNS server",
-              "C. Firewall",
-              "D. Router"
-            ],
-            "correct_answer": "B",
-            "given_answer": "B",
-            "is_correct": true
-          },
-          {
-            "question": "An Application Support Engineer receives an incident ticket describing a minor cosmetic UI bug. However, the ticket has been mistakenly categorized with \"Critical\" priority. What is the most appropriate initial action for the engineer to take?",
-            "options": [
-              "A. Immediately escalate to a senior engineer",
-              "B. Start working on the bug fix",
-              "C. Re-evaluate the priority based on impact and urgency",
-              "D. Close the ticket as invalid"
-            ],
-            "correct_answer": "C",
-            "given_answer": "C",
-            "is_correct": true
-          },
-          {
-            "question": "You need to write a Python script to scan a large log file (`application.log`) for occurrences of the string \"ERROR\" and count them. Which combination of Python operations would be most efficient?",
-            "options": [
-              "A. `read()` the whole file, then `split()` by lines, then `find()` \"ERROR\"",
-              "B. `for line in file:` and `if \"ERROR\" in line:`",
-              "C. `readline()` in a loop, then `replace()` \"ERROR\"",
-              "D. `open()` the file with `os.system('grep \"ERROR\" application.log')`"
-            ],
-            "correct_answer": "B",
-            "given_answer": "B",
-            "is_correct": true
-          },
-          {
-            "question": "An application is displaying incorrect data for some user profiles. Upon investigating, you find that the SQL query used to fetch user data is returning too many rows, including those from a different department. You suspect an issue with the filtering condition. Which clause in a SQL `SELECT` statement would you primarily inspect and modify?",
-            "options": [
-              "A. `SELECT`",
-              "B. `FROM`",
-              "C. `WHERE`",
-              "D. `ORDER BY`"
-            ],
-            "correct_answer": "C",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "A critical Windows service for your application fails to start and reports a generic error. Where is the most important place to look for detailed error messages and clues about why the service failed?",
-            "options": [
-              "A. Task Manager",
-              "B. Registry Editor",
-              "C. Event Viewer",
-              "D. System Information"
-            ],
-            "correct_answer": "C",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "A web application runs on port 80 for HTTP and port 443 for HTTPS. If a user is experiencing issues connecting via HTTPS, but HTTP connections work, what is the most likely area to investigate first?",
-            "options": [
-              "A. Database connectivity",
-              "B. Application server CPU usage",
-              "C. SSL/TLS certificate configuration or firewall rules for port 443",
-              "D. DNS resolution for the domain"
-            ],
-            "correct_answer": "C",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "An application process on a Linux server is unable to write to a specific log directory (`/var/log/myapp`). You suspect it's a permissions issue. Which command would you use to check the current permissions of that directory?",
-            "options": [
-              "A. `cat /var/log/myapp`",
-              "B. `chmod /var/log/myapp`",
-              "C. `ls -ld /var/log/myapp`",
-              "D. `chown /var/log/myapp`"
-            ],
-            "correct_answer": "C",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "You need to create a simple shell script to regularly check if a specific process named `my_app_service` is running on a Linux server and restart it if it's not. Which command would be most appropriate to check for the process's existence in a script?",
-            "options": [
-              "A. `ls -l my_app_service`",
-              "B. `ps aux | grep my_app_service`",
-              "C. `netstat -tuln`",
-              "D. `df -h`"
-            ],
-            "correct_answer": "B",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "An application suddenly stops responding and logs show frequent \"OutOfMemoryError\" messages. What is your immediate and most effective first step in diagnosing this issue?",
-            "options": [
-              "A. Reboot the server immediately",
-              "B. Check for recently deployed code changes",
-              "C. Analyze heap dumps or memory usage statistics",
-              "D. Escalate to the database administrator"
-            ],
-            "correct_answer": "C",
-            "given_answer": "A",
-            "is_correct": false
-          },
-          {
-            "question": "A user reports that their recently created account is not appearing in the application's user list. You want to verify if the user's data was successfully inserted into the `Users` table. Which SQL query would you use to check for a user with `username = 'john.doe'`?",
-            "options": [
-              "A. `DELETE FROM Users WHERE username = 'john.doe';`",
-              "B. `UPDATE Users SET active = 1 WHERE username = 'john.doe';`",
-              "C. `SELECT * FROM Users WHERE username = 'john.doe';`",
-              "D. `INSERT INTO Users (username, email) VALUES ('john.doe', 'john.doe@example.com');`"
-            ],
-            "correct_answer": "C",
-            "given_answer": "C",
-            "is_correct": true
-          },
-          {
-            "question": "An application server has an IP address of `192.168.1.10` and a subnet mask of `255.255.255.0`. Which of the following IP addresses would be on the same local network segment as the server?",
-            "options": [
-              "A. `192.168.2.10`",
-              "B. `10.0.0.5`",
-              "C. `192.168.1.100`",
-              "D. `172.16.0.20`"
-            ],
-            "correct_answer": "C",
-            "given_answer": "C",
-            "is_correct": true
-          },
-          {
-            "question": "On a Windows server, you need to write a PowerShell script to list all running services that have \"SQL\" in their name. Which commandlet would you use?",
-            "options": [
-              "A. `Get-Process -Name *SQL*`",
-              "B. `Get-Service | Where-Object {$_.Name -like \"*SQL*\"}`",
-              "C. `dir C:\\Program Files\\SQL`",
-              "D. `Tasklist /fi \"IMAGENAME eq SQL*\"`"
-            ],
-            "correct_answer": "B",
-            "given_answer": "B",
-            "is_correct": true
-          },
-          {
-            "question": "After resolving a critical application outage, the next crucial step in good incident management practice is to perform a Root Cause Analysis (RCA). What is the primary purpose of an RCA?",
-            "options": [
-              "A. To assign blame for the outage",
-              "B. To quickly restore services to prevent further downtime",
-              "C. To identify and address the underlying cause to prevent recurrence",
-              "D. To document the incident for audit purposes"
-            ],
-            "correct_answer": "C",
-            "given_answer": "C",
-            "is_correct": true
-          }
-        ],
-        "composite_score": 53,
-        "completed_at": "2026-06-25T19:46:52.253886"
       }
     }
   ],
   "walkin_drives": [
-    {
-      "id": "4e0614ab-ad69-4e68-9b0b-d3c88f98ad6d",
-      "title": "ISG",
-      "drive_type": "Walk-in Fresher",
-      "position": "Angular Developer",
-      "location": "Mumbai",
-      "venue": "Kurla",
-      "drive_date": "2052-05-15",
-      "drive_start_time": "07:08",
-      "drive_end_time": "08:59",
-      "description": "Mumbai",
-      "active": true,
-      "created_at": "2026-06-25T23:48:14.337220"
-    },
     {
       "id": "e50dfef2-990a-4668-8900-0c6a3ad13924",
       "title": "In Solution Global Limited",
@@ -478,16 +185,5 @@
       "created_at": "2026-06-25T23:51:16.769262"
     }
   ],
-  "walkin_registrations": [
-    {
-      "id": "324516a2-7803-4214-a795-77714cb10b58",
-      "drive_id": "4e0614ab-ad69-4e68-9b0b-d3c88f98ad6d",
-      "drive_title": "ISG",
-      "name": "Mumbai",
-      "email": "usmaniarsh7@gmail.com",
-      "phone": "9557875692",
-      "slot": "",
-      "registered_at": "2026-06-25T23:48:49.303629"
-    }
-  ]
+  "walkin_registrations": []
 }

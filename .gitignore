@@ -1,5 +1,27 @@
+# ── Secrets / config — NEVER commit these ──
 .env
+*.env
+instance/
+
+# ── Python ──
+venv/
+env/
 __pycache__/
 *.pyc
-venv/
+*.pyo
+*.egg-info/
+
+# ── Candidate data / uploaded resumes (PII — keep private) ──
 uploads/
+*.pdf
+*.docx
+
+# ── App data (if you store applications/jobs in a local json/db file) ──
+data.json
+*.db
+*.sqlite3
+
+# ── Editor / OS ──
+.vscode/
+.DS_Store
+Thumbs.dbgit init

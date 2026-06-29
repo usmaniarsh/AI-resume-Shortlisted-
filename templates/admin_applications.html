@@ -84,7 +84,7 @@
 <div class="d-flex align-center justify-between mb-4">
   <div>
     <h1 class="page-title">Applications</h1>
-    <p class="text-muted mt-1">{{ applications|length }} application{{ 's' if applications|length != 1 }} • sorted by AI match score</p>
+    <p class="text-muted mt-1" id="apps-count">{{ applications|length }} application{{ 's' if applications|length != 1 }} • sorted by AI match score</p>
   </div>
 </div>
 
@@ -159,6 +159,7 @@
   </div>
 </div>
 
+<div id="apps-wrap">
 {% if applications %}
 <div style="display:grid; gap:0.75rem;">
   {% for app in applications %}
@@ -285,4 +286,44 @@
   <p>{% if job_id or status_filter %}Try changing your filters.{% else %}Applications will appear here once candidates apply.{% endif %}</p>
 </div>
 {% endif %}
+</div><!-- /#apps-wrap -->
+
+<script>
+  /* ── Auto-refresh the Applications list every 5s ──
+     Re-fetches this same URL (filters/search preserved via query string)
+     in the background, and swaps in only the #apps-wrap (list/empty-state)
+     and #apps-count text if they changed — so a brand-new application
+     (or a status/assessment update) shows up without a manual reload.
+     The filter form itself is left untouched so typing in the search
+     box is never interrupted. */
+  (function () {
+    var wrap = document.getElementById('apps-wrap');
+    var countEl = document.getElementById('apps-count');
+    if (!wrap) return;
+
+    var inFlight = false;
+
+    function refresh() {
+      if (inFlight || document.visibilityState === 'hidden') return;
+      inFlight = true;
+      fetch(window.location.href, { credentials: 'same-origin', cache: 'no-store' })
+        .then(function (res) { return res.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var freshWrap = doc.getElementById('apps-wrap');
+          var freshCount = doc.getElementById('apps-count');
+          if (freshWrap && freshWrap.innerHTML !== wrap.innerHTML) {
+            wrap.innerHTML = freshWrap.innerHTML;
+          }
+          if (freshCount && countEl && freshCount.innerHTML !== countEl.innerHTML) {
+            countEl.innerHTML = freshCount.innerHTML;
+          }
+        })
+        .catch(function () { /* silent — next tick will retry */ })
+        .finally(function () { inFlight = false; });
+    }
+
+    setInterval(refresh, 5000);
+  })();
+</script>
 {% endblock %}

@@ -6,7 +6,7 @@ import base64
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash, send_from_directory
 from werkzeug.middleware.proxy_fix import ProxyFix
-from google import genai
+from openai import OpenAI          # ✅ NaraRouter (OpenAI-compatible)
 import PyPDF2
 import docx
 import pyotp
@@ -31,8 +31,12 @@ app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 
-# Initialize Gemini
-client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
+# ✅ Groq client (OpenAI-compatible, fully free, no Telegram required)
+client = OpenAI(
+    base_url="https://api.groq.com/openai/v1",
+    api_key=os.environ.get("GROQ_API_KEY"),
+)
+NARA_MODEL = "llama-3.3-70b-versatile"  # free & fast on Groq
 
 # Initialize Google OAuth (for candidate sign-in)
 oauth = OAuth(app)
@@ -125,6 +129,15 @@ def extract_text_from_file(filepath):
     return text.strip()
 
 
+# ✅ Helper: NaraRouter se text generate karo
+def _call_nara(prompt: str) -> str:
+    response = client.chat.completions.create(
+        model=NARA_MODEL,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return response.choices[0].message.content.strip()
+
+
 def analyze_resume_with_ai(resume_text, job_requirements, job_title):
     prompt = f"""You are an expert HR recruiter. Analyze this resume against the job requirements and provide a structured evaluation.
 
@@ -151,11 +164,7 @@ Status rules:
 - On Hold: score 50-69
 - Rejected: score < 50"""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
-    response_text = response.text.strip()
+    response_text = _call_nara(prompt)
 
     # Clean markdown if present
     if "```json" in response_text:
@@ -186,11 +195,7 @@ Resume text: {resume_text[:3000]}
 }}
 Be specific and actionable. Do not be harsh — candidate will read this directly."""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
-    response_text = response.text.strip()
+    response_text = _call_nara(prompt)
 
     if "```json" in response_text:
         response_text = response_text.split("```json")[1].split("```")[0].strip()
@@ -240,11 +245,7 @@ Provide your answer in this EXACT JSON format (no other text, no markdown, no ba
   ]
 }}"""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
-    response_text = response.text.strip()
+    response_text = _call_nara(prompt)
 
     if "```json" in response_text:
         response_text = response_text.split("```json")[1].split("```")[0].strip()
@@ -280,11 +281,7 @@ Return ONLY this exact JSON (no markdown, no backticks):
   ]
 }}"""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
-    response_text = response.text.strip()
+    response_text = _call_nara(prompt)
     if "```json" in response_text:
         response_text = response_text.split("```json")[1].split("```")[0].strip()
     elif "```" in response_text:
@@ -662,17 +659,14 @@ def admin_home():
         "active_drives": sum(1 for d in data["walkin_drives"] if d.get("active", True)),
     }
 
-    # Har job ke liye applicant count calculate karo
     applicant_counts = {}
     for a in data["applications"]:
         applicant_counts[a["job_id"]] = applicant_counts.get(a["job_id"], 0) + 1
 
-    # Har job object mein applicant_count field inject karo
     jobs = data["jobs"]
     for job in jobs:
         job["applicant_count"] = applicant_counts.get(job["id"], 0)
 
-    # Har walk-in drive ke liye registration count calculate karo
     reg_counts = {}
     for r in data["walkin_registrations"]:
         reg_counts[r["drive_id"]] = reg_counts.get(r["drive_id"], 0) + 1
@@ -715,6 +709,8 @@ def new_job():
         flash(f"Job '{job['title']}' posted successfully!", "success")
         return redirect(url_for("admin_home"))
     return render_template("new_job.html")
+
+
 # ============ WALK-IN DRIVE — ADMIN ============
 
 @app.route("/admin/walkin/new", methods=["GET", "POST"])
@@ -888,6 +884,7 @@ def register_walkin(drive_id):
         return render_template("walkin_registered.html", registration=registration, drive=drive)
 
     return render_template("walkin_register.html", drive=drive)
+
 
 @app.route("/admin/jobs/<job_id>/edit", methods=["GET", "POST"])
 @admin_required
@@ -1123,9 +1120,6 @@ def assessment_page(app_id):
         return redirect(url_for("candidate_dashboard"))
     if not app_data.get("assessment_questions"):
         job = next((j for j in data["jobs"] if j["id"] == app_data["job_id"]), None)
-        # Job posting might have been edited/deleted later — fall back to the
-        # title/requirements snapshot saved on the application itself, instead
-        # of blocking assessment generation entirely.
         job_title = job["title"] if job else app_data.get("job_title", "Unknown Role")
         job_requirements = job["requirements"] if job else app_data.get("job_requirements", "")
         try:
@@ -1170,14 +1164,8 @@ def submit_assessment(app_id):
 @app.route("/admin/applications/send-assessment-all", methods=["POST"])
 @admin_required
 def send_assessment_all():
-    """Ek click mein saare visible candidates ko assessment bhejo.
-    Jo already sent hain unhe skip karo — sirf naye wale ko generate karo.
-    Status (Shortlisted/On Hold/Rejected) se koi farak nahi padta — sabko
-    bheja ja sakta hai. Job posting delete/edit ho jaye tab bhi application
-    ke saved job_title/job_requirements se generate ho jata hai, block nahi hota."""
     data = load_data()
 
-    # Current filters padhho — sirf visible apps pe kaam karo
     job_id = request.form.get("job_id", "").strip()
     status = request.form.get("status", "").strip()
     search = request.form.get("search", "").strip().lower()
@@ -1198,14 +1186,11 @@ def send_assessment_all():
     failed_reasons = []
 
     for app_data in apps:
-        # Already questions hain ya result aa gaya — skip
         if app_data.get("assessment_questions") or app_data.get("assessment_result"):
             skipped_count += 1
             continue
 
         job = next((j for j in data["jobs"] if j["id"] == app_data["job_id"]), None)
-        # Job posting na mile (delete/edit ho gaya) to bhi block nahi karna —
-        # application ke apne saved title/requirements use karo.
         job_title = job["title"] if job else app_data.get("job_title", "Unknown Role")
         job_requirements = job["requirements"] if job else app_data.get("job_requirements", "")
 
@@ -1224,7 +1209,6 @@ def send_assessment_all():
 
     save_data(data)
 
-    # Flash summary
     parts = []
     if sent_count:
         parts.append(f"✅ {sent_count} assessment{'s' if sent_count != 1 else ''} generated")
@@ -1234,7 +1218,6 @@ def send_assessment_all():
         parts.append(f"❌ {failed_count} failed ({'; '.join(failed_reasons)})")
     flash(" • ".join(parts) if parts else "No assessments to send.", "success")
 
-    # Same filters ke saath wapas redirect
     params = {}
     if job_id: params["job_id"] = job_id
     if status: params["status"] = status
@@ -1252,8 +1235,6 @@ def send_assessment(app_id):
         return redirect(url_for("admin_applications"))
 
     job = next((j for j in data["jobs"] if j["id"] == app_data["job_id"]), None)
-    # Job posting delete/edit ho gaya ho tab bhi assessment generate ho —
-    # application mein saved job_title/job_requirements ka fallback use karo.
     job_title = job["title"] if job else app_data.get("job_title", "Unknown Role")
     job_requirements = job["requirements"] if job else app_data.get("job_requirements", "")
 

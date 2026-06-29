@@ -6,17 +6,80 @@
   <a href="/admin/jobs/new">+ Post Job</a>
   <a href="/admin/logout" style="color:var(--danger);">Logout {% if session.get('admin_email') %}({{ session.get('admin_email') }}){% endif %}</a>
 {% endblock %}
+
+{% block extra_head_styles %}
+  /* ── Dashboard header ── */
+  .dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .dash-header-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  /* ── Responsive tables → stacked cards on small screens ── */
+  @media (max-width: 768px) {
+    .dash-table thead { display: none; }
+    .dash-table, .dash-table tbody, .dash-table tr, .dash-table td {
+      display: block;
+      width: 100%;
+    }
+    .dash-table tr {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+    }
+    .dash-table tr:first-child { border-top: 1px solid var(--border) !important; }
+    .dash-table td {
+      border-top: none !important;
+      padding: 0.4rem 0 !important;
+    }
+    .dash-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+    .dash-table td[data-label="Actions"] .d-flex {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .dash-table td[data-label="Actions"] .btn,
+    .dash-table td[data-label="Actions"] form {
+      flex: 1 1 calc(50% - 0.25rem);
+    }
+    .dash-table td[data-label="Actions"] form .btn { width: 100%; }
+  }
+
+  @media (max-width: 640px) {
+    .dash-header { flex-direction: column; align-items: stretch; }
+    .dash-header-actions .btn { flex: 1; justify-content: center; text-align: center; }
+  }
+{% endblock %}
+
 {% block content %}
-<div class="d-flex align-center justify-between mb-4">
+<div class="dash-header mb-4">
   <div>
     <h1 class="page-title">Dashboard</h1>
     <p class="text-muted mt-1">Overview of your recruitment pipeline</p>
   </div>
-  <div class="d-flex gap-2">
+  <div class="dash-header-actions">
     <a href="/admin/walkin/new" class="btn btn-secondary">🚶 + Post Walk-in Drive</a>
     <a href="/admin/jobs/new" class="btn btn-primary">+ Post New Job</a>
   </div>
 </div>
+
+<!-- Everything inside this wrapper is silently re-fetched and swapped every
+     few seconds (see script at the bottom), so new applications / status
+     changes show up here automatically without a manual page reload. -->
+<div id="dashboard-wrap">
 
 <!-- Stats -->
 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-bottom:2rem;">
@@ -53,7 +116,7 @@
   </div>
   {% if jobs %}
   <div style="overflow-x:auto;">
-    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+    <table class="dash-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
       <thead>
         <tr style="background:var(--surface2);">
           <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Job Title</th>
@@ -66,19 +129,19 @@
       <tbody>
         {% for job in jobs %}
         <tr style="border-top:1px solid var(--border);">
-          <td style="padding:12px 16px; font-weight:500;">{{ job.title }}</td>
-          <td style="padding:12px 16px; color:var(--text-muted);">
+          <td data-label="Job Title" style="padding:12px 16px; font-weight:500;">{{ job.title }}</td>
+          <td data-label="Applicants" style="padding:12px 16px; color:var(--text-muted);">
             <span style="font-weight:600; color:var(--primary);">{{ job.applicant_count }}</span> applied
           </td>
-          <td style="padding:12px 16px;">
+          <td data-label="Status" style="padding:12px 16px;">
             {% if job.active %}
               <span class="badge badge-success">● Active</span>
             {% else %}
               <span class="badge badge-gray">Paused</span>
             {% endif %}
           </td>
-          <td style="padding:12px 16px; color:var(--text-muted);">{{ job.created_at[:10] }} <span style="opacity:0.7;">· {{ job.created_at[11:16] }}</span></td>
-          <td style="padding:12px 16px;">
+          <td data-label="Posted" style="padding:12px 16px; color:var(--text-muted);">{{ job.created_at[:10] }} <span style="opacity:0.7;">· {{ job.created_at[11:16] }}</span></td>
+          <td data-label="Actions" style="padding:12px 16px;">
             <div class="d-flex gap-2">
               <a href="/admin/jobs/{{ job.id }}/edit" class="btn btn-secondary btn-sm">Edit</a>
               <a href="/admin/applications?job_id={{ job.id }}" class="btn btn-secondary btn-sm">View Apps</a>
@@ -110,7 +173,7 @@
   </div>
   {% if walkin_drives %}
   <div style="overflow-x:auto;">
-    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+    <table class="dash-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
       <thead>
         <tr style="background:var(--surface2);">
           <th style="padding:12px 16px; text-align:left; font-weight:600; color:var(--text-muted);">Drive Title</th>
@@ -125,27 +188,27 @@
       <tbody>
         {% for drive in walkin_drives %}
         <tr style="border-top:1px solid var(--border);">
-          <td style="padding:12px 16px; font-weight:500;">{{ drive.title }}</td>
-          <td style="padding:12px 16px; color:var(--text-muted);">
+          <td data-label="Drive Title" style="padding:12px 16px; font-weight:500;">{{ drive.title }}</td>
+          <td data-label="Type / Position" style="padding:12px 16px; color:var(--text-muted);">
             {% if drive.drive_type %}<div>🧑‍💼 {{ drive.drive_type }}</div>{% endif %}
             {% if drive.position %}<div>💼 {{ drive.position }}</div>{% endif %}
           </td>
-          <td style="padding:12px 16px; color:var(--text-muted);">
+          <td data-label="Date & Time" style="padding:12px 16px; color:var(--text-muted);">
             {{ drive.drive_date }}
             {% if drive.drive_start_time %}<br>⏰ {{ drive.drive_start_time }}{% if drive.drive_end_time %} – {{ drive.drive_end_time }}{% endif %}{% endif %}
           </td>
-          <td style="padding:12px 16px; color:var(--text-muted);">{{ drive.location or '-' }}</td>
-          <td style="padding:12px 16px; color:var(--text-muted);">
+          <td data-label="Location" style="padding:12px 16px; color:var(--text-muted);">{{ drive.location or '-' }}</td>
+          <td data-label="Registered" style="padding:12px 16px; color:var(--text-muted);">
             <span style="font-weight:600; color:var(--primary);">{{ drive.registration_count }}</span> registered
           </td>
-          <td style="padding:12px 16px;">
+          <td data-label="Status" style="padding:12px 16px;">
             {% if drive.active %}
               <span class="badge badge-success">● Active</span>
             {% else %}
               <span class="badge badge-gray">Paused</span>
             {% endif %}
           </td>
-          <td style="padding:12px 16px;">
+          <td data-label="Actions" style="padding:12px 16px;">
             <div class="d-flex gap-2">
               <a href="/admin/walkin/{{ drive.id }}/edit" class="btn btn-secondary btn-sm">Edit</a>
               <a href="/admin/walkin/{{ drive.id }}/registrations" class="btn btn-secondary btn-sm">View Regs</a>
@@ -168,4 +231,39 @@
   </div>
   {% endif %}
 </div>
+
+</div><!-- /#dashboard-wrap -->
+
+<script>
+  /* ── Auto-refresh the Dashboard every 5s ──
+     Re-fetches this same page in the background, takes only the
+     #dashboard-wrap chunk out of the response, and swaps it in place —
+     no full page reload/flicker. New applications, status changes, or
+     job/drive edits made anywhere (including a candidate applying just
+     now) show up here automatically. */
+  (function () {
+    var wrap = document.getElementById('dashboard-wrap');
+    if (!wrap) return;
+
+    var inFlight = false;
+
+    function refresh() {
+      if (inFlight || document.visibilityState === 'hidden') return;
+      inFlight = true;
+      fetch(window.location.pathname, { credentials: 'same-origin', cache: 'no-store' })
+        .then(function (res) { return res.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var fresh = doc.getElementById('dashboard-wrap');
+          if (fresh && fresh.innerHTML !== wrap.innerHTML) {
+            wrap.innerHTML = fresh.innerHTML;
+          }
+        })
+        .catch(function () { /* silent — next tick will retry */ })
+        .finally(function () { inFlight = false; });
+    }
+
+    setInterval(refresh, 5000);
+  })();
+</script>
 {% endblock %}
